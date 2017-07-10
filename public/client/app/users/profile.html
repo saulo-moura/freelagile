@@ -1,0 +1,32 @@
+<content-body layout-align="center center">
+  <div flex=100 flex-sm=80 flex-gt-sm=60>
+    <form flex ng-submit="profileCtrl.update()">
+      <box box-title="{{::'views.titles.update' | translate}}">
+        <md-input-container class="md-block" flex>
+          <label>{{::'attributes.name' | translate}}</label>
+          <input type="text" ng-model="profileCtrl.user.name">
+        </md-input-container>
+        <md-input-container class="md-block" flex>
+          <label>{{::'attributes.email' | translate}}</label>
+          <input type="email" ng-model="profileCtrl.user.email">
+        </md-input-container>
+        <md-input-container class="md-block" flex>
+          <label>{{::'attributes.password' | translate}}</label>
+          <input type="password" ng-model="profileCtrl.user.password">
+        </md-input-container>
+        <md-input-container class="md-block" flex>
+          <label>{{::'views.fields.login.confirmPassword' | translate}}</label>
+          <input type="password" ng-model="profileCtrl.user.password_confirmation">
+        </md-input-container>
+        <div md-input-container class="md-block" >
+          <div ng-repeat="role in profileCtrl.roles">
+            <md-checkbox ng-model="role.selected">{{role.title}}</md-checkbox>
+          </div>
+        </div>
+        <box-footer-buttons >
+          <md-button type="submit" class="md-primary md-raised">{{::'views.actions.update' | translate}}</md-button>
+        </box-footer-buttons>
+      </box>
+    </form>
+  </div>
+</content-body>

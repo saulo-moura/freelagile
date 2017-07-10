@@ -1,0 +1,37 @@
+<form class="condensed" name="taskForm" ng-submit="tasksCtrl.save(taskForm)">
+  <box box-title="{{::'views.titles.register' | translate}}">
+    <box-toolbar-buttons>
+      <md-button class="md-icon-button" ng-click="tasksCtrl.goTo('list')">
+        <md-icon md-font-set="material-icons" class="md-warn">view_list</md-icon>
+        <md-tooltip md-direction="bottom" hide-sm hide-xs>{{ ::'views.actions.list' | translate }}</md-tooltip>
+      </md-button>
+    </box-toolbar-buttons>
+    <div class="padding-top-8">
+      <md-input-container class="md-block">
+        <label>{{::'attributes.task.description' | translate}}</label>
+        <input type="text" required ng-model="tasksCtrl.resource.description">
+      </md-input-container>
+      <div layout="row" hide-gt-xs>
+        <md-input-container class="md-block" flex="50">
+          <label>{{::'attributes.task.priority' | translate}}</label>
+          <input type="number" required step="1" min="1" max="10" ng-model="tasksCtrl.resource.priority">
+        </md-input-container>
+      </div>
+      <div layout="row">
+        <md-input-container class="md-block" flex="30" hide-xs>
+          <label>{{::'attributes.task.priority' | translate}}</label>
+          <input type="number" required step="1" min="1" max="10" ng-model="tasksCtrl.resource.priority">
+        </md-input-container>
+        <pr-date-time-picker hide-xs
+          ng-model="tasksCtrl.resource.scheduled_to"
+          with-time="true"
+          flex="30"
+          label="::'attributes.task.scheduled_to' | translate"></pr-date-time-picker>
+      </div>
+    </div>
+    <box-footer-buttons>
+      <md-button class="md-warn" ng-click="tasksCtrl.close()">{{::'views.actions.getOut' | translate}}</md-button>
+      <md-button class="md-primary md-raised" type="submit">{{::'views.actions.save' | translate}}</md-button>
+    </box-footer-buttons>
+  </box>
+</form>

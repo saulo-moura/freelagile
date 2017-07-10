@@ -1,0 +1,43 @@
+<box box-title="{{::'views.actions.search' | translate}}">
+  <box-toolbar-buttons>
+    <md-button id="btn-usersCtrl-goToForm" class="md-icon-button" ng-click="usersCtrl.goTo('form')">
+      <md-icon md-font-set="material-icons" class="md-warn">add</md-icon>
+      <md-tooltip md-direction="bottom" hide-sm hide-xs>{{::'views.actions.add' | translate}}</md-tooltip>
+    </md-button>
+  </box-toolbar-buttons>
+  <md-content layout-padding md-whiteframe="1" class="bottom-4">
+    <form class="condensed" ng-submit="usersCtrl.search(vm.paginator.currentPage)">
+      <div layout="row">
+        <md-input-container flex=40 flex-xs=75 class="top-20">
+          <label>{{::'views.fields.user.nameOrEmail' | translate}}</label>
+          <input type="text" ng-model="usersCtrl.queryFilters.nameOrEmail">
+        </md-input-container>
+        <md-input-container flex>
+        </md-input-container>
+        <md-button id="btn-usersCtrl-filter" class="md-raised md-primary md-mini" type="submit">
+          {{::'views.actions.filter' | translate}}
+        </md-button>
+      </div>
+    </form>
+  </md-content>
+
+  <md-list>
+    <md-list-item ng-repeat="user in usersCtrl.resources" id="btn-usersCtrl-edit-{{::$index}}" ng-click="usersCtrl.edit(user)" class="noright">
+      <img alt="{{ ::user.name }}" ng-src="{{ user.image ? user.image : global.imagePath + '/no_avatar.gif' }}"
+        class="md-avatar" />
+      <p class="user-list-info">{{ ::user.name }} <small class="user-list-info-email">({{::user.email}})</small></p>
+      <md-button class="md-icon-button" ng-if="user.deleted_at" ng-click="usersCtrl.ativar(user)">
+        <md-icon id="btn-usersCtrl-active-{{::$index}}" md-font-set="material-icons" >restore</md-icon>
+        <md-tooltip md-direction="top">{{::'views.actions.reactivate' | translate}}</md-tooltip>
+      </md-button>
+      <md-button class="md-icon-button" ng-if="!user.deleted_at" ng-click="usersCtrl.remove(user)">
+        <md-icon id="btn-usersCtrl-remove-{{::$index}}" md-font-set="material-icons" >delete</md-icon>
+        <md-tooltip md-direction="top">{{::'views.actions.disable' | translate}}</md-tooltip>
+      </md-button>
+    </md-list-item>
+  </md-list>
+
+  <box-footer-buttons>
+    <pr-pagination paginator="usersCtrl.paginator"></pr-pagination>
+  </box-footer-buttons>
+</box>

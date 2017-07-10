@@ -1,0 +1,193 @@
+<form name="vagaForm" ng-submit="vagasCtrl.save()">
+  <box box-title="{{::'views.titles.register' | translate}}">
+    <box-toolbar-buttons>
+      <md-button class="md-icon-button" ng-click="vagasCtrl.goTo('list')">
+        <md-icon md-font-set="material-icons" class="md-warn">view_list</md-icon>
+        <md-tooltip md-direction="bottom">{{ ::'views.actions.list' | translate}}</md-tooltip>
+      </md-button>
+    </box-toolbar-buttons>
+
+    <div layout-gt-sm="row">
+      <md-autocomplete flex="90" required ng-disabled="vagasCtrl.gestorSaude || vagasCtrl.resource.status_id === vagasCtrl.STATUS.AGUARDANDO_APROVACAO || vagasCtrl.onView"
+        flex class="md-block md-input-has-placeholder" md-input-name="estabelecimento_saude" md-min-length="3" md-no-cache="true"
+        md-selected-item="vagasCtrl.estabelecimentoSaude" md-search-text="vagasCtrl.estabelecimentoSaudeTerm" md-items="estabelecimento in vagasCtrl.searchEstabelecimentoAutoComplete(vagasCtrl.estabelecimentoSaudeTerm)"
+        md-item-text="estabelecimento.nome" md-clear-button="true" md-floating-label="Estabelecimento de Saúde" md-selected-item-change="vagasCtrl.onEstabelecimentoChange()">
+        <md-item-template>
+          <span md-highlight-text="vagasCtrl.estabelecimentoSaudeTerm" md-highlight-flags="^i">{{ vagasCtrl.printSigla(estabelecimento.sigla) + estabelecimento.nome}}</span>
+        </md-item-template>
+        <md-not-found>
+          Nenhum estabelecimento de saúde encontrado.
+        </md-not-found>
+      </md-autocomplete>
+    </div>
+
+    <div layout-gt-sm="row">
+      <md-input-container class="md-block md-input-has-placeholder" flex="30">
+        <label>Curso</label>
+        <md-select required ng-model="vagasCtrl.resource.curso_id" ng-disabled="vagasCtrl.resource.status_id === vagasCtrl.STATUS.AGUARDANDO_APROVACAO || vagasCtrl.resource.status_id === vagasCtrl.STATUS.APROVADO || vagasCtrl.onView">
+          <md-option ng-value="" ng-disabled="true"><em>Selecione...</em></md-option>
+          <md-option ng-repeat="curso in vagasCtrl.cursos" ng-value="{{ curso.id }}">
+            {{ curso.nome }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+
+      <md-input-container class="md-block md-input-has-placeholder" flex="30">
+        <label>Modalidades</label>
+        <md-select required md-on-open="vagasCtrl.onModalidadeOpen()" md-on-close="vagasCtrl.onModalidadeClose()" ng- ng-model="vagasCtrl.resource.modalidade_id" ng-disabled="vagasCtrl.resource.status_id === vagasCtrl.STATUS.AGUARDANDO_APROVACAO || vagasCtrl.resource.status_id === vagasCtrl.STATUS.APROVADO || vagasCtrl.onView">
+          <md-option ng-value="" ng-disabled="true"><em>Selecione...</em></md-option>
+          <md-option ng-repeat="modalidade in vagasCtrl.modalidades" ng-value="{{ modalidade.id }}">
+            {{ modalidade.nome }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+      <md-input-container class="md-block md-input-has-placeholder" flex="30">
+        <label>Área</label>
+        <md-select required ng-model="vagasCtrl.resource.area_id" ng-disabled="vagasCtrl.resource.status_id === vagasCtrl.STATUS.AGUARDANDO_APROVACAO || vagasCtrl.resource.status_id === vagasCtrl.STATUS.APROVADO || vagasCtrl.onView">
+          <md-option ng-value="" ng-disabled="true"><em>Selecione...</em></md-option>
+          <md-option ng-repeat="area in vagasCtrl.areas" ng-value="{{ area.id }}">
+            {{ area.nome }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+    </div>
+
+    <div layout-gt-sm="row">
+      <md-input-container class="md-block md-input-has-placeholder" flex="30">
+        <label>Setor</label>
+        <md-select required ng-model="vagasCtrl.resource.setor_id" ng-disabled="vagasCtrl.resource.status_id === vagasCtrl.STATUS.AGUARDANDO_APROVACAO || vagasCtrl.resource.status_id === vagasCtrl.STATUS.APROVADO || vagasCtrl.onView">
+          <md-option ng-value="" ng-disabled="true"><em>Selecione...</em></md-option>
+          <md-option ng-repeat="setor in vagasCtrl.setores" ng-value="{{ setor.id }}">
+            {{ setor.nome }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+      <md-input-container ng-hide="vagasCtrl.estabelecimentoSaude.tipo_id !== vagasCtrl.TIPO.HOSPITAL" class="md-block md-input-has-placeholder" flex="30">
+        <label>{{ ::'attributes.especialidade_id' | translate}}</label>
+        <md-select ng-model="vagasCtrl.resource.especialidade_id" ng-disabled="vagasCtrl.resource.status_id === vagasCtrl.STATUS.AGUARDANDO_APROVACAO || vagasCtrl.resource.status_id === vagasCtrl.STATUS.APROVADO || vagasCtrl.onView">
+          <md-option ng-value="" ng-disabled="true"><em>Selecione...</em></md-option>
+          <md-option ng-repeat="especialidade in vagasCtrl.especialidades" ng-value="{{ especialidade.id }}">
+            {{ especialidade.nome }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+      <md-input-container ng-hide="vagasCtrl.estabelecimentoSaude.tipo_id !== vagasCtrl.TIPO.CENTRO_REFERENCIA" class="md-block md-input-has-placeholder" flex="30">
+        <label>{{ ::'attributes.especificacao_id' | translate}}</label>
+        <md-select ng-model="vagasCtrl.resource.especificacao_id"  ng-disabled="vagasCtrl.resource.status_id === vagasCtrl.STATUS.AGUARDANDO_APROVACAO || vagasCtrl.resource.status_id === vagasCtrl.STATUS.APROVADO || vagasCtrl.onView">
+          <md-option ng-value="" ng-disabled="true"><em>Selecione...</em></md-option>
+          <md-option ng-repeat="especificacao in vagasCtrl.especificacoes" ng-value="{{ especificacao.id }}">
+            {{ especificacao.nome }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+    </div>
+
+    <h2 class="md-title">Período</h2>
+
+    <div layout-gt-sm="row">
+
+      <md-input-container class="md-block md-input-has-placeholder" flex="20">
+        <label>Data Início</label>
+        <md-select required ng-model="vagasCtrl.resource.diaJaneiro" ng-change="vagasCtrl.onDataInicioChange()" ng-disabled="vagasCtrl.resource.status_id === vagasCtrl.STATUS.AGUARDANDO_APROVACAO || vagasCtrl.resource.status_id === vagasCtrl.STATUS.APROVADO || vagasCtrl.onView">
+          <md-option ng-value="" ng-disabled="true"><em>Selecione...</em></md-option>
+          <md-option ng-repeat="dia in vagasCtrl.dias" ng-value="{{ dia }}">
+            {{ dia }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+
+      <md-input-container class="md-block md-input-has-placeholder" flex="10">
+        <input ng-disabled="true" type="text" ng-model="vagasCtrl.mesJaneiroLabel">
+      </md-input-container>
+
+      <md-input-container class="md-block md-input-has-placeholder" flex="10">
+        <input ng-disabled="true" type="text" ng-model="vagasCtrl.anoAtual">
+      </md-input-container>
+
+    </div>
+
+    <div layout-gt-sm="row">
+
+      <md-input-container class="md-block md-input-has-placeholder" flex="20">
+        <label>Data Fim</label>
+        <md-select required ng-model="vagasCtrl.resource.diaDezembro" ng-change="vagasCtrl.onDataFimChange()" ng-disabled="vagasCtrl.resource.status_id === vagasCtrl.STATUS.AGUARDANDO_APROVACAO || vagasCtrl.resource.status_id === vagasCtrl.STATUS.APROVADO || vagasCtrl.onView">
+          <md-option ng-value="" ng-disabled="true"><em>Selecione...</em></md-option>
+          <md-option ng-repeat="dia in vagasCtrl.dias" ng-value="{{ dia }}">
+            {{ dia }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+
+      <md-input-container class="md-block md-input-has-placeholder" flex="10">
+        <input ng-disabled="true" type="text" ng-model="vagasCtrl.mesDezembroLabel">
+      </md-input-container>
+
+      <md-input-container class="md-block md-input-has-placeholder" flex="10">
+        <input ng-disabled="true" type="text" ng-model="vagasCtrl.anoAtual">
+      </md-input-container>
+
+    </div>
+
+    <h2 class="md-title">Horários Semanais</h2>
+
+    <div layout-gt-sm="row" layout-align="end none">
+      <md-button ng-disabled="vagasCtrl.resource.status_id === vagasCtrl.STATUS.AGUARDANDO_APROVACAO || vagasCtrl.resource.status_id === vagasCtrl.STATUS.APROVADO || vagasCtrl.onView"
+        class="md-primary md-raised" type="button" ng-click="vagasCtrl.addHorario(1)">8h - 12h</md-button>
+      <md-button ng-disabled="vagasCtrl.resource.status_id === vagasCtrl.STATUS.AGUARDANDO_APROVACAO || vagasCtrl.resource.status_id === vagasCtrl.STATUS.APROVADO || vagasCtrl.onView"
+        class="md-primary md-raised" type="button" ng-click="vagasCtrl.addHorario(2)">14h - 18h</md-button>
+      <md-button ng-disabled="vagasCtrl.resource.modalidade_id === vagasCtrl.MODALIDADE.PRATICA || !vagasCtrl.resource.modalidade_id || vagasCtrl.onView || vagasCtrl.resource.status_id === vagasCtrl.STATUS.AGUARDANDO_APROVACAO"
+        class="md-primary md-raised" type="button" ng-click="vagasCtrl.addHorario(3)">7h - 19h</md-button>
+      <md-button ng-disabled="vagasCtrl.resource.modalidade_id === vagasCtrl.MODALIDADE.PRATICA || !vagasCtrl.resource.modalidade_id || vagasCtrl.onView || vagasCtrl.resource.status_id === vagasCtrl.STATUS.AGUARDANDO_APROVACAO"
+        class="md-primary md-raised" type="button" ng-click="vagasCtrl.addHorario(4)">19h - 7h</md-button>
+    </div>
+
+    <div layout-gt-sm="row">
+      <div calendar="semana" ui-calendar="vagasCtrl.uiConfig.calendar" ng-model="calendarHorarios"></div>
+    </div>
+
+    <br />
+
+    <div layout-gt-sm="row" layout-align="start center">
+      <md-button layout-align="start center" ng-disabled="vagasCtrl.resource.status_id === vagasCtrl.STATUS.AGUARDANDO_APROVACAO || vagasCtrl.resource.status_id === vagasCtrl.STATUS.APROVADO || vagasCtrl.onView || !vagasCtrl.resource.data_inicio || !vagasCtrl.resource.data_fim"
+        class="md-primary md-raised" ng-click="vagasCtrl.replicar()">Replicar
+      </md-button>
+      <div  ng-if="!vagasCtrl.resource.data_inicio || !vagasCtrl.resource.data_fim">
+        <span class="sgeo-warning">Para replicar, defina o Período.</span>
+      </div>
+    </div>
+
+    <div layout-gt-sm="row">
+      <md-input-container layout-align="end center" class="md-block md-input-has-placeholder" flex="20">
+        <span>Total de vagas no Ano:</span>
+        <span>{{vagasCtrl.resource.total_vagas_ano}}</span>
+      </md-input-container>
+    </div>
+
+    <box-footer-buttons>
+      <br />
+      <md-button class="md-primary md-raised" type="button" ng-click="vagasCtrl.imprimirAgendaView()">
+
+        <md-icon md-font-set="material-icons" class="ng-scope material-icons">print</md-icon>
+        Imprimir</md-button>
+      <md-button class="md-primary md-raised" ng-if="vagasCtrl.resource.id" type="button" ng-click="vagasCtrl.historico()">
+
+        <md-icon md-font-set="material-icons" class="ng-scope material-icons">history</md-icon>
+        {{::'views.actions.historico' | translate}}</md-button>
+
+      <md-button class="md-primary md-raised" ng-show="vagasCtrl.resource.status_id === vagasCtrl.STATUS.AGUARDANDO_APROVACAO  && !vagasCtrl.onView"
+        ng-disabled="!vagaForm.$valid || vagasCtrl.onView" type="button" ng-click="vagasCtrl.aprovar()">{{::'views.actions.approve' | translate}}</md-button>
+
+      <md-button class="md-primary md-raised" ng-show="vagasCtrl.resource.status_id === vagasCtrl.STATUS.AGUARDANDO_APROVACAO && !vagasCtrl.onView"
+        ng-disabled="!vagaForm.$valid || vagasCtrl.onView" type="button" ng-click="vagasCtrl.rejeitar()">{{::'views.actions.reject' | translate}}</md-button>
+
+      <md-button class="md-primary md-raised" ng-hide="vagasCtrl.resource.status_id === vagasCtrl.STATUS.AGUARDANDO_APROVACAO || vagasCtrl.resource.status_id === vagasCtrl.STATUS.APROVADO || vagasCtrl.onView"
+        ng-disabled="!vagaForm.$valid || vagasCtrl.onView" type="button" ng-click="vagasCtrl.salvarPendente()">{{::'views.actions.save' | translate}}</md-button>
+
+      <md-button class="md-primary md-raised" ng-hide="vagasCtrl.resource.status_id === vagasCtrl.STATUS.AGUARDANDO_APROVACAO || vagasCtrl.resource.status_id === vagasCtrl.STATUS.APROVADO || vagasCtrl.onView"
+        ng-disabled="!vagaForm.$valid || vagasCtrl.onView" type="button" ng-click="vagasCtrl.finalize()">{{::'views.actions.finalize' | translate}}</md-button>
+
+      <md-button class="md-raised" ng-show="(vagasCtrl.resource.status_id === vagasCtrl.STATUS.PENDENTE || vagasCtrl.resource.status_id === vagasCtrl.STATUS.REJEITADO || !vagasCtrl.resource.status_id) && !vagasCtrl.resource.id"
+        ng-click="vagasCtrl.cleanForm()">{{::'views.actions.clear' | translate}}</md-button>
+    </box-footer-buttons>
+  </box>
+</form>

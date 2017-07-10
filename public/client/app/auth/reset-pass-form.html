@@ -1,0 +1,37 @@
+<content-body layout-align="center center">
+    <box box-title="{{ ::'views.titles.resetPassword' | translate}}" flex=60>
+      <div layout="row" layout-sm="column" flex>
+        <div flex=30 flex-sm=99 flex-gt-sm=99 layout-align="center center">
+          <img ng-src="{{:: global.imagePath + '/governo-do-estado-da-bahia.png' }}" alt="logo" />
+        </div>
+        <form flex>
+          <div layout="row" flex layout-align="center center">
+            <md-input-container flex class="bottom-5">
+              <md-icon md-font-set="material-icons">email</md-icon>
+              <label>{{::'attributes.email' | translate}}</label>
+              <input type="email" ng-model="passCtrl.reset.email">
+            </md-input-container>
+          </div>
+          <div layout="row" flex layout-align="center center">
+            <md-input-container flex class="top-1 bottom-1">
+              <md-icon md-font-set="material-icons">lock</md-icon>
+              <label>{{::'attributes.password' | translate}}</label>
+              <input type="password" flex=99 ng-model="passCtrl.reset.password">
+            </md-input-container>
+          </div>
+          <div layout="row" flex layout-align="center center">
+            <md-input-container flex class="top-1 bottom-1">
+              <md-icon md-font-set="material-icons">lock_outline</md-icon>
+              <label>{{::'views.fields.login.confirmPassword' | translate}}</label>
+              <input type="password" flex=99 ng-model="passCtrl.reset.password_confirmation">
+            </md-input-container>
+          </div>
+          <div layout="row" flex layout-align="center center">
+            <md-button class="md-raised md-primary" flex ng-click="passCtrl.sendReset()">
+              {{::'views.actions.send' | translate}}
+            </md-button>
+          </div>
+        </form>
+      </div>
+    </box>
+</content-body>

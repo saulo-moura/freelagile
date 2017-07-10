@@ -1,0 +1,25 @@
+<md-dialog aria-label="Logs" flex="60" class="md-dialog-transparent">
+  <content-body>
+    <div flex="50" ng-if="auditDetailCtrl.auditDetail.old">
+      <box box-title="{{ ::auditDetailCtrl.auditDetail | auditDetailTitle:'before' }}">
+        <ul>
+          <li ng-repeat="(key, value) in auditDetailCtrl.auditDetail.old">{{ ::key | tAttr}}: {{ ::value | auditValue:key}}</li>
+        </ul>
+        <box-footer-buttons>
+          <md-button class="md-warn" ng-click="auditDetailCtrl.close()">{{::'views.actions.getOut' | translate}}</md-button>
+        </box-footer-buttons>
+      </box>
+    </div>
+
+    <div flex="50" ng-if="auditDetailCtrl.auditDetail.new">
+      <box box-title="{{ ::auditDetailCtrl.auditDetail | auditDetailTitle:'after' }}">
+        <ul>
+          <li ng-repeat="(key, value) in auditDetailCtrl.auditDetail.new">{{ ::key | tAttr}}: {{ ::value | auditValue:key}}</li>
+        </ul>
+        <box-footer-buttons>
+          <md-button class="md-warn" ng-click="auditDetailCtrl.close()">{{::'views.actions.getOut' | translate}}</md-button>
+        </box-footer-buttons>
+      </box>
+    </div>
+  </content-body>
+</md-dialog>

@@ -1,0 +1,41 @@
+{
+  "name": "base-php-laravel-angular",
+  "main": "",
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.6.4",
+    "angular-resource": "~1.6.4",
+    "angular-aria": "~1.6.4",
+    "angular-animate": "~1.6.4",
+    "angular-messages": "~1.6.4",
+    "angular-translate": "~2.11.1",
+    "angular-sanitize": "~1.6.4",
+    "angular-material": "~1.1.4",
+    "angular-ui-router": "~0.3.1",
+    "angular-input-masks": "~2.4.0",
+    "angular-model-factory": "~1.0.3",
+    "angular-i18n": "~1.6.4",
+    "angular-moment": "~0.10.3",
+    "angular-material-data-table": "~0.10.9",
+    "ng-material-datetimepicker": "~1.6.2",
+    "ng-prodeb": "git@git.prodeb.ba.gov.br:starter-pack/ngprodeb.git#0.2.5",
+    "moment": "~2.14.1",
+    "alasql": "~0.3.5",
+    "angular-br-filters": "^0.7.0"
+  },
+  "resolutions": {
+    "angular": "~1.6.4",
+    "moment": "~2.14.1",
+    "angular-material": "~1.1.4"
+  }
+}

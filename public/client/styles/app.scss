@@ -1,0 +1,332 @@
+@import "node_modules/angular-material/angular-material.scss";
+
+$alignList: left, right, center, bottom, top, middle;
+
+html,
+body {
+  background-color: #FAFAFA;
+  height: 100% !important;
+  min-height: 100% !important;
+}
+
+.pull-left {
+  float: left !important;
+}
+
+.pull-right {
+  float: right !important;
+}
+
+#toast-container> div {
+  opacity: 1;
+}
+
+md-toolbar {
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 2px rgba(255, 255, 255, 0.1);
+}
+
+md-toolbar.no-radius {
+  border-radius: 0px !important;
+}
+
+.md-toolbar-tools {
+  padding-right: 0px !important;
+}
+
+@for $i from 1 through 5 {
+  md-toolbar.md-toolbar-h#{$i * 10} {
+    min-height: 10px * $i;
+    height: 10px * $i;
+  }
+}
+
+@for $i from 1 through 30 {
+  .top-#{$i} { margin-top: 1px * $i !important; }
+}
+
+@for $i from 1 through 30 {
+  .bottom-#{$i} { margin-bottom: 1px * $i !important; }
+}
+
+@for $i from 1 through 30 {
+  .padding-#{$i} { padding: 1px * $i; }
+}
+
+@for $i from 1 through 30 {
+  .padding-left-#{$i} { padding-left: 1px * $i; }
+}
+
+@for $i from 1 through 30 {
+  .padding-right-#{$i} { padding-right: 1px * $i !important; }
+}
+
+@for $i from 1 through 30 {
+  .padding-top-#{$i} { padding-top: 1px * $i; }
+}
+
+@for $i from 1 through 100 {
+  .font-size-#{$i} { font-size: 1% * $i !important; }
+}
+
+form.condensed {
+  margin: 2px 0 !important;
+  padding: 4px 0 0 0 !important;
+}
+
+form.condensed md-input-container {
+  margin: 0px;
+}
+
+form.condensed mdp-date-picker .md-button.md-icon-button, form.condensed mdp-time-picker .md-button.md-icon-button {
+  margin: 0px !important;
+}
+
+table.condensed .md-row {
+  height: 28px !important;
+}
+table.condensed .md-column {
+  padding: 0 12px !important;
+}
+table.condensed .md-cell {
+  padding: 0 10px !important;
+}
+
+.md-button.md-mini {
+  line-height: 20px;
+  min-width: 30px;
+  min-height: 24px;
+  font-size: 12px;
+}
+
+.md-buttom-menu{
+  margin: 0 !important;
+  margin-bottom: 0px !important;
+  text-align: inherit;
+  width: 100%;
+}
+
+.md-buttom-menu span{
+  margin-left: 10px !important;
+}
+
+.md-button.md-micro {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  min-height: 20px;
+  vertical-align: top;
+  font-size: 10px;
+  padding: 0 0;
+  margin: 0;
+}
+
+.md-button-floating {
+  position: absolute;
+  right: 35px;
+  top: 47px;
+}
+
+.md-text-center {
+  text-align: center !important;
+}
+
+.menu-icon {
+  margin-top: 7px !important;
+}
+
+@media only screen and (min-width: 240px) {
+  .md-breadcrumb {
+    font-size: 53% !important;
+    font-weight: 400 !important;
+    line-height: 140% !important;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .md-breadcrumb {
+    font-size: 100% !important;
+    font-weight: 400 !important;
+  }
+}
+
+.menu-sidenav, .menu-sidenav ul {
+  list-style: none;
+  padding: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.menu-sidenav li {
+  padding: 0;
+  margin-top: 3px;
+}
+
+.menu-sidenav> li {
+  border-bottom: 1px solid #FFFFFF;
+}
+
+.md-block {
+  width: 100%;
+}
+
+.md-default {
+  background-color: #31B0D5 !important;
+  color: #fff !important;
+}
+
+/* https://google.github.io/material-design-icons/#using-the-icons-in-html */
+
+.material-icons.md-dark {
+  color: #000000 !important;
+}
+
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+@for $i from 1 through 4 {
+  .material-icons.md-#{$i * 12} { font-size: 12px * $i; }
+}
+
+.nav-header {
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.logo {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 0 16px;
+  margin: 0 auto;
+}
+
+.logo span {
+  width: 100%;
+  font-size: 80%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.logo span.email {
+  padding: 0px !important;
+}
+
+a.logo {
+  text-decoration: none;
+  color: #fff;
+}
+
+.logo div.principal {
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: cover;
+  border-radius: 50%;
+  width: 40%;
+  height: 100px;
+}
+
+.full-height {
+  height: 100% !important;
+  min-height: 100% !important;
+}
+
+.site-sidenav,
+.site-sidenav.md-locked-open-add-active,
+.site-sidenav.md-locked-open {
+  width: 272px;
+  min-width: 272px;
+  max-width: 272px;
+}
+
+.site-sidenav md-content {
+  background: transparent;
+}
+
+.site-sidenav> * {
+  min-width: 218px;
+}
+
+.site-content-toolbar {
+  background: #f6f6f6 !important;
+  color: #202020 !important;
+  z-index: 3;
+}
+
+.md-whiteframe-glow-z1 {
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 0px 2px 2px rgba(0, 0, 0, 0.098), 0px 0px 5px 1px rgba(0, 0, 0, 0.084);
+}
+
+#license-footer {
+  align-self: flex-end;
+  padding: 16px 32px;
+  width: 100%;
+  text-align: center;
+  font-size: small;
+  border-top: 1px solid #ddd;
+}
+
+.md-dialog-transparent {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+@each $align in $alignList {
+  .md-text-#{$align} {
+    text-align: #{$align} !important;
+  }
+}
+
+.prContactChips md-content.autocomplete input {
+  min-width: 400px;
+}
+
+.prContactChips md-content.autocomplete {
+  margin: 0px 8px;
+}
+
+.fc-day-header{
+  text-transform: uppercase !important;
+}
+.fc-scroller{
+  overflow-y: auto !important; 
+}
+
+@media only print {
+  @page {
+    border: initial;
+    border-radius: initial;
+    width: initial;
+    min-height: initial;
+    box-shadow: initial;
+    background: initial;
+    page-break-after: always;
+  }
+  html, body {
+    height: 210mm;
+    width: 297mm;
+  }
+  .hide-print {
+    display: none !important;
+  }
+  .show-print {
+    display: block;
+  }
+}
+
+.sgeo-warning{
+  color: #c97000;
+  text-align: center;
+  padding-top: 10px;
+}
+
+[role="tabpanel"],
+md-tabs {
+  transition: none;
+}
+
+.ies-anexos-container{
+  margin-bottom: 30px;
+}
+

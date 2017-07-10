@@ -1,0 +1,28 @@
+.sonar/
+
+### Resources ###
+node_modules/
+bower_components/
+build/
+
+npm-debug.log
+
+### Editores ###
+
+.vscode/
+
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio
+.idea/
+.idea_modules/
+/out/
+*.ipr
+*.iws
+*.iml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+
+### mac os x ####
+.DS_Store

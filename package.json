@@ -1,12 +1,15 @@
 {
   "private": true,
+  "name": "base-php-laravel-angular",
+  "description": "StarterPack em PHP usando Laravel com Angular",
+  "version": "1.0.0",
   "scripts": {
-    "prod": "gulp --production",
-    "dev": "gulp watch"
-  },
-  "devDependencies": {
-    "gulp": "^3.9.1",
-    "laravel-elixir": "^5.0.0",
-    "bootstrap-sass": "^3.0.0"
+    "server": "php artisan serve --port=5000 --host=0.0.0.0",
+    "package": "sh scripts/deploy.sh",
+    "build": "gulp --gulpfile public/client/gulpfile.js",
+    "check": "gulp --gulpfile public/client/gulpfile.js check",
+    "webdriver": "webdriver-manager start",
+    "e2e-test": "sh scripts/e2e-test.sh",
+    "unit-test": "sh scripts/unit-test.sh"
   }
 }

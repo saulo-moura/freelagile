@@ -1,0 +1,16 @@
+<section md-whiteframe="1">
+  <md-toolbar md-whiteframe="1" class="md-toolbar-h50"
+    ng-class="$ctrl.toolbarClass"
+    md-colors="::{background:'{{$ctrl.toolbarBgColor}}'}">
+    <div class="md-toolbar-tools font-size-80">
+      <h3>{{$ctrl.boxTitle | uppercase}}</h3>
+      <span flex></span>
+      <ng-transclude ng-transclude-slot="toolbarButtons"></ng-transclude>
+    </div>
+  </md-toolbar>
+  <md-content class="padding-8" layout-xs="column">
+    <ng-transclude></ng-transclude>
+    <md-card-actions ng-if="$ctrl.transclude.isSlotFilled('footerButtons')" layout="row" layout-align="end center" ng-transclude="footerButtons">
+    </md-card-actions>
+  </md-content>
+</section>

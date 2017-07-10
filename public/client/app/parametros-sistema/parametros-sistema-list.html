@@ -1,0 +1,48 @@
+<box box-title="{{ ::'views.actions.list' | translate}}">
+  <box-toolbar-buttons>
+    <md-button ng-if="parametrossistemaCtrl.accessPermission('parametrosSistema', 'store')" class="md-icon-button" ng-click="parametrossistemaCtrl.goTo('form')">
+      <md-icon md-font-set="material-icons" class="md-warn">add</md-icon>
+      <md-tooltip md-direction="bottom" hide-sm hide-xs>{{ ::'views.actions.add' | translate}}</md-tooltip>
+    </md-button>
+  </box-toolbar-buttons>
+  <md-table-container>
+    <table md-table class="condensed">
+      <thead md-head>
+        <tr md-row>
+          <th md-column>{{ ::'attributes.descricao' | translate}}</th>
+          <th md-column>{{ ::'attributes.chave' | translate}}</th>
+          <th md-column>{{ ::'attributes.valor' | translate}}</th>
+          <th md-column class="md-text-center">{{ ::'views.fields.action' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody md-body>
+        <tr md-row ng-repeat="resource in parametrossistemaCtrl.resources" ng-if="parametrossistemaCtrl.resources.length > 0">
+          <td md-cell>{{ ::resource.descricao}}</td>
+          <td md-cell>{{ ::resource.chave}}</td>
+          <td md-cell>{{ ::resource.valor}}</td>
+          <td md-cell class="md-text-center">
+            <md-button ng-if="parametrossistemaCtrl.accessPermission('parametrosSistema', 'update')" class="md-icon-button" ng-click="parametrossistemaCtrl.edit(resource)">
+              <md-icon md-font-set="material-icons"
+                class="md-dark">create</md-icon>
+              <md-tooltip md-direction="top">{{::'views.actions.edit' | translate}}</md-tooltip>
+            </md-button>
+            <md-button ng-if="parametrossistemaCtrl.accessPermission('parametrosSistema', 'destroy')" class="md-icon-button" ng-click="parametrossistemaCtrl.remove(resource)">
+              <md-icon md-font-set="material-icons"
+                class="md-warn">delete</md-icon>
+              <md-tooltip md-direction="top">{{::'views.actions.remove' | translate}}</md-tooltip>
+            </md-button>
+          </td>
+        </tr>
+        <tr md-row ng-if="parametrossistemaCtrl.resources.length == 0">
+          <td md-cell colspan="4">
+            <div layout="row" layout-align="center center">{{::'messages.notFound' | translate}}</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </md-table-container>
+
+  <md-card-actions layout="row" layout-align="end center">
+    <pr-pagination paginator="parametrossistemaCtrl.paginator"></pr-pagination>
+  </md-card-actions>
+</box>

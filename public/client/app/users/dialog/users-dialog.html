@@ -1,0 +1,40 @@
+<md-dialog flex=75 flex-gt-md=60 aria-label="{{::'views.titles.userList' | translate}}" class="md-dialog-transparent">
+  <content-body flex>
+    <box box-title="{{::'views.titles.userList' | translate}}" flex>
+      <md-table-container>
+        <table md-table class="condensed">
+          <thead md-head>
+            <tr md-row>
+              <th md-column>{{::'attributes.name' | translate}}</th>
+              <th md-column>{{::'attributes.email' | translate}}</th>
+              <th md-column>{{::'views.fields.actions' | translate}}</th>
+            </tr>
+          </thead>
+          <tbody md-body>
+            <tr md-row ng-repeat="user in ctrl.resources">
+              <td md-cell>{{ ::user.name}}</td>
+              <td md-cell>{{ ::user.email}}</td>
+              <td md-cell>
+                <md-button class="md-icon-button" ng-click="ctrl.transferUser(user)">
+                  <md-icon md-font-set="material-icons" class="md-dark">swap_horiz</md-icon>
+                  <md-tooltip md-direction="top" hide-sm hide-xs>{{::'views.tooltips.user.transfer' | translate}}</md-tooltip>
+                </md-button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
+
+      <box-footer-buttons>
+        <div layout="row">
+          <div flex layout="row" layout-align="center center">
+            <pr-pagination paginator="ctrl.paginator"></pr-pagination>
+          </div>
+          <div>
+            <md-button class="md-warn" ng-click="ctrl.close()">{{::'views.actions.getOut' | translate}}</md-button>
+          </div>
+        </div>
+      </box-footer-buttons>
+    </box>
+  </content-body>
+</md-dialog>

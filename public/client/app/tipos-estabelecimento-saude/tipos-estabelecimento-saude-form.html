@@ -1,0 +1,17 @@
+<form ng-submit="tiposEstabelecimentoSaudeCtrl.save()">
+  <box box-title="{{::'views.titles.register' | translate}}">
+    <box-toolbar-buttons>
+      <md-button class="md-icon-button" ng-click="tiposEstabelecimentoSaudeCtrl.goTo('list')">
+        <md-icon md-font-set="material-icons" class="md-warn">view_list</md-icon>
+        <md-tooltip md-direction="bottom">{{ ::'views.actions.list' | translate}}</md-tooltip>
+      </md-button>
+    </box-toolbar-buttons>
+      <md-input-container class="md-block" flex>
+        <input ng-change="tiposEstabelecimentoSaudeCtrl.resource.nome = tiposEstabelecimentoSaudeCtrl.resource.nome.toUpperCase()" required type="text" placeholder="{{ ::'attributes.name' | translate}}" ng-model="tiposEstabelecimentoSaudeCtrl.resource.nome">
+      </md-input-container>
+    <box-footer-buttons>
+      <md-button class="md-primary md-raised" type="submit">{{::'views.actions.save' | translate}}</md-button>
+      <md-button class="md-raised" ng-click="tiposEstabelecimentoSaudeCtrl.cleanForm()">{{::'views.actions.clear' | translate}}</md-button>
+    </box-footer-buttons>
+  </box>
+</form>

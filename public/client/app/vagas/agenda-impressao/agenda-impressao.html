@@ -1,0 +1,16 @@
+<div layout="row" layout-align="center center">
+    <h2 class="md-title">{{ vagasCtrl.agendaImpressaoTitulo }}</h2>
+</div>
+<div layout="row">
+    <div calendar="impressao" ui-calendar="vagasCtrl.uiConfig.impressao" ng-model="calendarHorarios"></div>
+</div>
+<div layout="row" layout-align="end center">
+    <md-button class="md-primary md-raised hide-print" type="button" ng-click="vagasCtrl.voltarImpressao()">
+        <md-icon md-font-set="material-icons" class="ng-scope material-icons">replay</md-icon>
+        Voltar
+    </md-button>
+    <md-button class="md-primary md-raised hide-print" type="button" ng-click="vagasCtrl.imprimirAgenda()">
+        <md-icon md-font-set="material-icons" class="ng-scope material-icons">print</md-icon>
+        Imprimir
+    </md-button>
+</div>

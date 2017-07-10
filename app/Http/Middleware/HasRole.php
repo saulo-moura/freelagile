@@ -1,0 +1,37 @@
+<?php namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Contracts\Auth\Guard;
+
+class HasRole
+{
+    protected $auth;
+    /**
+     * Creates a new instance of the middleware.
+     *
+     * @param Guard $auth
+     */
+    public function __construct(Guard $auth)
+    {
+        $this->auth = $auth;
+    }
+
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  Closure $next
+     * @param  $roles
+     * @return mixed
+     */
+    public function handle($request, Closure $next, $roles)
+    {
+        $all = str_contains($roles, "-all");
+
+        if ($this->auth->guest() || !$request->user()->hasRole(explode('|', str_replace("-all", "", $roles)), $all)) {
+            return response()->json(['error' =>'messages.notAuthorized'], 403);
+        }
+
+        return $next($request);
+    }
+}

@@ -1,0 +1,5 @@
+projectKey=br.gov.ba.sesab.sgeo
+serverUrl=http://sonar.prodeb.ba.gov.br:9000
+dashboardUrl=http://sonar.prodeb.ba.gov.br:9000/dashboard/index/br.gov.ba.sesab.sgeo
+ceTaskId=AV0tiJ2gvNc8Sl9GCafo
+ceTaskUrl=http://sonar.prodeb.ba.gov.br:9000/api/ce/task?id=AV0tiJ2gvNc8Sl9GCafo

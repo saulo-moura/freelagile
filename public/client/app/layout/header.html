@@ -1,0 +1,31 @@
+<!-- titulo do projeto -->
+<md-toolbar class="md-whiteframe-glow-z1 site-content-toolbar hide-print" aria-hidden="false">
+  <div class="md-toolbar-tools" layout-wrap>
+    <md-button
+      ng-click="menuCtrl.open()"
+      class="md-icon-button md-primary"
+      hide-gt-sm
+      aria-label="Menu">
+      <md-icon md-font-set="material-icons">menu</md-icon>
+    </md-button>
+    <div layout="row" flex>
+      <div layout="row" layout-align="start center">
+        <div id="page-breadcrumb" class="md-breadcrumb">{{$state.current.name | tBreadcrumb}}</div>
+      </div>
+      <span flex></span>
+      <div layout="row" class="md-toolbar-item" ng-if="auth.authenticated()">
+        <md-button class="md-icon-button" aria-label="Perfil" ui-sref="app.user-profile">
+          <md-icon md-font-set="material-icons"
+            class="md-dark">perm_identity</md-icon>
+          <md-tooltip md-direction="left" hide-sm hide-xs>{{::'views.tooltips.user.perfil' | translate}}</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="Sair" ng-click="appCtrl.logout()">
+          <md-icon md-font-set="material-icons"
+            class="md-dark">power_settings_new</md-icon>
+          <md-tooltip md-direction="bottom" hide-sm hide-xs>{{::'views.actions.getOut' | translate}}</md-tooltip>
+        </md-button>
+      </div>
+
+    </div>
+  </div>
+</md-toolbar>

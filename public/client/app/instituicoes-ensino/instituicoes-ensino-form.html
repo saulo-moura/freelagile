@@ -1,0 +1,37 @@
+<form name="iesForm" ng-submit="iesCtrl.save()">
+  <box box-title="{{::'views.titles.register' | translate}}">
+    <box-toolbar-buttons>
+      <md-button class="md-icon-button" ng-click="iesCtrl.cadastrarCurso()">
+        <md-icon md-font-set="material-icons" class="md-warn">book</md-icon>
+        <md-tooltip md-direction="top">Cadastrar Cursos</md-tooltip>
+      </md-button>
+      <md-button class="md-icon-button" ng-click="iesCtrl.goTo('list')">
+        <md-icon md-font-set="material-icons" class="md-warn">view_list</md-icon>
+        <md-tooltip md-direction="top">{{ ::'views.actions.list' | translate}}</md-tooltip>
+      </md-button>
+    </box-toolbar-buttons>
+    <div ng-cloak>
+      <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+          <md-tab label="Cadastro">
+            <div ng-include src="global.clientPath + '/instituicoes-ensino/instituicoes-ensino-tab-cadastro.html'"></div>
+          </md-tab>
+          <md-tab label="Campus" ng-disabled="!iesCtrl.resource.id">
+            <md-content>
+              <div ng-controller="CampusController as campusCtrl" ng-include flex src="global.clientPath + '/instituicoes-ensino/instituicoes-ensino-tab-campus.html'"></div>
+            </md-content>
+          </md-tab>
+          <md-tab label="Cursos" ng-disabled="!iesCtrl.resource.id">
+            <md-content>
+              <div ng-include src="global.clientPath + '/instituicoes-ensino/instituicoes-ensino-tab-cursos.html'"></div>
+            </md-content>
+          </md-tab>
+        </md-tabs>
+      </md-content>
+    </div>
+    <box-footer-buttons>
+      <md-button class="md-primary md-raised" type="submit">{{::'views.actions.save' | translate}}</md-button>
+      <md-button class="md-raised" ng-click="iesCtrl.cleanForm()">{{::'views.actions.clear' | translate}}</md-button>
+    </box-footer-buttons>
+  </box>
+</form>

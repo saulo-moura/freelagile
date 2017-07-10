@@ -9,18 +9,25 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="Application Test Suite">
-            <directory suffix="Test.php">./tests</directory>
+        <testsuite name="Feature Tests">
+            <directory suffix="Test.php">./tests/Feature</directory>
+        </testsuite>
+
+        <testsuite name="Unit Tests">
+            <directory suffix="Test.php">./tests/Unit</directory>
         </testsuite>
     </testsuites>
     <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
+        <whitelist addUncoveredFilesFromWhitelist="true" processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./app</directory>
-            <exclude>
-                <file>./app/Http/routes.php</file>
-            </exclude>
         </whitelist>
     </filter>
+    <logging>
+      <log type="coverage-html" target="./testresults/codecoverage" charset="UTF-8" yui="true" highlight="true" lowUpperBound="50" highLowerBound="80"/>
+      <log type="coverage-clover" target="./testresults/test-clover.xml"/>
+      <log type="testdox-text" target="./testresults/log.txt"/>
+      <log type="junit" target="./testresults/test-unit.xml"/>
+    </logging>
     <php>
         <env name="APP_ENV" value="testing"/>
         <env name="CACHE_DRIVER" value="array"/>

@@ -1,0 +1,46 @@
+<box box-title="{{::'views.titles.register' | translate}}">
+  <box-toolbar-buttons>
+    <md-button ng-if="rolesCtrl.accessPermission('roles', 'index')" class="md-icon-button" ng-click="rolesCtrl.goTo('list')">
+      <md-icon md-font-set="material-icons" class="md-warn">view_list</md-icon>
+      <md-tooltip md-direction="bottom">{{ ::'views.actions.list' | translate}}</md-tooltip>
+    </md-button>
+  </box-toolbar-buttons>
+  <form>
+    <md-input-container  class="md-block" flex>
+      <input type="text" ng-change="rolesCtrl.resource.title = rolesCtrl.resource.title.toUpperCase()" ng-disabled="rolesCtrl.resource.slug === 'admin'" required placeholder="Nome" ng-model="rolesCtrl.resource.title">
+    </md-input-container>
+    <style>
+      .md-select-value, .md-select-value > span {
+        display: inline-block !important;
+      }
+    </style>
+
+    <md-table-container>
+      <table md-table class="condensed">
+        <thead md-head>
+          <tr md-row>
+            <th md-column>Recurso</th>
+            <th md-column>Permissões</th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr ng-if="availableResource.slug != 'authorization' && availableResource.slug != 'authentication'" md-row ng-repeat="availableResource in rolesCtrl.availableResources">
+            <td md-cell>{{ ::availableResource.name}}</td>
+            <td md-cell>
+                <md-input-container class="md-block">
+                  <label>Permissões</label>
+                  <md-select ng-change="rolesCtrl.actionsSelectionChanged(availableResource)" multiple ng-model="rolesCtrl.resource.actions" ng-model-options="{trackBy: '$value.id'}">
+                    <md-option ng-if="action.action_type_slug !== 'updateProfile'" ng-value="action" ng-repeat="action in availableResource.actions">{{ action.action_type_name }}</md-option>
+                  </md-select>
+              </md-input-container class="md-block">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </form>
+  <box-footer-buttons>
+    <md-button class="md-primary md-raised" ng-click="rolesCtrl.save()">{{::'views.actions.save' | translate}}</md-button>
+    <md-button class="md-raised" ng-hide="rolesCtrl.resource.id" ng-click="rolesCtrl.cleanForm()">{{::'views.actions.clear' | translate}}</md-button>
+  </box-footer-buttons>
+</box>

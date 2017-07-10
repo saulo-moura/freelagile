@@ -1,0 +1,92 @@
+<content-body>
+  <div flex="100">
+    <box box-title="{{::'views.titles.auditList' | translate}}">
+      <md-content layout-padding md-whiteframe="1" class="bottom-4">
+        <form class="condensed">
+          <div layout="row">
+            <md-input-container flex=20 flex-xs=40>
+              <label>{{::'id' | tAttr}}</label>
+              <input type="text" ng-model="auditCtrl.queryFilters.auditable_id">
+            </md-input-container>
+            <pr-date-time-picker hide-xs
+              ng-model="auditCtrl.queryFilters.dateStart"
+              with-time="false"
+              flex="25"
+              label="::'views.fields.audit.dateStart' | translate"></pr-date-time-picker>
+
+            <pr-date-time-picker hide-xs
+              ng-model="auditCtrl.queryFilters.dateEnd"
+              with-time="false"
+              flex="25"
+              label="::'views.fields.audit.dateEnd' | translate"></pr-date-time-picker>
+          </div>
+          <div layout="row" hide-gt-xs>
+            <md-input-container flex=100>
+              <label>{{::'models.user' | translate}}</label>
+              <input type="text" ng-model="auditCtrl.queryFilters.user">
+            </md-input-container>
+          </div>
+          <div layout="row">
+            <md-input-container flex=50 flex-gt-md=20 hide-xs>
+              <label>{{::'models.user' | translate}}</label>
+              <input type="text" ng-model="auditCtrl.queryFilters.user">
+            </md-input-container>
+            <md-input-container flex=50 flex-gt-md=40 flex-xs=100>
+              <label>{{::'views.fields.audit.resource' | translate}}</label>
+              <md-select ng-model="auditCtrl.queryFilters.model">
+                <md-option ng-repeat="model in auditCtrl.models" value="{{::model.id}}">
+                  {{::model.label}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+          <div layout="row" >
+            <md-input-container flex=80 hide-xs>
+              <md-radio-group ng-model="auditCtrl.queryFilters.type" layout="row">
+                <md-radio-button value="{{::type.id}}" ng-repeat="type in auditCtrl.types">{{::type.label}}</md-radio-button>
+              </md-radio-group>
+            </md-input-container>
+            <md-input-container flex>
+            </md-input-container>
+            <md-button class="md-raised md-primary md-mini" ng-click="auditCtrl.search(auditCtrl.paginator.currentPage)">
+              {{::'views.actions.filter' | translate}}
+            </md-button>
+          </div>
+        </form>
+      </md-content>
+
+      <md-table-container>
+        <table md-table class="condensed">
+          <thead md-head>
+            <tr md-row>
+              <th md-column>{{'models.user' | translate}}</th>
+              <th md-column hide-xs>{{'views.fields.action' | translate}}</th>
+              <th md-column>{{'views.fields.audit.resource' | translate}}</th>
+              <th md-column hide-xs>{{'attributes.date' | translate}}</th>
+              <th md-column>{{'views.fields.actions' | translate}}</th>
+            </tr>
+          </thead>
+          <tbody md-body>
+            <tr md-row ng-repeat="log in auditCtrl.resources">
+              <td md-cell>{{ ::log.user.name}}</td>
+              <td md-cell hide-xs>{{ ::log.type | auditType }}</td>
+              <td md-cell>{{::log.auditable_id}}: {{ ::log.auditable_type | auditModel}}</td>
+              <td md-cell hide-xs>{{ ::log.created_at | prDatetime}}</td>
+              <td md-cell>
+                <md-button class="md-icon-button" ng-click="auditCtrl.viewDetail(log)">
+                  <md-icon md-font-set="material-icons"
+                    class="md-dark">search</md-icon>
+                  <md-tooltip md-direction="bottom" hide-sm hide-xs>{{::'views.tooltips.audit.viewDetail' | translate}}</md-tooltip>
+                </md-button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
+
+      <box-footer-buttons>
+        <pr-pagination paginator="auditCtrl.paginator"></pr-pagination>
+      </box-footer-buttons>
+    </box>
+  </div>
+</content-body>

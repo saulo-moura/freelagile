@@ -1,0 +1,44 @@
+<box box-title="{{ ::'views.actions.list' | translate}}">
+  <box-toolbar-buttons>
+    <md-button class="md-icon-button" ng-click="tiposEstabelecimentoSaudeCtrl.goTo('form')">
+      <md-icon md-font-set="material-icons" class="md-warn">add</md-icon>
+      <md-tooltip md-direction="bottom" hide-sm hide-xs>{{ ::'views.actions.add' | translate}}</md-tooltip>
+    </md-button>
+  </box-toolbar-buttons>
+  <md-table-container>
+    <table md-table class="condensed">
+      <thead md-head>
+        <tr md-row>
+          <th md-column>{{ ::'attributes.name' | translate}}</th>
+          <th md-column class="md-text-center">{{ ::'views.fields.action' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody md-body>
+        <tr md-row ng-repeat="resource in tiposEstabelecimentoSaudeCtrl.resources" ng-if="tiposEstabelecimentoSaudeCtrl.resources.length > 0">
+          <td md-cell>{{ ::resource.nome}}</td>
+          <td md-cell class="md-text-center">
+            <md-button class="md-icon-button" ng-click="tiposEstabelecimentoSaudeCtrl.edit(resource)">
+              <md-icon md-font-set="material-icons"
+                class="md-dark">create</md-icon>
+              <md-tooltip md-direction="top">{{::'views.actions.edit' | translate}}</md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="tiposEstabelecimentoSaudeCtrl.remove(resource)">
+              <md-icon md-font-set="material-icons"
+                class="md-warn">delete</md-icon>
+              <md-tooltip md-direction="top">{{::'views.actions.remove' | translate}}</md-tooltip>
+            </md-button>
+          </td>
+        </tr>
+        <tr md-row ng-if="tiposEstabelecimentoSaudeCtrl.resources.length == 0">
+          <td md-cell colspan="2">
+            <div layout="row" layout-align="center center">{{::'messages.notFound' | translate}}</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </md-table-container>
+
+  <md-card-actions layout="row" layout-align="end center">
+    <pr-pagination paginator="tiposEstabelecimentoSaudeCtrl.paginator"></pr-pagination>
+  </md-card-actions>
+</box>

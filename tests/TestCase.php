@@ -1,25 +1,22 @@
 <?php
 
-class TestCase extends Illuminate\Foundation\Testing\TestCase
+namespace Tests;
+
+use Exception;
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+
+class TestCase extends BaseTestCase
 {
-    /**
-     * The base URL to use while testing the application.
-     *
-     * @var string
-     */
-    protected $baseUrl = 'http://localhost';
+    use CreatesApplication, TokenHelper, AssertsHelper;
 
-    /**
-     * Creates the application.
-     *
-     * @return \Illuminate\Foundation\Application
-     */
-    public function createApplication()
+    protected $apiPath = '/api/v1';
+    protected $webPath = '';
+    protected $faker;
+    protected $adminUserData;
+    protected $normalUserData;
+
+    public function __construct()
     {
-        $app = require __DIR__.'/../bootstrap/app.php';
-
-        $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
-
-        return $app;
+        $this->faker = \Faker\Factory::create();
     }
 }

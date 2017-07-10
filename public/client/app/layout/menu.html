@@ -1,0 +1,50 @@
+<md-sidenav
+  class="site-sidenav md-sidenav-left full-height"
+  md-component-id="left"
+  md-is-locked-open="$mdMedia('gt-sm')"
+  hide-print
+  md-whiteframe="4">
+
+  <header class="nav-header" ng-style="::menuCtrl.sidenavStyle.top">
+    <a class="logo" href="/">
+      <div class="principal"
+        ng-style="{'background-image':'url(' + appCtrl.getImagePerfil() + ')'}">
+      </div>
+      <span ng-style="menuCtrl.sidenavStyle.textColor">{{auth.currentUser.name}}</span>
+      <span  id="logged-user-cpf" ng-style="::menuCtrl.sidenavStyle.textColor">{{ auth.currentUser.cpf | brCpf }}</span>
+    </a>
+  </header>
+
+  <md-content layout-padding flex style="text-transform:uppercase;" ng-style="::menuCtrl.sidenavStyle.content">
+
+    <ul class="menu-sidenav">
+      <li ng-repeat="item in menuCtrl.itensMenu" ng-style="::menuCtrl.sidenavStyle.lineBottom" ng-if="auth.currentUser.itemMenuPermitido(item.subItens) || auth.currentUser.hasPermission(item.needPermission.resource, item.needPermission.action)">
+        <md-menu md-offset="300 20">
+          <md-button
+            class="md-button md-buttom-menu"
+            ng-click="menuCtrl.openMenuOrRedirectToState($mdOpenMenu, $event, item)">
+            <md-icon md-font-set="material-icons"
+              class="pull-left menu-icon" ng-style="menuCtrl.sidenavStyle.textColor">
+              {{::item.icon}}
+            </md-icon>
+            <span translate="{{::item.title}}" translate-cloak ng-style="::menuCtrl.sidenavStyle.textColor"></span>
+          </md-button>
+          <md-menu-content width="4">
+            <md-menu-item ng-repeat="subItem in item.subItens" ng-if="!subItem.needPermission || auth.currentUser.hasPermission(subItem.needPermission.resource, subItem.needPermission.action)">
+              <md-button
+                ng-click="menuCtrl.openMenuOrRedirectToState($mdOpenMenu, $event, subItem)"
+                >
+                <span md-menu-align-target>
+                  <md-icon md-font-set="material-icons" class="pull-left menu-icon">
+                    {{::subItem.icon}}
+                  </md-icon>
+                  <span translate="{{::subItem.title}}"></span>
+                </span>
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </li>
+    </ul>
+  </md-content>
+</md-sidenav>

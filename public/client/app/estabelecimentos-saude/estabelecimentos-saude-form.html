@@ -1,0 +1,210 @@
+<form name="estabelecimentoSaudeForm" ng-submit="estabelecimentosSaudeCtrl.save()">
+  <box box-title="{{::'views.titles.register' | translate}}">
+    <box-toolbar-buttons>
+      <md-button class="md-icon-button" ng-click="estabelecimentosSaudeCtrl.goTo('list')">
+        <md-icon md-font-set="material-icons" class="md-warn">view_list</md-icon>
+        <md-tooltip md-direction="bottom">{{ ::'views.actions.list' | translate}}</md-tooltip>
+      </md-button>
+    </box-toolbar-buttons>
+
+    <h2 class="md-title">Estabelecimento</h2>
+
+    <div layout-gt-sm="row">
+
+      <md-input-container class="md-block" flex="20">
+        <label>CNES</label>
+        <input maxlength="10" required ng-disabled="estabelecimentosSaudeCtrl.editando" type="text" name="cnes" ng-model="estabelecimentosSaudeCtrl.resource.cnes" ng-maxlength="10">
+        <div ng-messages="estabelecimentoSaudeForm.sigla.$error">
+          <div ng-message="maxlength">CNES deve ter no máximo 10 caracteres</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container class="md-block" flex="60">
+        <label>{{::'attributes.name' | translate}}</label>
+        <input required ng-change="estabelecimentosSaudeCtrl.resource.nome = estabelecimentosSaudeCtrl.resource.nome.toUpperCase()" type="text" name="nome" ng-model="estabelecimentosSaudeCtrl.resource.nome">
+      </md-input-container>
+
+      <md-input-container class="md-block" flex=20>
+        <label>Sigla</label>
+        <input maxlength="6" required ui-mask="999999" ng-change="estabelecimentosSaudeCtrl.resource.sigla = estabelecimentosSaudeCtrl.resource.sigla.toUpperCase()" type="text" name="sigla" ng-model="estabelecimentosSaudeCtrl.resource.sigla" ng-maxlength="6">
+        <div ng-messages="estabelecimentoSaudeForm.sigla.$error">
+          <div ng-message="maxlength">Sigla deve ter no máximo 6 caracteres</div>
+        </div>
+      </md-input-container>
+    </div>
+
+    <div layout-gt-sm="row" ng-if="estabelecimentosSaudeCtrl.resource.id">
+      <md-input-container class="md-block md-input-has-placeholder" flex-gt-md>
+        <label>Tipo de Estabelecimento</label>
+        <md-select ng-model="estabelecimentosSaudeCtrl.resource.tipo_id">
+          <md-option ng-value="" ng-disabled="true"><em>Selecione...</em></md-option>
+          <md-option ng-repeat="tipo in estabelecimentosSaudeCtrl.tiposEstabelecimento" ng-value="{{ tipo.id }}">
+            {{ tipo.nome }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+
+      <md-input-container class="md-block" flex-gt-md>
+        <label>CNPJ</label>
+        <input required ui-br-cnpj-mask type="text" name="cnpj" ng-model="estabelecimentosSaudeCtrl.resource.cpf_cnpj">
+        <div ng-messages="estabelecimentoSaudeForm.cnpj.$error">
+          <div ng-message="cnpj">CNPJ inválido.</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container class="md-block md-input-has-placeholder" flex-gt-md>
+        <label>Natureza Jurídica</label>
+        <md-select ng-model="estabelecimentosSaudeCtrl.resource.natureza_juridica_id">
+          <md-option ng-value="" ng-disabled="true"><em>Selecione...</em></md-option>
+          <md-option ng-repeat="naturezaJuridica in estabelecimentosSaudeCtrl.naturezasJuridicas" ng-value="{{ naturezaJuridica.id }}">
+            {{ naturezaJuridica.nome }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+    </div>
+
+    <div layout-gt-sm="row" ng-if="estabelecimentosSaudeCtrl.resource.id">
+      <md-input-container class="md-block" flex="20">
+        <label>CEP</label>
+        <input required ui-br-cep-mask type="text" name="cep" ng-model="estabelecimentosSaudeCtrl.resource.cep">
+        <div ng-messages="estabelecimentoSaudeForm.cep.$error">
+          <div ng-message="cep">CEP inválido.</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container class="md-block" flex="60">
+        <label>Endereço</label>
+        <input required type="text" name="endereco" ng-model="estabelecimentosSaudeCtrl.resource.endereco">
+      </md-input-container>
+
+      <md-input-container class="md-block" flex="20">
+        <label>Bairro</label>
+        <input required type="text" name="bairro" ng-model="estabelecimentosSaudeCtrl.resource.bairro">
+      </md-input-container>
+
+    </div>
+    <div layout-gt-sm="row" ng-if="estabelecimentosSaudeCtrl.resource.id">
+      <md-input-container class="md-block md-input-has-placeholder" flex-gt-md>
+        <label>Município</label>
+        <md-select ng-change="estabelecimentosSaudeCtrl.onMunicipioChange()" ng-model="estabelecimentosSaudeCtrl.resource.municipio">
+          <md-option ng-value="" ng-disabled="true"><em>Selecione...</em></md-option>
+          <md-option ng-repeat="municipio in estabelecimentosSaudeCtrl.municipios" ng-value="municipio">
+            {{ municipio.nome }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+
+      <md-input-container class="md-block md-input-has-placeholder" flex-gt-md>
+        <label>Nucleo Regional</label>
+        <md-select ng-disabled="true" ng-model="estabelecimentosSaudeCtrl.resource.nucleo_regional_id">
+          <md-option ng-value="" ng-disabled="true"><em>Selecione...</em></md-option>
+          <md-option ng-repeat="nucleoRegional in estabelecimentosSaudeCtrl.nucleosRegionais" ng-value="{{ nucleoRegional.id }}">
+            {{ nucleoRegional.nome }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+
+      <md-input-container class="md-block md-input-has-placeholder" flex-gt-md>
+        <label>Estado</label>
+        <md-select ng-disabled="true" ng-model="estabelecimentosSaudeCtrl.resource.estado_id">
+          <md-option ng-value="" ng-disabled="true"><em>Selecione...</em></md-option>
+          <md-option ng-repeat="estado in estabelecimentosSaudeCtrl.estados" ng-value="{{ estado.id }}">
+            {{ estado.nome }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+    </div>
+
+    <h2 ng-if="estabelecimentosSaudeCtrl.resource.id" class="md-title">Diretor do Estabelecimento</h2>
+
+    <div layout-gt-sm="row" ng-if="estabelecimentosSaudeCtrl.resource.id">
+      <md-input-container class="md-block" flex>
+        <label>Nome do Diretor</label>
+        <input required type="text" name="nome_diretor" ng-model="estabelecimentosSaudeCtrl.resource.nome_diretor">
+      </md-input-container>
+    </div>
+
+    <div layout-gt-sm="row" ng-if="estabelecimentosSaudeCtrl.resource.id">
+      <md-input-container class="md-block" flex>
+        <label>E-mail do Diretor</label>
+        <input required type="email" name="email_diretor" ng-model="estabelecimentosSaudeCtrl.resource.email_diretor" >
+        <div ng-messages="estabelecimentoSaudeForm.telefone_diretor.$error">
+          <div ng-message="email">E-mail inválido</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container class="md-block" flex>
+        <label>E-mail Alternativo</label>
+        <input type="email" name="email_alternativo_diretor" ng-model="estabelecimentosSaudeCtrl.resource.email_alternativo_diretor" >
+        <div ng-messages="estabelecimentoSaudeForm.email_alternativo_diretor.$error">
+          <div ng-message="email">E-mail inválido</div>
+        </div>
+      </md-input-container>
+    </div>
+
+    <div layout-gt-sm="row" ng-if="estabelecimentosSaudeCtrl.resource.id">
+      <md-input-container class="md-block" flex>
+        <label>Telefone do Diretor</label>
+        <input required ui-br-phone-number type="text" name="telefone_diretor" ng-model="estabelecimentosSaudeCtrl.resource.telefone_diretor">
+        <div ng-messages="estabelecimentoSaudeForm.telefone_diretor.$error">
+          <div ng-message="brPhoneNumber">Telefone inválido</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container class="md-block" flex>
+        <label>Telefone Alternativo</label>
+        <input ui-br-phone-number type="text" name="telefone_alternativo_diretor" ng-model="estabelecimentosSaudeCtrl.resource.telefone_alternativo_diretor">
+        <div ng-messages="estabelecimentoSaudeForm.telefone_alternativo_diretor.$error">
+          <div ng-message="brPhoneNumber">Telefone inválido</div>
+        </div>
+      </md-input-container>
+    </div>
+
+    <h2 ng-if="estabelecimentosSaudeCtrl.resource.id" class="md-title">Responsável de Estágio</h2>
+    <div layout-gt-sm="row" ng-if="estabelecimentosSaudeCtrl.resource.id">
+      <md-input-container class="md-block" flex>
+        <label>Nome do Responsável de Estágio</label>
+        <input required type="text" name="nome_responsavel_estagio" ng-model="estabelecimentosSaudeCtrl.resource.nome_responsavel_estagio">
+      </md-input-container>
+    </div>
+
+    <div layout-gt-sm="row" ng-if="estabelecimentosSaudeCtrl.resource.id">
+      <md-input-container class="md-block" flex>
+        <label>E-mail do Responsável de Estágio</label>
+        <input required type="email" name="email_responsavel_estagio" ng-model="estabelecimentosSaudeCtrl.resource.email_responsavel_estagio">
+        <div ng-messages="estabelecimentoSaudeForm.email_responsavel_estagio.$error">
+          <div ng-message="email">E-mail inválido</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block" flex>
+        <label>E-mail Alternativo</label>
+        <input type="email" name="email_alternativo_responsavel_estagio" ng-model="estabelecimentosSaudeCtrl.resource.email_alternativo_responsavel_estagio">
+        <div ng-messages="estabelecimentoSaudeForm.email_alternativo_responsavel_estagio.$error">
+          <div ng-message="email">E-mail inválido</div>
+        </div>
+      </md-input-container>
+    </div>
+
+    <div layout-gt-sm="row" ng-if="estabelecimentosSaudeCtrl.resource.id">
+      <md-input-container class="md-block" flex>
+        <label>Telefone do Responsável de Estágio</label>
+        <input required ui-br-phone-number type="text" name="telefone_responsavel_estagio" ng-model="estabelecimentosSaudeCtrl.resource.telefone_responsavel_estagio">
+        <div ng-messages="estabelecimentoSaudeForm.telefone_responsavel_estagio.$error">
+          <div ng-message="brPhoneNumber">Telefone inválido</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block" flex>
+        <label>Telefone Alternativo</label>
+        <input ui-br-phone-number type="text" name="telefone_alternativo_responsavel_estagio" ng-model="estabelecimentosSaudeCtrl.resource.telefone_alternativo_responsavel_estagio">
+        <div ng-messages="estabelecimentoSaudeForm.telefone_alternativo_responsavel_estagio.$error">
+          <div ng-message="brPhoneNumber">Telefone inválido</div>
+        </div>
+      </md-input-container>
+    </div>
+
+    <box-footer-buttons>
+      <md-button class="md-primary md-raised" ng-disabled="!estabelecimentoSaudeForm.$valid" type="submit">{{::'views.actions.save' | translate}}</md-button>
+      <md-button class="md-raised" ng-hide="estabelecimentosSaudeCtrl.resource.id" ng-click="estabelecimentosSaudeCtrl.cleanForm()">{{::'views.actions.clear' | translate}}</md-button>
+    </box-footer-buttons>
+  </box>
+</form>

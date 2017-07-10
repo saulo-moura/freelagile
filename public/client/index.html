@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html ng-app="app">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{::global.appName}}</title>
+
+    <link rel="shortcut icon" ng-href="{{ ::global.imagePath + '/favicon.ico' }}" type="image/x-icon">
+    <link rel="icon" ng-href="{{ ::global.imagePath + '/favicon.ico' }}" type="image/x-icon">
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <!--
+       Todos os inject são inseridos automaticamente através da tarefa do gulp.
+       Quando executado a tarefa do gulp pra produção a tarefa substituirá
+       as referências para os arquivos minificados.
+     -->
+
+    <!-- inject:all:css -->
+    <link rel="stylesheet" href="client/build/application.css?version=l8yuxl0yuasqnai">
+    <!-- end:inject:all:css -->
+
+    <!--
+      Family Font usada no projeto
+    -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <!--
+      Material Icons (Referência: https://design.google.com/icons/ )
+    -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!--[if lte IE 10]>
+      <script type="text/javascript">document.location.href = '/client/app/layout/unsupported-browser.html'</script>
+    <![endif]-->
+  </head>
+
+  <body ng-controller="AppController as appCtrl" layout="column">
+    <md-content flex>
+      <pr-spinner></pr-spinner>
+      <ui-view>
+      </ui-view>
+      <!--<script src="client/lib/jquery.min.js"></script>-->
+      <!-- inject:vendors:script  -->
+      <script src="client/build/vendors.js?version=l8yuxl0yuasqnai"></script>
+      <script src="client/build/angular-with-plugins.js?version=l8yuxl0yuasqnai"></script>
+      <!-- end:inject:vendors:script  -->
+
+      <!-- inject:application:script -->
+      <script src="client/build/application.js?version=xkigexp25iq4eov"></script>
+      <!-- end:inject:application:script  -->
+    </md-content>
+  </body>
+
+</html>

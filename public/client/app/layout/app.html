@@ -1,0 +1,20 @@
+<div layout="row" class="full-height" ng-controller="MenuController as menuCtrl" ng-cloak>
+
+  <ng-include src="global.clientPath + '/layout/menu.html'" ng-if="auth.authenticated()"></ng-include>
+
+  <div layout="column" flex class="full-height">
+
+    <ng-include src="global.clientPath + '/layout/header.html'" ng-if="auth.authenticated()"></ng-include>
+
+    <md-content layout="column" flex md-scroll-y>
+
+      <!-- É nesta div que o ui-router adiciona o conteudo das páginas através da diretiva ui-view -->
+      <div flex="noshrink" ui-view></div>
+    </md-content>
+
+    <!-- Rodapé -->
+    <ng-include src="global.clientPath + '/layout/footer.html'"></ng-include>
+
+  </div>
+
+</div>

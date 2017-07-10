@@ -1,0 +1,39 @@
+
+<div layout="row">
+  <md-button class="md-raised hide-print" ng-click="relatorioEstabelecimentosSaudeCtrl.voltarParaEs()" flex="10">{{::'views.actions.back' | translate}}</md-button>
+  <md-button class="md-primary md-raised hide-print" ng-click="relatorioEstabelecimentosSaudeCtrl.imprimirPendencia()" flex="10">Imprimir</md-button>
+</div>
+
+<br>
+
+<td md-cell colspan="2">
+  <div layout="row" layout-align="center center">{{ ::'views.titles.relatorio-estabelecimentos-saude' | translate}}</div>
+</td>
+
+
+<md-table-container>
+  <table md-table class="condensed">
+    <thead md-head>
+      <tr md-row>
+        <th md-column>{{ ::'attributes.estabelecimentoSaude' | translate}}</th>
+        <th md-column>{{ ::'attributes.contatoResponsavelEstagio' | translate}}</th>
+        <th md-column>{{ ::'attributes.emailResponsavelEstagio' | translate}}</th>
+        <th md-column>{{ ::'attributes.telefoneResponsavelEstagio' | translate}}</th>
+      </tr>
+    </thead>
+    <tbody md-body>
+      <tr md-row ng-repeat="resource in relatorioEstabelecimentosSaudeCtrl.estabelecimentosSaudePendente | orderBy: ['nome' , 'nome_responsavel_estagio']">
+        <td md-cell>{{ ::resource.nome}}</td>
+        <td md-cell>{{ ::resource.nome_responsavel_estagio}}</td>
+        <td md-cell>{{ ::resource.email_responsavel_estagio}}</td>
+        <td md-cell>{{ ::resource.telefone_responsavel_estagio}}</td>
+      </tr>
+      <tr md-row ng-if="relatorioEstabelecimentosSaudeCtrl.estabelecimentosSaudePendente.length == 0">
+        <td md-cell colspan="4">
+          <div layout="row" layout-align="center center">{{::'messages.notFound' | translate}}</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</md-table-container>
+

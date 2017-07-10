@@ -1,0 +1,86 @@
+<md-dialog aria-label="List dialog" flex="percentage">
+  <form name="iesCursosForm" ng-submit="iesCursosCtrl.save()">
+    <box box-title="Cursos da Instituição de Ensino Superior">
+      <box-toolbar-buttons>
+        <md-button class="md-icon-button" ng-click="iesCursosCtrl.closeDialog()">
+          <md-icon md-font-set="material-icons" class="md-warn">close</md-icon>
+        </md-button>
+      </box-toolbar-buttons>
+
+      <div layout-gt-sm="row">
+
+        <md-input-container class="md-block" flex>
+          <label>{{::'attributes.instituicoes_ensino_cursos.curso_id' | translate}}</label>
+          <md-select required name="curso_id" ng-model="iesCtrl.resource.curso_id">
+            <md-option ng-value="" ng-disabled="true"><em>Selecione...</em></md-option>
+            <md-option ng-repeat="curso in iesCursosCtrl.cursos" ng-value="{{ curso.id }}">
+              {{ curso.nome }}
+            </md-option>
+          </md-select>
+          <div ng-messages="iesCursosForm.curso_id.$error">
+            <div ng-message="required">{{::'attributes.instituicoes_ensino_cursos.curso_id' | translate}} deve ser selecionado.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex>
+          <label>{{::'attributes.instituicoes_ensino_cursos.campus_id' | translate}}</label>
+          <md-select required name="campus_id" ng-model="iesCtrl.resource.campus_id">
+            <md-option ng-value="" ng-disabled="true"><em>Selecione...</em></md-option>
+            <md-option ng-repeat="campus in iesCursosCtrl.campi" ng-value="{{ campus.id }}">
+              {{ campus.nome }}
+            </md-option>
+          </md-select>
+          <div ng-messages="iesCursosForm.campus_id.$error">
+            <div ng-message="required">{{::'attributes.instituicoes_ensino_cursos.campus_id' | translate}} deve ser selecionado.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex>
+          <label>{{::'attributes.instituicoes_ensino_cursos.coordenador_id' | translate}}</label>
+          <md-select required name="coordenador_id" ng-model="iesCtrl.resource.coordenador_id">
+            <md-option ng-value="" ng-disabled="true"><em>Selecione...</em></md-option>
+            <md-option ng-repeat="coordenador in iesCursosCtrl.coordenadores" ng-value="{{ curso.id }}">
+              {{ curso.nome }}
+            </md-option>
+          </md-select>
+          <div ng-messages="iesCursosForm.coordenador_id.$error">
+            <div ng-message="required">{{::'attributes.instituicoes_ensino_cursos.coordenador_id' | translate}} deve ser selecionado.</div>
+          </div>
+        </md-input-container>
+      </div>
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex>
+          <label>{{::'attributes.instituicoes_ensino_cursos.email' | translate}}</label>
+          <input required type="email" name="email" ng-model="iesCursosCtrl.resource.email">
+          <div ng-messages="iesCursosForm.email.$error">
+            <div ng-message="required">{{::'attributes.instituicoes_ensino_cursos.email' | translate}} deve ser preenchido.</div>
+            <div ng-message="email">E-mail inválido</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex>
+          <label>{{::'attributes.instituicoes_ensino_cursos.telefone' | translate}}</label>
+          <input required type="text" ui-br-phone-number name="telefone" ng-model="iesCursosCtrl.resource.telefone">
+          <div ng-messages="iesCursosForm.telefone.$error">
+            <div ng-message="required">{{::'attributes.instituicoes_ensino_cursos.telefone' | translate}} deve ser preenchido.</div>
+            <div ng-message="brPhoneNumber">Telefone inválido.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex>
+          <label>{{::'attributes.instituicoes_ensino_cursos.data_reconhecimento' | translate}}</label>
+          <input required type="date" name="data_reconhecimento" max="2999-12-31" ng-model="iesCursosCtrl.resource.data_reconhecimento">
+          <div ng-messages="iesCursosForm.data_reconhecimento.$error">
+            <div ng-message="required">{{::'attributes.instituicoes_ensino_cursos.data_reconhecimento' | translate}} deve ser preenchido.</div>
+            <div ng-message="date">Data inválida</div>
+            <div ng-message="max">Data muito distante</div>
+          </div>
+        </md-input-container>
+      </div>
+      <box-footer-buttons>
+        <md-button ng-disabled="!iesCursosForm.$valid" class="md-primary md-raised" type="submit">{{::'views.actions.save' | translate}}</md-button>
+        <md-button class="md-raised" ng-click="insituicoesensinocursosCtrl.cleanForm()">{{::'views.actions.clear' | translate}}</md-button>
+      </box-footer-buttons>
+    </box>
+  </form>
+</md-dialog>
