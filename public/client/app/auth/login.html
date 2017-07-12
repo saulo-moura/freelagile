@@ -1,42 +1,37 @@
-<content-body>
-
-  <md-card style="padding: 0px">
-    <img ng-src="{{:: global.imagePath + '/logo-sesab.gif' }}" class="md-card-image" alt="logo">
-    <md-card-title>
-      <md-card-title-text>
-        <span class="md-headline">{{:: global.appName}}</span>
-      </md-card-title-text>
-    </md-card-title>
-    <form flex name="loginForm" ng-submit="loginCtrl.login()">
-      <md-card-content>
-
-        <div layout="row" flex layout-align="center center">
-          <md-input-container flex class="bottom-5">
-            <md-icon md-font-set="material-icons">portrait</md-icon>
-            <label>{{::'cpf' | tAttr}}</label>
-            <input required ui-br-cpf-mask type="text" name="cpf" ng-model="loginCtrl.credentials.cpf">
-            <div ng-show="loginForm.cpf.$error.cpf" ng-messages="loginForm.cpf.$error.cpf">
-              <div ng-message="cpf">CPF inválido.</div>
-            </div>
-          </md-input-container>
-        </div>
-        <div layout="row" flex layout-align="center center">
-          <md-input-container flex class="top-1 bottom-1">
-            <md-icon md-font-set="material-icons">lock</md-icon>
-            <label>{{::'password' | tAttr}}</label>
-            <input required type="password" flex=99 ng-model="loginCtrl.credentials.password">
-          </md-input-container>
-        </div>
-
-
-      </md-card-content>
-      <md-card-actions layout="column" layout-align="start">
-        <md-button ng-disabled="!loginForm.$valid" id="btn-loginCtrl-login" flex type="submit" class="md-raised md-primary">
-          {{::'views.actions.in' | translate}}
-        </md-button>
-        <md-button class="md-primary" flex ng-click="loginCtrl.openDialogResetPass()">
-          {{::'views.fields.login.resetPassword' | translate}}
-        </md-button>
-      </md-card-actions>
-    </form>
-  </md-card>
+<content-body layout-align="center center">
+  <box box-title="{{ ::global.appName}}" flex=100 flex-gt-xs=100 flex-gt-sm=70 flex-gt-md=60>
+    <div layout-gt-xs="row" layout-xs="column">
+      <div flex-gt-xs=30 layout-align="center center" class="md-text-center">
+        <img ng-src="{{:: global.imagePath + '/logo-vertical.png' }}" alt="logo" />
+      </div>
+      <div flex layout-align="center center">
+        <form flex ng-submit="loginCtrl.login()">
+          <div layout="row" flex layout-align="center center">
+            <md-input-container flex class="bottom-5">
+              <md-icon md-font-set="material-icons">email</md-icon>
+              <label>{{::'email' | tAttr}}</label>
+              <input type="email" ng-model="loginCtrl.credentials.email">
+            </md-input-container>
+          </div>
+          <div layout="row" flex layout-align="center center">
+            <md-input-container flex class="top-1 bottom-1">
+              <md-icon md-font-set="material-icons">lock</md-icon>
+              <label>{{::'password' | tAttr}}</label>
+              <input type="password" flex=99 ng-model="loginCtrl.credentials.password">
+            </md-input-container>
+          </div>
+          <div layout="row" flex layout-align="center center">
+            <md-button id="btn-loginCtrl-login" flex type="submit" class="md-raised md-primary">
+              {{::'views.actions.in' | translate}}
+            </md-button>
+          </div>
+          <div layout="row" flex layout-align="center center">
+            <md-button class="md-primary" flex ng-click="loginCtrl.openDialogResetPass()">
+              {{::'views.fields.login.resetPassword' | translate}}
+            </md-button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </box>
+</content-body>

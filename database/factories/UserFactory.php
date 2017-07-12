@@ -23,31 +23,31 @@ $factory->state(App\User::class, 'admin', function () {
     return [
         'cpf' => '81100413537',
         'name' => 'Admin',
-        'email' => 'admin-base@prodeb.com',
-        'password' => Hash::make('Prodeb01')
+        'email' => 'admin-base@freelagile.com',
+        'password' => Hash::make('tccifba2017')
     ];
 });
 
 $factory->state(App\User::class, 'admin-plain-password', function () {
     return [
         'name' => 'Admin',
-        'email' => 'admin-base@prodeb.com',
-        'password' => 'Prodeb01'
+        'email' => 'admin-base@freelagile.com',
+        'password' => 'tccifba2017'
     ];
 });
 
 
 $factory->state(App\User::class, 'normal', function () {
     return [
-        'email' => 'normal-base@prodeb.com',
-        'password' => Hash::make('Prodeb01')
+        'email' => 'normal-base@freelagile.com',
+        'password' => Hash::make('tccifba2017')
     ];
 });
 
 $factory->state(App\User::class, 'normal-plain-password', function () {
     return [
-        'email' => 'normal-base@prodeb.com',
-        'password' => 'Prodeb01'
+        'email' => 'normal-base@freelagile.com',
+        'password' => 'tccifba2017'
     ];
 });
 
