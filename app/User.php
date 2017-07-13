@@ -66,6 +66,8 @@ class User extends BaseModel implements AuthenticatableContract, CanResetPasswor
     protected $hidden = ['password', 'remember_token'];
     protected $dontKeepLogOf = ['password', 'remember_token'];
 
+    protected $dateFormat = "Y-m-d H:m:i";
+
     /**
      * Atributo usado para amazenar temporáriamente a senha para envio no email
      *

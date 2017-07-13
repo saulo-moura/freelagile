@@ -39,6 +39,8 @@ class Task extends BaseModel
         'project_id'
     ];
 
+    protected $dateFormat = "Y-m-d H:m:i";
+
     /**
     * Retorna o projeto de um projeto
     */

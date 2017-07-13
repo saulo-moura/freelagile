@@ -29,6 +29,8 @@ class Project extends BaseModel
     protected $table = 'projects';
     protected $fillable = ['name', 'cost'];
 
+    protected $dateFormat = "Y-m-d H:m:i";
+
     public function __construct($attributes = array())
     {
         parent::__construct($attributes);
