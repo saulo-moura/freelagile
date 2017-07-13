@@ -1,3 +1,8 @@
+1.5.1
+
+- Corrigido bug no datapicker
+- Retirado o bower e adicionado as dependências no npm
+
 1.5.0
 
 - Atualização para o laravel 5.4.12;

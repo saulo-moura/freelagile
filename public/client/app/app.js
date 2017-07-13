@@ -10,13 +10,9 @@
     'ui.utils.masks',
     'text-mask',
     'ngMaterial',
-    'ngMessages',
     'modelFactory',
     'md.data.table',
     'ngMaterialDatePicker',
     'pascalprecht.translate',
-    'angularFileUpload',
-    'idf.br-filters',
-    'ui.calendar',
-    'lfNgMdFileInput']);
+    'angularFileUpload']);
 })();

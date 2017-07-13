@@ -1,5 +1,5 @@
 /*eslint angular/file-name: 0, no-undef: 0*/
-(function () {
+(function() {
   'use strict';
 
   angular
@@ -8,27 +8,12 @@
       breadcrumbs: {
         user: 'Administração - Usuário',
         'user-profile': 'Perfil',
-        dashboard: 'SGEO - Sistema de Gestão de Estágio Obrigatório',
+        dashboard: 'Dashboard',
         audit: 'Administração - Auditoria',
         mail: 'Administração - Envio de e-mail',
-        roles: 'Administração - Perfis',
         project: 'Exemplos - Projetos',
         'dinamic-query': 'Administração - Consultas Dinâmicas',
-        'not-authorized': 'Acesso Negado',
-        'estabelecimentos-saude': 'Estabelecimento de Saúde',
-        'vagas': 'Disponibilidade de Vagas',
-        'parametros-sistema': 'Administração - Painel de Controle',
-        'relatorio-estabelecimentos-saude': 'Relatório de Estabelecimentos de Saúde Pendentes',
-        'relatorio-disponibilidade-vagas': 'Relatório de Disponibilidade de Vagas',
-        'tipos-estabelecimento-saude': 'Tipos de Estabelecimento de Saúde',
-        areas: 'Áreas',
-        setores: 'Setores',
-        'naturezas-juridicas': 'Naturezas Jurídicas',
-        cursos: 'Cursos',
-        especialidades: 'Especialidades',
-        especificacoes: 'Especificações',
-        'instituicoes-ensino': 'Instituições de Ensino Superior',
-        modalidades: 'Modalidades'
+        'not-authorized': 'Acesso Negado'
       },
       titles: {
         dashboard: 'Página inicial',
@@ -38,18 +23,11 @@
         auditList: 'Lista de Logs',
         register: 'Formulário de Cadastro',
         resetPassword: 'Redefinir Senha',
-        update: 'Formulário de Atualização',
-        'relatorio-estabelecimentos-saude': 'Relatório de Estabelecimentos de Saúde Pendentes',
-        'relatorio-disponibilidade-vagas': 'Relatório de Disponibilidade de Vagas',
-        especialidades: 'Especialidades',
-        especificacoes: 'Especificações',
-        cursos: 'Cursos',
-        modalidades: 'Modalidades'
+        update: 'Formulário de Atualização'
       },
       actions: {
         send: 'Enviar',
         save: 'Salvar',
-        finalize: 'Finalizar',
         clear: 'Limpar',
         clearAll: 'Limpar Tudo',
         restart: 'Reiniciar',
@@ -63,18 +41,7 @@
         getOut: 'Sair',
         add: 'Adicionar',
         in: 'Entrar',
-        loadImage: 'Carregar Imagem',
-        cantRemove: 'Não é possível remover',
-        approval: 'Aprovação',
-        approve: 'Aprovar',
-        reject: 'Rejeitar',
-        historico: 'Histórico',
-        view: 'Visualizar',
-        back: 'Voltar',
-        disable: 'Desativar',
-        reactivate: 'Reativar',
-        imprimir: 'Imprimir',
-        download: 'Download'
+        loadImage: 'Carregar Imagem'
       },
       fields: {
         date: 'Data',
@@ -130,19 +97,6 @@
         user: {
           perfils: 'Perfis',
           nameOrEmail: 'Nome ou Email'
-        },
-        estabelecimentoSaude: {
-          nome: 'Estabelecimento de Saúde',
-          tipo: 'Tipo',
-          naturezaJuridica: 'Natureza Jurídica'
-        },
-        vaga: {
-          estabelecimentoSaude: 'Estabelecimento de Saúde',
-          curso: 'Curso',
-          modalidade: 'Modalidade',
-          area: 'Área',
-          setor: 'Setor',
-          status: 'Status'
         }
       },
       layout: {
@@ -152,24 +106,9 @@
           admin: 'Administração',
           examples: 'Exemplos',
           user: 'Usuários',
-          roles: 'Perfis',
           mail: 'Enviar e-mail',
           audit: 'Auditoria',
-          dinamicQuery: 'Consultas Dinamicas',
-          estabelecimentosSaude: 'Estabelecimento de Saúde',
-          cadastroes: 'Cadastro de ES',
-          vagas: 'Disponibilidade de Vagas',
-          painelcontrole: 'Painel de Controle',
-          instituicoesEnsino: 'Instituições de Ensino',
-          especialidades: 'Especialidades',
-          especificacoes: 'Especificações',
-          cadastrosBasicos: 'Cadastros Básicos',
-          tiposEstabelecimentoSaude: 'Tipos de Estabelecimento de Saúde',
-          naturezasJuridicas: 'Naturezas Jurídicas',
-          areas: 'Áreas',
-          setores: 'Setores',
-          cursos: 'Cursos',
-          modalidades: 'Modalidades'
+          dinamicQuery: 'Consultas Dinamicas'
         }
       },
       tooltips: {
@@ -182,13 +121,6 @@
         },
         task: {
           listTask: 'Listar Tarefas'
-        },
-        estabelecimentoSaude: {
-          listaDeEstabeleicmentosDeSaudePendentes: 'Lista de Estabelecimentos de Saúde Pendentes'
-        },
-        vagas: {
-          listaDeDisponibilidadeDeVagasParaImpressao: 'Lista de Disponibilidade de Vagas Para Impressão',
-          gerarRelatorioDeDisponibilidadeDeVagas: 'Gerar Relatório de Disponibilidade de Vagas'
         }
       }
     })

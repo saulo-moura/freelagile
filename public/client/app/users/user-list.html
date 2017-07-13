@@ -26,14 +26,8 @@
       <img alt="{{ ::user.name }}" ng-src="{{ user.image ? user.image : global.imagePath + '/no_avatar.gif' }}"
         class="md-avatar" />
       <p class="user-list-info">{{ ::user.name }} <small class="user-list-info-email">({{::user.email}})</small></p>
-      <md-button class="md-icon-button" ng-if="user.deleted_at" ng-click="usersCtrl.ativar(user)">
-        <md-icon id="btn-usersCtrl-active-{{::$index}}" md-font-set="material-icons" >restore</md-icon>
-        <md-tooltip md-direction="top">{{::'views.actions.reactivate' | translate}}</md-tooltip>
-      </md-button>
-      <md-button class="md-icon-button" ng-if="!user.deleted_at" ng-click="usersCtrl.remove(user)">
-        <md-icon id="btn-usersCtrl-remove-{{::$index}}" md-font-set="material-icons" >delete</md-icon>
-        <md-tooltip md-direction="top">{{::'views.actions.disable' | translate}}</md-tooltip>
-      </md-button>
+      <md-icon id="btn-usersCtrl-remove-{{::$index}}" md-font-set="material-icons" class="md-secondary" ng-click="usersCtrl.remove(user)"
+        aria-label="remove">delete</md-icon>
     </md-list-item>
   </md-list>
 

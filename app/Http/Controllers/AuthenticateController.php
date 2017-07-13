@@ -13,16 +13,17 @@ use Adldap\Laravel\Facades\Adldap;
 
 class AuthenticateController extends Controller
 {
+
     public function __construct()
     {
     }
 
     public function authenticate(Request $request)
     {
-        $credentials = $request->only('cpf', 'password');
+        $credentials = $request->only('email', 'password');
 
         $this->validate($request, [
-            'cpf' => 'required',
+            'email' => 'required',
             'password' => 'required'
         ]);
 
@@ -64,7 +65,7 @@ class AuthenticateController extends Controller
      *
      * @param  $credentials array with email and password
      */
-/*    public function authenticateInLDAPAndCreateToken($credentials)
+    public function authenticateInLDAPAndCreateToken($credentials)
     {
         if (Adldap::auth()->attempt($credentials['email'], $credentials['password'])) {
             $userLdapData = Adldap::search()->users()->find($credentials['email']);
@@ -87,5 +88,5 @@ class AuthenticateController extends Controller
         }
 
         return null;
-    }*/
+    }
 }

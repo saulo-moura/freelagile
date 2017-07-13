@@ -30,8 +30,7 @@
     "ng-material-datetimepicker": "~1.6.2",
     "ng-prodeb": "git@git.prodeb.ba.gov.br:starter-pack/ngprodeb.git#0.2.5",
     "moment": "~2.14.1",
-    "alasql": "~0.3.5",
-    "angular-br-filters": "^0.7.0"
+    "alasql": "~0.3.5"
   },
   "resolutions": {
     "angular": "~1.6.4",

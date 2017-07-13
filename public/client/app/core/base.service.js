@@ -11,8 +11,8 @@
    * Mais informações:
    * https://github.com/swimlane/angular-model-factory/wiki/API
    */
-  function serviceFactory($modelFactory, PrToast) {
-    var service = function(url, options) {
+  function serviceFactory($modelFactory) {
+    return function(url, options) {
       var model;
       var defaultOptions = {
         actions: {
@@ -25,9 +25,7 @@
             isArray: false,
             wrap: false,
             afterRequest: function(response) {
-              if (response.permissionError) {
-                PrToast.error(response['error']);
-              } else if (response['items']) {
+              if (response['items']) {
                 response['items'] = model.List(response['items']);
               }
 
@@ -41,7 +39,5 @@
 
       return model;
     }
-
-    return service;
-  };
+  }
 })();

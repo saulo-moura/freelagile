@@ -1,4 +1,4 @@
-<form name="userForm" ng-submit="usersCtrl.save()">
+<form ng-submit="usersCtrl.save()">
   <box box-title="{{::'views.titles.register' | translate}}">
     <box-toolbar-buttons>
       <md-button class="md-icon-button" ng-click="usersCtrl.goTo('list')">
@@ -6,70 +6,30 @@
         <md-tooltip md-direction="bottom" hide-sm hide-xs>{{::'views.actions.list' | translate}}</md-tooltip>
       </md-button>
     </box-toolbar-buttons>
-
-    <md-input-container class="md-block" flex>
-      <label>{{::'attributes.cpf' | translate}}</label>
-      <input required ui-br-cpf-mask ng-disabled="usersCtrl.resource.id" type="text" name="cpf" ng-model="usersCtrl.resource.cpf">
-      <div ng-show="userForm.cpf.$error.cpf" ng-messages="userForm.cpf.$error.cpf">
-        <div ng-message="cpf">CPF inválido.</div>
-      </div>
-    </md-input-container>
-
     <md-input-container class="md-block" flex>
       <label>{{::'attributes.name' | translate}}</label>
-      <input required type="text" name="name" ng-model="usersCtrl.resource.name">
+      <input type="text" ng-model="usersCtrl.resource.name">
     </md-input-container>
-
     <md-input-container class="md-block" flex>
       <label>{{::'attributes.email' | translate}}</label>
-      <input required type="email" name="email" ng-model="usersCtrl.resource.email">
-      <div ng-show="userForm.email.$error.email" ng-messages="userForm.email.$error.email">
-        <div ng-message="email">E-mail inválido.</div>
-      </div>
+      <input type="email" ng-model="usersCtrl.resource.email">
     </md-input-container>
 
     <md-input-container class="md-block md-input-has-placeholder" flex>
       <label>{{::'attributes.image' | translate}}</label>
-      <img alt="{{ ::usersCtrl.resource.name }}" ng-src="{{ usersCtrl.resource.image ? usersCtrl.resource.image : global.imagePath + '/no_avatar.gif' }}"
-      />
+      <img alt="{{ ::usersCtrl.resource.name }}" ng-src="{{ usersCtrl.resource.image ? usersCtrl.resource.image : global.imagePath + '/no_avatar.gif' }}"/>
       <input type="file" pr-uploader-base64 ng-model="usersCtrl.resource.image">
     </md-input-container>
-
-    <md-input-container class="md-block md-input-has-placeholder">
-      <label>Perfil</label>
-      <md-select required ng-model="usersCtrl.resource.role" ng-change="usersCtrl.onRoleChange()">
-        <md-option ng-value=""><em>Nenhum</em></md-option>
-        <md-option ng-repeat="role in usersCtrl.roles" ng-value="{{ role.id }}">
-          {{role.title}}
-        </md-option>
-      </md-select>
+    <md-input-container class="md-block md-input-has-placeholder" >
+      <label>{{::'attributes.roles' | translate}}</label>
+      <div ng-repeat="role in usersCtrl.roles">
+        <md-checkbox ng-model="role.selected">{{role.title}}</md-checkbox>
+      </div>
     </md-input-container>
-
-    <md-autocomplete flex ng-show="usersCtrl.gestorEnsino" class="md-block md-input-has-placeholder" md-input-name="instituicao_ensino" md-min-length="1" md-no-cache="true" md-selected-item="usersCtrl.instituicaoEnsino"
-      md-search-text="usersCtrl.instituicaoEnsinoTerm" md-items="instituicao in usersCtrl.searchInstituicaoAutoComplete(usersCtrl.instituicaoEnsinoTerm)"
-      md-item-text="instituicao.nome" md-clear-button="true" md-floating-label="Instituição de Ensino Superior" md-selected-item-change="usersCtrl.onInstituicaoChange()">
-      <md-item-template>
-        <span md-highlight-text="usersCtrl.instituicaoEnsinoTerm" md-highlight-flags="^i">{{ instituicao.nome }}</span>
-      </md-item-template>
-      <md-not-found>
-        Nenhuma instituicação de ensino encontrada.
-      </md-not-found>
-    </md-autocomplete>
-    
-    <md-autocomplete flex ng-show="usersCtrl.gestorSaude" class="md-block md-input-has-placeholder" md-input-name="estabelecimento_saude" md-min-length="3" md-no-cache="true" md-selected-item="usersCtrl.estabelecimentoSaude"
-      md-search-text="usersCtrl.estabelecimentoSaudeTerm" md-items="estabelecimento in usersCtrl.searchEstabelecimentoAutoComplete(usersCtrl.estabelecimentoSaudeTerm)"
-      md-item-text="estabelecimento.nome" md-clear-button="true" md-floating-label="Estabelecimento de Saúde" md-selected-item-change="usersCtrl.onEstabelecimentoChange()">
-      <md-item-template>
-        <span md-highlight-text="usersCtrl.estabelecimentoSaudeTerm" md-highlight-flags="^i">{{ estabelecimento.nome }}</span>
-      </md-item-template>
-      <md-not-found>
-        Nenhum estabelecimento de saúde encontrado.
-      </md-not-found>
-    </md-autocomplete>
-
     <box-footer-buttons layout-align="end center">
-      <md-button ng-disabled="!userForm.$valid" type="submit" id="btn-usersCtrl-save" class="md-primary md-raised">{{::'views.actions.save' | translate}}</md-button>
+      <md-button type="submit" id="btn-usersCtrl-save" class="md-primary md-raised">{{::'views.actions.save' | translate}}</md-button>
       <md-button class="md-raised" ng-click="usersCtrl.cleanForm()">{{::'views.actions.clear' | translate}}</md-button>
     </box-footer-buttons>
   </box>
 </form>
+

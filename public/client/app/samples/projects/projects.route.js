@@ -18,7 +18,7 @@
         url: '/projetos',
         templateUrl: Global.clientPath + '/samples/projects/projects.html',
         controller: 'ProjectsController as projectsCtrl',
-        data: { needAuthentication: true, needPermission: { resource: 'users' } }
+        data: { needAuthentication: true, needProfile: ['admin'] }
       });
   }
 }());

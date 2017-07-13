@@ -39,7 +39,7 @@
    */
   // eslint-disable-next-line max-params
   function CRUDController(vm, modelService, options, PrToast, PrPagination, // NOSONAR
-    Auth, PrDialog, $translate) {
+    PrDialog, $translate) {
 
     //Functions Block
     vm.search = search;
@@ -50,7 +50,6 @@
     vm.remove = remove;
     vm.goTo = goTo;
     vm.cleanForm = cleanForm;
-    vm.accessPermission = accessPermission;
 
     activate();
 
@@ -203,14 +202,8 @@
 
           vm.search();
           PrToast.info($translate.instant('messages.removeSuccess'));
-        }, function (responseData) {
-          if (angular.isFunction(vm.onRemoveError)) vm.onRemoveError(responseData.data);
         });
       });
-    }
-
-    function accessPermission (resource, actions) {
-      return Auth.currentUser.hasPermission(resource, actions);
     }
 
     /**

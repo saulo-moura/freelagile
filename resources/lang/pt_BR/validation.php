@@ -86,11 +86,8 @@ return [
     */
 
     'custom' => [
-	'attribute-name' => [
+        'attribute-name' => [
             'rule-name' => 'custom-message',
-        ],
-        'title' => [
-            'unique' => 'Nome já em uso.',
         ],
     ],
 
@@ -107,7 +104,6 @@ return [
 
     'attributes' => [
         'id' => 'id',
-        'cpf' => 'CPF',
         'password' => 'Senha',
         'email' => 'Email',
         'name' => 'Nome',
@@ -125,59 +121,7 @@ return [
         'subject' => 'Assunto',
         'message' => 'Mensagem',
         'date' => 'Data',
-        'image' => 'Imagem',
-        'instituicoes_ensino' => [
-            'nome' => 'Nome de Registro no MEC',
-            'sigla' => 'Sigla',
-            'razao_social' => 'Razão Social',
-            'cnpj' => 'CNPJ',
-            'mantenedora' => 'Mantenedora',
-            'cnpj_mantenedora' => 'CNPJ Mantenedora',
-            'natureza_juridica_id' => 'Natureza Juridica',
-            'endereco' => 'Endereço',
-            'numero' => 'Número',
-            'complemento' => 'Complemento',
-            'bairro' => 'Bairro',
-            'cep' => 'CEP',
-            'municipio_id' => 'Município',
-            'nucleo_regional_id' => 'Núcleo Regional',
-            'telefone' => 'Telefone',
-            'telefone2' => 'Telefone 2',
-            'telefone3' => 'Telefone 3',
-            'igc' => 'Nota Índice Geral de Cursos (IGC)',
-            'email' => 'E-mail',
-            'email2' => 'E-mail 2',
-            'email3' => 'E-mail 3',
-            'nome_reitor' => 'Nome Reitor/Diretor',
-            'telefone_reitor' => 'Telefone',
-            'telefone_reitor2' => 'Telefone 2',
-            'email_reitor' => 'E-mail',
-            'cpf_reitor' => 'CPF',
-            'rg_reitor' => 'RG'
-        ],
-        'instituicoes_ensino_cursos' => [
-            'curso_id' => 'Curso',
-            'campus_id' => 'Campus',
-            'coordenador_id' => 'Coordenador',
-            'instituicao_ensino_id' => 'Instituição de Ensino',
-            'email' => 'E-mail',
-            'telefone' => 'Telefone',
-            'data_reconhecimento' => 'Data Reconhecimento',
-            'nota_enade' => 'Nota Enade',
-            'autorizacao_funcionamento' => 'Diário Oficial da União com autorização de funcionamento do Curso'
-        ],
-        'area_id' => 'Área',
-        'curso_id' => 'Curso',
-        'modalidade_id' => 'Modalidade',
-        'data_inicio' => 'Período Inicial',
-        'data_fim' => 'Período Final',
-        'especialidade_id' => 'Especialidade',
-        'especificacao_id' => 'Especificação',
-        'estabelecimento_saude_id' => 'Estabelecimento de Saúde',
-        'setor_id' => 'Setor',
-        'especialidade_id' => 'Especialidade',
-        'nome' => 'Nome',
-        'tipo_natureza_juridica' => 'Tipo Natureza Jurídica'
+        'image' => 'Imagem'
     ],
 
 ];

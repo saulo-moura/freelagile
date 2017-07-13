@@ -5,11 +5,7 @@
   angular
     .module('app')
     .constant('pt-BR.i18n.attributes', {
-      cpf: 'CPF',
       email: 'Email',
-      todas: 'Todas',
-      todos: 'Todos',
-      type: 'Tipo',
       password: 'Senha',
       name: 'Nome',
       image: 'Imagem',
@@ -17,17 +13,6 @@
       date: 'Data',
       initialDate: 'Data Inicial',
       finalDate: 'Data Final',
-      descricao: 'Descrição',
-      chave: 'Chave',
-      valor: 'Valor',
-      estabelecimentoSaude: 'Estabelecimento de Saúde',
-      curso: 'Curso',
-      modalidade: 'Modalidade',
-      setor: 'Setor',
-      vagas: 'Vagas',
-      contatoResponsavelEstagio: 'Contato Responsável Estágio',
-      emailResponsavelEstagio: 'E-mail Reponsável Estágio',
-      telefoneResponsavelEstagio: 'Telefone Responsável Estágio',
       task: {
         description: 'Descrição',
         done: 'Feito?',

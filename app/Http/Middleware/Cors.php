@@ -22,7 +22,7 @@ class Cors
 
         //Adiciona os cabeçalhos na resposta
         foreach ($headers as $key => $value) {
-            $response->headers->set($key, $value);
+            $response->header($key, $value);
         }
 
         return $response;

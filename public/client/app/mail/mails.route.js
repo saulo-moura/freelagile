@@ -18,7 +18,7 @@
         url: '/email',
         templateUrl: Global.clientPath + '/mail/mails-send.html',
         controller: 'MailsController as mailsCtrl',
-        data: { needAuthentication: true, needPermission: { resource: 'sendBatchEmails' } }
+        data: { needAuthentication: true, needProfile: ['admin'] }
       });
 
   }

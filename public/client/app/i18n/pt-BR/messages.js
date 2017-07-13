@@ -18,8 +18,6 @@
       resourceNotFoundError: 'Recurso não encontrado',
       notNullError: 'Todos os campos obrigatórios devem ser preenchidos.',
       duplicatedResourceError: 'Já existe um recurso com essas informações.',
-      periodoFinalInferiorAoInicial: 'O Período Final não deve ser inferior ao Período Inicial.',
-      removerAssociado: 'Este registro não pode ser removido enquanto estiver associado à(s) entidade(s): {{entidade}}',
       validate: {
         fieldRequired: 'O campo {{field}} é obrigratório.'
       },
@@ -48,19 +46,7 @@
         userExists: 'Usuário já adicionado!',
         profile: {
           updateError: 'Não foi possível atualizar seu profile'
-        },
-        missingEstabelecimentoSaude: "É necessário definir o Estabelecimento de Saúde.",
-        missingInstituicaoEnsino: "É necessário definir a Instituição de Ensino",
-        activeSuccess: "Usuário ativado com sucesso"
-      },
-      vagas:{
-        dataInicioJaneiro: "A data de início deve ser do mês de Janeiro.",
-        dataFimDezembro: "A data do fim deve ser do mês de Dezembro.",
-        validarEstabelecimento: "O cadastro do Estabelecimento de Saúde ainda não foi finalizado."
-      },
-      role: {
-        actionDependenciesAutoSelected: 'Permissões adicionais necessárias para a ação {{action}} foram selecionadas automaticamente',
-        emptyActions: 'Um perfil tem que permitir acesso a, pelo menos, um recurso (funcionalidade/ação) do sistema.'
+        }
       },
       queryDinamic: {
         noFilter: 'Nenhum filtro adicionado'

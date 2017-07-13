@@ -52,6 +52,5 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'develop.auth' => \App\Http\Middleware\DevelopAuth::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'acl.permission' => \App\Http\Middleware\HasPermission::class,
     ];
 }

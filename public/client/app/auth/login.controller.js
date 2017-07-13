@@ -21,11 +21,11 @@
     }
 
     function login() {
-      
       var credentials = {
-        cpf: vm.credentials.cpf,
+        email: vm.credentials.email,
         password: vm.credentials.password
       };
+
       Auth.login(credentials).then(function() {
         $state.go(Global.homeState);
       });

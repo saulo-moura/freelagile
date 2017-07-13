@@ -15,9 +15,6 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Tymon\JWTAuth\Contracts\JWTSubject as JWTSubject;
 use Mail;
-use App\Authorization\Action;
-use App\Authorization\Authorization;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\User
@@ -47,8 +44,6 @@ class User extends BaseModel implements AuthenticatableContract, CanResetPasswor
 
     protected $dontFilterAttributesInDinamicQuery = ['password', 'image', 'remember_token'];
 
-    use SoftDeletes;
-
     /**
      * The database table used by the model.
      *
@@ -57,18 +52,11 @@ class User extends BaseModel implements AuthenticatableContract, CanResetPasswor
     protected $table = 'users';
 
     /**
-     * Relation to be loaded
-     *
-     * @var array
-     */
-    protected $with = ['instituicaoEnsino', 'estabelecimentoSaude'];
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'image', 'cpf', 'instituicao_ensino_id', 'estabelecimento_saude_id'];
+    protected $fillable = ['name', 'email', 'image'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -77,8 +65,6 @@ class User extends BaseModel implements AuthenticatableContract, CanResetPasswor
      */
     protected $hidden = ['password', 'remember_token'];
     protected $dontKeepLogOf = ['password', 'remember_token'];
-
-    protected $dateFormat = 'Y-m-d H:m:i';
 
     /**
      * Atributo usado para amazenar temporáriamente a senha para envio no email
@@ -162,40 +148,5 @@ class User extends BaseModel implements AuthenticatableContract, CanResetPasswor
     public function roles()
     {
         return $this->belongsToMany(Role::class);
-    }
-    /**
-     * Belongs to Relationship Method for accessing the User->estabelecimentoSaude
-     *
-     * @return QueryBuilder Object
-     */
-    public function estabelecimentoSaude()
-    {
-        return $this->belongsTo('App\EstabelecimentoSaude', 'estabelecimento_saude_id', 'id');
-    }
-
-    /**
-     * Belongs to Relationship Method for accessing the User->instituicaoEnsino
-     *
-     * @return QueryBuilder Object
-     */
-    public function instituicaoEnsino()
-    {
-        return $this->belongsTo('App\InstituicaoEnsino', 'instituicao_ensino_id', 'id');
-    }
-
-    /**
-     * Verifica se o usuário corrent possui uma permissão
-     *
-     * @return boolean
-     */
-    public function hasPermission($controller, $action)
-    {
-        return Authorization::hasPermission($controller, $action, $this);
-    }
-
-    public function toArray() {
-        $data = parent::toArray();
-        $data['allowed_actions'] = Authorization::userAllowedActions($this);
-        return $data;
     }
 }

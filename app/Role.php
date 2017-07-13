@@ -1,17 +1,10 @@
 <?php
-/*
- * This file is part of the Starter Pack Dynamic Authorization
- */
-
 
 namespace App;
 
 use App\User;
 use App\BaseModel;
 use Illuminate\Database\Eloquent\Model;
-
-use App\Authorization\Action;
-use App\Authorization\Resource;
 
 /**
  * App\Role
@@ -36,8 +29,6 @@ class Role extends BaseModel
     protected $table = 'roles';
     public $timestamps = false;
 
-    protected $fillable = ['title','slug'];
-
     /*
     |--------------------------------------------------------------------------
     | Relationship Methods
@@ -52,29 +43,5 @@ class Role extends BaseModel
     public function users()
     {
         return $this->belongsToMany(User::class);
-    }
-
-    /**
-     * many-to-many relationship method.
-     *
-     * @return QueryBuilder
-     */
-    public function actions()
-    {
-        return $this->belongsToMany('\App\Authorization\Action', 'role_actions', 'role_id', 'action_id');
-    }
-
-
-     /**
-     * Overrrides toArray method
-     *
-     * @return Array
-     */
-    public function toArray() {
-        $data = parent::toArray();
-        $actions = $this->actions;
-        $data['actions'] = $actions->toArray();
-        $data['has_users'] = $this->users->count() > 0;
-        return $data;
     }
 }

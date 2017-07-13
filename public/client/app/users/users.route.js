@@ -18,7 +18,7 @@
         url: '/usuario',
         templateUrl: Global.clientPath + '/users/users.html',
         controller: 'UsersController as usersCtrl',
-        data: { needAuthentication: true, needPermission: { resource: 'users' } }
+        data: { needAuthentication: true, needProfile: ['admin'] }
       })
       .state('app.user-profile', {
         url: '/usuario/perfil',

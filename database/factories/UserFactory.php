@@ -5,7 +5,6 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
     return [
         'name' => $faker->name,
-        'cpf' => $faker->cpf(false),
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10)
@@ -21,9 +20,8 @@ $factory->state(App\User::class, 'invalid', function () {
 
 $factory->state(App\User::class, 'admin', function () {
     return [
-        'cpf' => '81100413537',
         'name' => 'Admin',
-        'email' => 'admin-base@freelagile.com',
+        'email' => 'admin@freelagile.com',
         'password' => Hash::make('tccifba2017')
     ];
 });
@@ -31,7 +29,7 @@ $factory->state(App\User::class, 'admin', function () {
 $factory->state(App\User::class, 'admin-plain-password', function () {
     return [
         'name' => 'Admin',
-        'email' => 'admin-base@freelagile.com',
+        'email' => 'admin@freelagile.com',
         'password' => 'tccifba2017'
     ];
 });

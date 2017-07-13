@@ -4,7 +4,7 @@
   angular
     .module('app')
     .constant('Global', {
-      appName: 'Freelagile',
+      appName: 'Starter Pack',
       homeState: 'app.dashboard',
       loginUrl: 'app/login',
       loginState: 'app.login',

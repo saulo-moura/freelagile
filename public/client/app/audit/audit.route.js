@@ -18,7 +18,7 @@
         url: '/auditoria',
         templateUrl: Global.clientPath + '/audit/audit.html',
         controller: 'AuditController as auditCtrl',
-        data: { needAuthentication: true, needPermission: { resource: 'audit' } }
+        data: { needAuthentication: true, needProfile: ['admin'] }
       });
 
   }

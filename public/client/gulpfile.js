@@ -23,14 +23,13 @@ var argv = require('yargs').argv;
 
 paths.client = '.';
 paths.node = 'node_modules';
-paths.lib = './lib';
 
 paths.app = paths.client + '/app';
 paths.destination = paths.client + '/build';
 paths.angularScripts = [
-  paths.node + '/angular/angular.js',
   paths.node + '/deep-diff/index.js',
   paths.node + '/uri-templates/uri-templates.js',
+  paths.node + '/angular/angular.js',
   paths.node + '/angular-aria/angular-aria.js',
   paths.node + '/angular-sanitize/angular-sanitize.js',
   paths.node + '/angular-animate/angular-animate.js',
@@ -45,24 +44,16 @@ paths.angularScripts = [
   paths.node + '/angular-model-factory/dist/angular-model-factory.js',
   paths.node + '/angular-file-upload/dist/angular-file-upload.js',
   paths.node + '/ng-material-datetimepicker/dist/angular-material-datetimepicker.min.js',
-  paths.node + '/ng-prodeb/dist/ng-prodeb.js',
-  paths.node + '/angular-br-filters/release/angular-br-filters.min.js',
-  paths.node + '/angular-ui-calendar/src/calendar.js',
-  paths.node + '/angular-messages/angular-messages.min.js',
-  paths.lib + '/lf-ng-md-file-input.js',
+  paths.node + '/ng-prodeb/dist/ng-prodeb.js'
 ];
 //Add minifieds files.
 paths.vendorsScripts = [
   paths.node + '/alasql/dist/alasql.js',
   paths.node + '/xlsx/dist/xlsx.core.min.js',
   paths.node + '/lodash/lodash.min.js',
-  paths.node + '/jquery/dist/jquery.min.js',
   paths.node + '/moment/min/moment.min.js',
-  paths.node + '/moment/min/locales.min.js',
-  paths.node + '/fullcalendar/dist/fullcalendar.min.js',
-  paths.node + '/fullcalendar/dist/gcal.min.js',
+  paths.node + '/moment/min/locales.min.js'
 ];
-
 paths.scripts = [
   paths.app + '/app.js',
   paths.app + '/app.*.js',
@@ -72,9 +63,7 @@ paths.styles = [
   paths.node   + '/ng-prodeb/dist/ng-prodeb.css',
   paths.node   + '/angular-material-data-table/dist/md-data-table.min.css',
   paths.node   + '/ng-material-datetimepicker/dist/material-datetimepicker.min.css',
-  paths.node   + '/fullcalendar/dist/fullcalendar.min.css',
-  paths.node   + '/lf-ng-md-file-input/dist/lf-ng-md-file-input.min.css',
-  paths.client + '/styles/app.scss',
+  paths.client  + '/styles/app.scss'
 ];
 
 var filesNames = {

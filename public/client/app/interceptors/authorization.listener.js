@@ -13,8 +13,8 @@
      */
     $rootScope.$on('$stateChangeStart', function(event, toState) {
       if (toState.data && toState.data.needAuthentication &&
-        toState.data.needPermission && Auth.authenticated() &&
-        !Auth.currentUser.hasPermission(toState.data.needPermission.resource, toState.data.needPermission.action)) {
+        toState.data.needProfile && Auth.authenticated() &&
+        !Auth.currentUser.hasProfile(toState.data.needProfile, toState.data.allProfiles)) {
 
         $state.go(Global.notAuthorizedState);
         event.preventDefault();

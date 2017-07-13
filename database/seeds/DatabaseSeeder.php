@@ -32,21 +32,10 @@ class DatabaseSeeder extends Seeder
         factory(\App\Project::class)->create()
             ->tasks()->saveMany(factory(\App\Task::class, 5)->states('no-project')->make());
 
-
         $role = factory(\App\Role::class)->states('admin')->create();
-        factory(\App\Role::class)->states('gestorDoSistema')->create();
-        factory(\App\Role::class)->states('gestorDaIes')->create();
-        factory(\App\Role::class)->states('gestorDaEs')->create();
 
+        User::where('email', 'admin@freelagile.com')->first()->roles()->attach($role->id);
 
-        User::where('email', 'admin-base@prodeb.com')->first()->roles()->attach($role->id);
-        $this->call(ActionsSeeder::class);
-        $this->call(TiposEstabelecimentoSaudeTableSeeder::class);
-        $this->call(NucleosRegionaisTableSeeder::class);
-        $this->call(StatusTableSeeder::class);
-        $this->call(CursosTableSeeder::class);
-        $this->call(ModalidadesTableSeeder::class);
-        $this->call(AreasTableSeeder::class);
         Model::reguard();
     }
 }

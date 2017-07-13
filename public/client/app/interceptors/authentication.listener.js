@@ -35,12 +35,17 @@
 
     //Check if the token still valid.
     $rootScope.$on('$stateChangeStart', function(event, toState) {
-      if (toState.data.needAuthentication || toState.data.needPermission) {
+      if (toState.data.needAuthentication || toState.data.needProfile) {
         //dont trait the success block because already did by token interceptor
         Auth.remoteValidateToken().catch(function() {
           PrToast.warn($translate.instant('messages.login.logoutInactive'));
-              event.preventDefault();
-          });
+
+          if (toState.name !== Global.loginState) {
+            $state.go(Global.loginState);
+          }
+
+          event.preventDefault();
+        });
       } else {
         //if the use is authenticated and need to enter in login page
         //him will be redirected to home page

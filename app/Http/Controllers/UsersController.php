@@ -32,7 +32,7 @@ class UsersController extends CrudController
 
     protected function applyFilters(Request $request, $query)
     {
-        $query = $query->with('roles')->withTrashed();
+        $query = $query->with('roles');
 
         if ($request->has('name')) {
             $query = $query->where('name', 'like', '%'.$request->name.'%');
@@ -62,8 +62,7 @@ class UsersController extends CrudController
     {
         $rules = [
             'name' => 'required|max:255',
-            'email' => ( !isset($obj->id) ) ? 'required|email|max:255|unique:users,email' : 'required|email|max:255|unique:users,email,'.$obj->id,
-            'cpf' => ( !isset($obj->id) ) ? 'required|max:255|unique:users,cpf' : 'required|max:255|unique:users,cpf,'.$obj->id,
+            'email' => 'required|email|max:255|unique:users'
         ];
 
         if (strpos($request->route()->getName(), 'users.update') !== false) {
@@ -88,28 +87,26 @@ class UsersController extends CrudController
     protected function beforeUpdate(Request $request, Model $obj)
     {
         //adiciona no request os papeis antigos para depois ser possível auditar
-        //pois por padrão a solução de auditar não audita relacionamentos 1 para muito
+        //pois por padrão a solução de auditar não audita relacionamentos 1 para muitos
         $request->merge(array('oldRoles' => array_pluck($obj->roles()->get()->toArray(), 'slug')));
     }
 
     //After Store and Update
     protected function afterSave(Request $request, Model $obj)
     {
-        if (empty(Input::only('roles')["roles"])) {
-            $obj->roles()->detach();
-        } else {
-            $obj->roles()->sync(array_pluck(Input::only('roles')["roles"], 'id'));
-             $newRoles = $obj->roles()->get()->toArray();
-            $this->auditRoles($obj, $request->oldRoles, array_pluck($newRoles, 'slug'));
+        $obj->roles()->sync(array_pluck(Input::only('roles')["roles"], 'id'));
 
-            $obj->roles = $newRoles;
-        }
+        $newRoles = $obj->roles()->get()->toArray();
+        $this->auditRoles($obj, $request->oldRoles, array_pluck($newRoles, 'slug'));
+
+        $obj->roles = $newRoles;
     }
 
     //after store (only new users)
     protected function afterStore(Request $request, Model $obj)
     {
         //Envia o email de confirmação para o usuário com o login e senha
+
         Mail::to($obj)->send(new ConfirmNewUser($obj));
     }
 
@@ -171,23 +168,4 @@ class UsersController extends CrudController
 
         return $user;
     }
-
-    protected function beforeSave(Request $request, Model $obj) {
-        $input = $request->all();
-        if (!isset($input['estabelecimento_saude_id'])) {
-            $obj->estabelecimento_saude_id = null;
-        }
-        if (!isset($input['instituicao_ensino_id'])) {
-            $obj->instituicao_ensino_id = null;
-        }
-    }
-
-    /**
-     * Ativa o usuario.
-     */
-    public function ativar(Request $request) {
-        return $this->getModel()::where('id', $request->input('user_id'))
-        ->restore();
-    }
-
 }

@@ -23,61 +23,21 @@
 
       // Array contendo os itens que são mostrados no menu lateral
       vm.itensMenu = [
+        { state: 'app.dashboard', title: menuPrefix + 'dashboard', icon: 'dashboard', subItens: [] },
+        {
+          state: '#', title: menuPrefix + 'examples', icon: 'view_carousel', profiles: ['admin'],
+          subItens: [
+            { state: 'app.project', title: menuPrefix + 'project', icon: 'star' }
+          ]
+        },
         // Coloque seus itens de menu a partir deste ponto
-        { state: '#', title: menuPrefix + 'cadastrosBasicos', icon: 'input',
+        {
+          state: '#', title: menuPrefix + 'admin', icon: 'settings_applications', profiles: ['admin'],
           subItens: [
-            { state: 'app.areas', title: menuPrefix + 'areas', icon: 'border_all',
-              needPermission: { resource: 'areas' }
-            },
-            { state: 'app.cursos', title: menuPrefix + 'cursos', icon: 'book',
-              needPermission: { resource: 'cursos' }
-            },
-            { state: 'app.especialidades', title: menuPrefix + 'especialidades', icon: 'pie_chart_outlined',
-              needPermission: { resource: 'especialidades' }
-            },
-            { state: 'app.especificacoes', title: menuPrefix + 'especificacoes', icon: 'toys',
-              needPermission: { resource: 'especificacoes' }
-            },
-            { state: 'app.modalidades', title: menuPrefix + 'modalidades', icon: 'compare',
-              needPermission: { resource: 'modalidades' }
-            },
-            { state: 'app.naturezas-juridicas', title: menuPrefix + 'naturezasJuridicas', icon: 'nature',
-              needPermission: { resource: 'naturezasJuridicas' }
-            },
-            { state: 'app.setores', title: menuPrefix + 'setores', icon: 'dashboard',
-              needPermission: { resource: 'setores' }
-            },
-            { state: 'app.tipos-estabelecimento-saude', title: menuPrefix + 'tiposEstabelecimentoSaude', icon: 'playlist_add',
-              needPermission: { resource: 'tiposEstabelecimentoSaude' }
-            }
-          ]
-        },
-        { state: '#', title: menuPrefix + 'estabelecimentosSaude', icon: 'local_hospital',
-          subItens: [
-            { state: 'app.estabelecimentos-saude', title: menuPrefix + 'cadastroes',
-              icon: 'format_list_bulleted', needPermission: { resource: 'estabelecimentosSaude' }
-            },
-            { state: 'app.vagas', title: menuPrefix + 'vagas', icon: 'event_note',
-              needPermission: { resource: 'vagas' }
-            }
-          ]
-        },
-        { state: 'app.instituicoes-ensino', title: menuPrefix + 'instituicoesEnsino', icon: 'school',
-          needPermission: { resource: 'instituicoesEnsino' },
-          subItens: [
-          ]
-        },
-        { state: '#', title: menuPrefix + 'admin', icon: 'settings_applications',
-          subItens: [
-            { state: 'app.user', title: menuPrefix + 'user', icon: 'people',
-              needPermission: { resource: 'users' }
-            },
-            { state: 'app.roles', title: menuPrefix + 'roles', icon: 'perm_contact_calendar',
-              needPermission: { resource: 'roles' }
-            },
-            { state: 'app.parametros-sistema', title: menuPrefix + 'painelcontrole', icon: 'extension',
-              needPermission: { resource: 'parametrosSistema' }
-            }
+            { state: 'app.user', title: menuPrefix + 'user', icon: 'people' },
+            { state: 'app.mail', title: menuPrefix + 'mail', icon: 'mail' },
+            { state: 'app.audit', title: menuPrefix + 'audit', icon: 'storage' },
+            { state: 'app.dinamic-query', title: menuPrefix + 'dinamicQuery', icon: 'location_searching' }
           ]
         }
       ];
@@ -110,9 +70,9 @@
      * Método que exibe o sub menu dos itens do menu lateral caso tenha sub itens
      * caso contrário redireciona para o state passado como parâmetro
      */
-    function openMenuOrRedirectToState($mdOpenMenu, ev, item) {
+    function openMenuOrRedirectToState($mdMenu, ev, item) {
       if (angular.isDefined(item.subItens) && item.subItens.length > 0) {
-        $mdOpenMenu(ev);
+        $mdMenu.open(ev);
       } else {
         $state.go(item.state);
         $mdSidenav('left').close();

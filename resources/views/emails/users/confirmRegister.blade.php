@@ -18,7 +18,7 @@
             <table style="border: none">
                 <tr>
                     <td><b>Login:</b></td>
-                    <td>{{$user['cpf']}}</td>
+                    <td>{{$user['email']}}</td>
                 </tr>
                 <tr>
                     <td><b>Senha:</b></td>
