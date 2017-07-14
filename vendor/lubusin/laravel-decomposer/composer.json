@@ -1,0 +1,24 @@
+{
+    "name": "lubusin/laravel-decomposer",
+    "description": "A Laravel package to decompose and list your installed packages and their dependencies",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Harish Toshniwal",
+            "email": "harish@lubus.in"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Lubusin\\Decomposer\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.6",
+        "illuminate/support": "^5.0"
+    },
+    "require-dev": {
+        "illuminate/routing": "^5.0",
+        "illuminate/http": "^5.0"
+    }
+}

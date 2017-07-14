@@ -1,0 +1,15 @@
+<md-dialog flex=50 aria-label="{{::ctrl.title}}">
+  <md-toolbar md-scroll-shrink>
+    <div class="md-toolbar-tools">
+      <h3>
+        <span>{{::ctrl.title}}</span>
+      </h3>
+    </div>
+  </md-toolbar>
+  <md-dialog-content layout-margin>
+    <p>{{::ctrl.description}}</p>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button class="md-raised md-primary" ng-click="ctrl.close()">Sair</md-button>
+  </md-dialog-actions>
+</md-dialog>

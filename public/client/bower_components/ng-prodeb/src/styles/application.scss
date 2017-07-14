@@ -1,0 +1,46 @@
+// Toast
+body.md-toast-animating {
+  overflow: auto !important;
+}
+
+// Pagination
+
+.pr-table tr th,
+.pr-table tr td {
+  padding: 2px;
+  border: 1px black solid;
+}
+
+.pr-pagination .md-button {
+  margin: 4px 2px;
+  line-height: 20px;
+  min-width: 30px;
+  min-height: 24px;
+  font-size: 12px;
+}
+
+// Spinner
+
+.spin-label-component {
+  top: 0;
+  z-index: 10000;
+}
+
+.md-dialog-transparent {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.my-drop-zone { border: dotted 3px lightgray; padding: 20px; margin: 15px; }
+.nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+.another-file-over-class { border: dotted 3px green; }
+
+canvas {
+  background-color: #f3f3f3;
+  -webkit-box-shadow: 3px 3px 3px 0 #e3e3e3;
+  -moz-box-shadow: 3px 3px 3px 0 #e3e3e3;
+  box-shadow: 3px 3px 3px 0 #e3e3e3;
+  border: 1px solid #c3c3c3;
+  height: 100px;
+  margin: 6px 0 0 6px;
+}

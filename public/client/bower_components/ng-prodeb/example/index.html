@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html ng-app="app">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Exemplos</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/github.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../dist/ng-prodeb-vendors.css">
+  <link rel="stylesheet" href="../dist/ng-prodeb.css">
+</head>
+
+<body ng-controller="GlobalController as globalCtrl" layout="column">
+  <md-content flex>
+    <section layout="row" layout-padding layout-align="center center">
+      <section class="md-whiteframe-z1" flex=60>
+        <md-toolbar class="md-primary">
+          <pr-spinner bg-color="teal" text-color="orange" position="absolute" color="md-warn"></pr-spinner>
+          <div class="md-toolbar-tools">
+            <h3>Exemplo</h3>
+          </div>
+        </md-toolbar>
+
+        <md-content class="md-padding" layout-xs="column">
+
+          <md-card>
+            <md-toolbar class="md-accent">
+              <div class="md-toolbar-tools">
+                <h2 class="md-title">Carros</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Export To Excel" ng-click="globalCtrl.exportToExcel()">
+                  <md-icon md-svg-icon="pr-excel"></md-icon>
+                </md-button>
+              </div>
+            </md-toolbar>
+
+            <md-table-container>
+              <table md-table>
+                <thead md-head>
+                  <tr md-row>
+                    <th md-column>Marca</th>
+                    <th md-column>Nome</th>
+                  </tr>
+                </thead>
+                <tbody md-body>
+                  <tr md-row ng-repeat="car in globalCtrl.cars">
+                    <td md-cell>{{car.brand}}</td>
+                    <td md-cell>{{car.name}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </md-table-container>
+
+            <md-table-pagination md-label="{page: 'Página:', rowsPerPage: 'Por página:', of: 'de'}" md-limit="globalCtrl.paginator.perPage" md-total="{{globalCtrl.paginator.total}}" md-page="globalCtrl.paginator.currentPage" md-on-paginate="globalCtrl.search" md-page-select>
+            </md-table-pagination>
+
+            <md-card-actions layout="row" layout-align="end center">
+              <pr-pagination paginator="globalCtrl.paginator"></pr-pagination>
+            </md-card-actions>
+          </md-card>
+
+          <md-card>
+            <md-toolbar class="md-accent">
+              <div class="md-toolbar-tools md-accent">
+                <h2 class="md-title">Toast</h2>
+              </div>
+            </md-toolbar>
+            <md-card-content class="md-padding" layout-xs="column">
+              <md-button class="md-raised" md-colors="::{background:'green'}" ng-click="globalCtrl.notification('success', 'Sucesso.')">Sucesso</md-button>
+              <md-button class="md-raised" md-colors="::{background:'red-A700'}" ng-click="globalCtrl.notification('error', 'Erro.')">Erro</md-button>
+              <md-button class="md-raised" md-colors="::{background:'teal'}" ng-click="globalCtrl.notification('info', 'Informação.')">Info</md-button>
+              <md-button class="md-raised md-warn" ng-click="globalCtrl.notification('warn', 'Alert.')">Alert</md-button>
+              <md-button class="md-raised" md-colors="::{background:'red-A700'}" ng-click="globalCtrl.notificationArrayValidationErrors()">Erros em Array</md-button>
+              <md-button class="md-raised" md-colors="::{background:'red-A700'}" ng-click="globalCtrl.notificationObjectValidationErrors()">Erros em um objeto</md-button>
+              <md-button class="md-raised" md-colors="::{background:'teal'}" ng-click="globalCtrl.hideNotification()">Esconder</md-button>
+            </md-card-content>
+          </md-card>
+
+          <md-card>
+            <md-toolbar class="md-accent">
+              <div class="md-toolbar-tools md-accent">
+                <h2 class="md-title">Dialog</h2>
+              </div>
+            </md-toolbar>
+            <md-card-content class="md-padding" layout-xs="column">
+              <md-button class="md-raised" md-colors="::{background:'green'}" ng-click="globalCtrl.customDialog()">Custom dialog</md-button>
+              <md-button class="md-raised md-primary" ng-click="globalCtrl.confirmDialog()">Confirm dialog</md-button>
+            </md-card-content>
+          </md-card>
+
+          <md-card>
+            <md-toolbar class="md-accent">
+              <div class="md-toolbar-tools md-accent">
+                <h2 class="md-title">DateTime Picker</h2>
+              </div>
+            </md-toolbar>
+            <md-card-content class="md-padding" layout-xs="column">
+              <md-input-container class="md-block" flex-gt-md="30">
+                <label for="date">Data</label>
+                <pr-date-time-picker
+                  id="date"
+                  ng-model="globalCtrl.dataWithTime"
+                  max-date="2017-11-11"
+                  with-time="true">
+                </pr-date-time-picker>
+              </md-input-container>
+              <div ng-if="globalCtrl.dataWithTime">
+                objeto: {{globalCtrl.dataWithTime}}
+                <br/> prDate filter: {{globalCtrl.dataWithTime | prDate}}
+                <br/> prDatetime filter: {{globalCtrl.dataWithTime | prDatetime}}
+              </div>
+            </md-card-content>
+          </md-card>
+
+          <md-card>
+            <md-toolbar class="md-accent">
+              <div class="md-toolbar-tools md-accent">
+                <h2 class="md-title">Upload de arquivos</h2>
+              </div>
+            </md-toolbar>
+            <md-card-content class="md-padding" layout-xs="column">
+
+              <label><b>Uploader do Arquivo:</b></label><br><br>
+
+              <!-- 3. nv-file-drop="" nv-file-over uploader="link" over-class="className" -->
+              <div nv-file-drop class="my-drop-zone padded" nv-file-over uploader="globalCtrl.uploader" aria-label="dragDropZone">
+                Zona Drag and Drop Padrão
+              </div>
+
+              <!-- Example: nv-file-drop="" uploader="{Object}" options="{Object}" filters="{String}" -->
+              <div nv-file-drop uploader="globalCtrl.uploader" options="{ url: '/foo' }">
+                <div nv-file-over uploader="globalCtrl.uploader" over-class="another-file-over-class" class="my-drop-zone">
+                  Zona Drag and Drop com configurações personalizadas
+                </div>
+              </div>
+
+              <!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
+              <label>Multiplos Arquivos:</label>
+              <md-input-container class="md-block">
+                <input type="file" nv-file-select uploader="globalCtrl.uploader" aria-label="upload-multiple" multiple /><br/>
+              </md-input-container>
+
+              <label>Único Arquivo:</label>
+              <md-input-container class="md-block">
+                <input type="file" nv-file-select uploader="globalCtrl.uploader" /><br/>
+              </md-input-container>
+
+              <md-table-container ng-if="globalCtrl.uploader.queue.length > 0">
+                <table md-table>
+                  <thead md-head>
+                    <tr md-row>
+                      <th md-column ng-show="globalCtrl.uploader.isHTML5">Nome do arquivo</th>
+                      <th md-column ng-show="globalCtrl.uploader.isHTML5">Tamanho</th>
+                      <th md-column ng-show="globalCtrl.uploader.isHTML5">Progesso</th>
+                      <th md-column>Status</th>
+                      <th md-column style="text-align: center;">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody md-body>
+                    <tr ng-repeat="item in globalCtrl.uploader.queue">
+                      <td md-cell ng-show="globalCtrl.uploader.isHTML5">{{ item.file.size/1024/1024|number:2 }} MB</td>
+                      <td md-cell ng-show="globalCtrl.uploader.isHTML5">
+                        <div class="progress" style="margin-bottom: 0;">
+                          <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                        </div>
+                      </td>
+                      <td md-cell>
+                        <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                        <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                        <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                      </td>
+                      <td md-cell style="text-align: center;">
+                        <md-button class="md-fab md-raised md-primary md-mini" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                          <md-icon md-font-set="material-icons"> file_upload </md-icon>
+                        </md-button>
+                        <md-button class="md-fab md-raised md-accent md-mini" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                          <md-icon md-font-set="material-icons"> cancel </md-icon>
+                        </md-button>
+                        <md-button class="md-fab md-raised md-warn md-mini" ng-click="item.remove()">
+                          <md-icon md-font-set="material-icons"> delete </md-icon>
+                        </md-button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </md-table-container>
+
+              <md-divider></md-divider>
+
+              <div layout="column">
+                <div flex="100" layout-padding>
+                  Progresso da Fila:
+                </div>
+                <md-progress-linear md-mode="determinate" value="{{globalCtrl.uploader.progress}}"></md-progress-linear>
+              </div>
+
+              <div layout="row" flex layout-padding layout-align="center center">
+                <md-button type="button" class="md-raised md-primary" ng-click="globalCtrl.uploader.uploadAll()" ng-disabled="!globalCtrl.uploader.getNotUploadedItems().length">
+                    Subir Todos
+                </md-button>
+                <md-button type="button" class="md-raised md-accent" ng-click="globalCtrl.uploader.cancelAll()" ng-disabled="!globalCtrl.uploader.isUploading">
+                    Cancelar Todos
+                </md-button>
+                <md-button type="button" class="md-raised md-warn" ng-click="globalCtrl.uploader.clearQueue()" ng-disabled="!globalCtrl.uploader.queue.length">
+                    Remover Todos
+                </md-button>
+              </div>
+
+              <md-divider></md-divider>
+              <br><br>
+
+              <label><b>Uploader em Base64:</b></label><br><br>
+              <md-input-container class="md-block">
+                <input type="file" pr-uploader-base64 ng-model="globalCtrl.base64" aria-label="base64"/><br/>
+              </md-input-container>
+
+              <label><b>Código da imagem em Base64:</b></label><br><br>
+              <div style="width:100% !important; overflow-wrap: break-word; overflow-y: scroll; height: 300px;" >
+                {{globalCtrl.base64}}
+              </div>
+              <br><br>
+
+              <label><b>Base64 como imagem:</b></label><br>
+              <div style="width:100% !important;" >
+                <img style="width: 30% !important;" ng-src="{{globalCtrl.base64}}">
+              </div>
+
+            </md-card-content>
+          </md-card>
+
+        </md-content>
+      </section>
+    </section>
+
+    <script src="../dist/ng-prodeb-vendors.min.js"></script>
+    <script src="../dist/ng-prodeb.min.js"></script>
+    <script src="index.js"></script>
+  </md-content>
+</body>
+
+</html>

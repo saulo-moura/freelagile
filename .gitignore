@@ -1,6 +1,51 @@
-/vendor
-/node_modules
-/public/storage
+### Composer ###
+composer.phar
+composer.lock
+
+### Resources ###
+node_modules/
+
+### deploy ###
+deploy/
+
+### docker ###
+php-docker/
+
+### quality ###
+testresults
+.sonar/
+
+npm-debug.log
+
+### Laravel ###
+.env
 Homestead.yaml
 Homestead.json
-.env
+
+### Production ###
+*.zip
+ftp.log
+
+### Editores ###
+
+.vscode/
+
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio
+.idea/
+.idea_modules/
+/out/
+*.ipr
+*.iws
+*.iml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+
+### mac os x ####
+.DS_Store
+
+### sonar ###
+.scannerwork/
+sonar-project.properties

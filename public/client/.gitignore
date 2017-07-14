@@ -1,11 +1,6 @@
 .sonar/
 
 ### Resources ###
-node_modules/
-bower_components/
-build/
-paths.json
-app/app.global.js
 
 npm-debug.log
 

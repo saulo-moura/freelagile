@@ -41,7 +41,8 @@
         getOut: 'Sair',
         add: 'Adicionar',
         in: 'Entrar',
-        loadImage: 'Carregar Imagem'
+        loadImage: 'Carregar Imagem',
+        signup: 'Cadastrar'
       },
       fields: {
         date: 'Data',
