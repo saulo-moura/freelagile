@@ -13,6 +13,7 @@
 
     vm.login = login;
     vm.openDialogResetPass = openDialogResetPass;
+    vm.openDialogSignUp = openDialogSignUp;
 
     activate();
 
@@ -38,6 +39,18 @@
       var config = {
         templateUrl: Global.clientPath + '/auth/send-reset-dialog.html',
         controller: 'PasswordController as passCtrl',
+        hasBackdrop: true
+      }
+
+      PrDialog.custom(config);
+    }
+    /**
+     * Exibe o dialog para recuperação de senha
+     */
+    function openDialogSignUp() {
+      var config = {
+        templateUrl: Global.clientPath + '/users/user-form.html',
+        controller: 'UsersController as usersCtrl',
         hasBackdrop: true
       }
 

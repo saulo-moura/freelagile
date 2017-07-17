@@ -34,6 +34,8 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
         return response()->json(['status' => 'valid']);
     })->middleware('jwt.auth'); //just to check the token
 
+    Route::post('users', 'UsersController@store');
+
     //authenticated area
     Route::group(['middleware' => ['jwt.auth', 'jwt.refresh']], function () {
         Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
@@ -57,7 +59,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
             Route::get('audit', 'AuditController@index');
             Route::get('audit/models', 'AuditController@models');
 
-            Route::resource('users', 'UsersController', ['except' => ['updateProfile']]);
+            Route::resource('users', 'UsersController', ['except' => ['updateProfile', 'store']]);
 
             Route::group(['prefix' => 'dinamicQuery'], function () {
                 Route::get('/', 'DinamicQueryController@index');

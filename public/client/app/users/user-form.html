@@ -1,11 +1,5 @@
 <form ng-submit="usersCtrl.save()">
   <box box-title="{{::'views.titles.register' | translate}}">
-    <box-toolbar-buttons>
-      <md-button class="md-icon-button" ng-click="usersCtrl.goTo('list')">
-        <md-icon md-font-set="material-icons">view_list</md-icon>
-        <md-tooltip md-direction="bottom" hide-sm hide-xs>{{::'views.actions.list' | translate}}</md-tooltip>
-      </md-button>
-    </box-toolbar-buttons>
     <md-input-container class="md-block" flex>
       <label>{{::'attributes.name' | translate}}</label>
       <input type="text" ng-model="usersCtrl.resource.name">
@@ -14,21 +8,9 @@
       <label>{{::'attributes.email' | translate}}</label>
       <input type="email" ng-model="usersCtrl.resource.email">
     </md-input-container>
-
-    <md-input-container class="md-block md-input-has-placeholder" flex>
-      <label>{{::'attributes.image' | translate}}</label>
-      <img alt="{{ ::usersCtrl.resource.name }}" ng-src="{{ usersCtrl.resource.image ? usersCtrl.resource.image : global.imagePath + '/no_avatar.gif' }}"/>
-      <input type="file" pr-uploader-base64 ng-model="usersCtrl.resource.image">
-    </md-input-container>
-    <md-input-container class="md-block md-input-has-placeholder" >
-      <label>{{::'attributes.roles' | translate}}</label>
-      <div ng-repeat="role in usersCtrl.roles">
-        <md-checkbox ng-model="role.selected">{{role.title}}</md-checkbox>
-      </div>
-    </md-input-container>
     <box-footer-buttons layout-align="end center">
-      <md-button type="submit" id="btn-usersCtrl-save" class="md-primary md-raised">{{::'views.actions.save' | translate}}</md-button>
-      <md-button class="md-raised" ng-click="usersCtrl.cleanForm()">{{::'views.actions.clear' | translate}}</md-button>
+      <md-button type="submit" id="btn-usersCtrl-save" class="md-primary md-raised">{{::'views.actions.signup' | translate}}</md-button>
+      <md-button class="md-raised" ng-click="$mdDialog.hide()">{{::'views.actions.cancel' | translate}}</md-button>
     </box-footer-buttons>
   </box>
 </form>
