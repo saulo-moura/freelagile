@@ -21,6 +21,7 @@ npm-debug.log
 .env
 Homestead.yaml
 Homestead.json
+vendor/
 
 ### Production ###
 *.zip
