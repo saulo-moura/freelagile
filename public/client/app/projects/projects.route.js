@@ -14,11 +14,11 @@
   /** @ngInject */
   function routes($stateProvider, Global) {
     $stateProvider
-      .state('app.project', {
-        url: '/projetos',
-        templateUrl: Global.clientPath + '/samples/projects/projects.html',
+      .state('app.projects', {
+        url: '/projects',
+        templateUrl: Global.clientPath + '/projects/projects.html',
         controller: 'ProjectsController as projectsCtrl',
-        data: { needAuthentication: true, needProfile: ['admin'] }
+        data: { needAuthentication: true}
       });
   }
 }());

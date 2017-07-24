@@ -1,0 +1,37 @@
+<box box-title="{{ ::'views.actions.projectList' | translate}}">
+	<box-toolbar-buttons>
+		<md-button class="md-icon-button" ng-click="projectsCtrl.goTo('form')">
+			<md-icon md-font-set="material-icons" class="md-warn">add</md-icon>
+			<md-tooltip md-direction="bottom" hide-sm hide-xs>{{ ::'views.actions.criarProjeto' | translate}}</md-tooltip>
+		</md-button>
+	</box-toolbar-buttons>
+	<md-content layout="row" flex layout-wrap class="md-padding" ng-if="projectsCtrl.resources.length > 0">
+		<md-card ng-repeat="project in projectsCtrl.resources" flex="45">
+			<md-card-title>
+				<md-card-title-text>
+					<span class="md-headline">{{ ::project.name }}</span>
+				</md-card-title-text>
+			</md-card-title>
+			<md-card-content>
+				<span class="md-subhead">{{ ::project.description }}</span>
+			</md-card-content>
+			<md-card-actions layout-align="end center">
+				<md-button ng-click="projectsCtrl.verProjeto(project)">
+					<md-icon md-font-set="material-icons" class="md-warn">remove_red_eye</md-icon>
+					<md-tooltip md-direction="bottom" hide-sm hide-xs>Visualizar</md-tooltip>
+				</md-button>
+				<md-button ng-click="projectsCtrl.edit(project)">
+					<md-icon md-font-set="material-icons" class="md-warn">edit</md-icon>
+					<md-tooltip md-direction="bottom" hide-sm hide-xs>Editar</md-tooltip>
+				</md-button>
+				<md-button ng-click="projectsCtrl.remove(project)">
+					<md-icon md-font-set="material-icons" class="md-warn">delete</md-icon>
+					<md-tooltip md-direction="bottom" hide-sm hide-xs>Apagar</md-tooltip>
+				</md-button>
+			</md-card-actions>
+		</md-card>
+	</md-content>
+	<div ng-if="projectsCtrl.resources.length === 0" style="text-align:center;">
+		<span>Não há projetos cadastrados</span>
+	</div>
+</box>

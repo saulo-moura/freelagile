@@ -44,4 +44,5 @@ class Role extends BaseModel
     {
         return $this->belongsToMany(User::class);
     }
+    
 }

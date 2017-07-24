@@ -5,7 +5,7 @@
     .module('app')
     .constant('Global', {
       appName: 'Freelagile',
-      homeState: 'app.dashboard',
+      homeState: 'app.projects',
       loginUrl: 'app/login',
       loginState: 'app.login',
       resetPasswordState: 'app.password-reset',

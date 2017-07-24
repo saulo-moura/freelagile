@@ -11,7 +11,7 @@
         dashboard: 'Dashboard',
         audit: 'Administração - Auditoria',
         mail: 'Administração - Envio de e-mail',
-        project: 'Exemplos - Projetos',
+        projects: 'Projetos',
         'dinamic-query': 'Administração - Consultas Dinâmicas',
         'not-authorized': 'Acesso Negado'
       },
@@ -42,7 +42,9 @@
         add: 'Adicionar',
         in: 'Entrar',
         loadImage: 'Carregar Imagem',
-        signup: 'Cadastrar'
+        signup: 'Cadastrar',
+        criarProjeto: 'Criar Projeto',
+        projectList: 'Lista de Projetos'
       },
       fields: {
         date: 'Data',

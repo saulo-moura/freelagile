@@ -40,7 +40,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
     Route::group(['middleware' => ['jwt.auth', 'jwt.refresh']], function () {
         Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
 
-        Route::resource('projects', 'Samples\ProjectsController');
+        Route::resource('projects', 'ProjectsController');
         Route::resource('roles', 'RolesController', ['only' => ['index']]);
 
         Route::put('tasks/toggleDone', 'Samples\TasksController@toggleDone');

@@ -1,0 +1,36 @@
+<form name="projectForm" ng-submit="projectsCtrl.save()" novalidate>
+	<box box-title="Novo Projeto">
+		<box-toolbar-buttons>
+			<md-button class="md-icon-button" ng-click="projectsCtrl.goTo('list')">
+				<md-icon md-font-set="material-icons" class="md-warn">view_list</md-icon>
+				<md-tooltip md-direction="bottom" hide-sm hide-xs>{{ ::'views.actions.list' | translate}}</md-tooltip>
+			</md-button>
+		</box-toolbar-buttons>
+		<div layout="row" flex>
+			<div flex=70>
+				<md-input-container class="md-block" flex>
+					<input type="text" placeholder="Nome" ng-model="projectsCtrl.resource.name" required>
+				</md-input-container>
+			</div>
+			<div flex=30>
+				<md-input-container style="width:100%;">
+					<md-select ng-model="projectsCtrl.resource.role" placeholder="Selecione o seu Papel no Projeto">
+						<md-option ng-value="" disabled>Selecione o seu Papel no Projeto</md-option>
+						<md-option ng-value="{{role}}" ng-repeat="role in projectsCtrl.roles" ng-if="!$first">{{ ::role.title }}</md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+		</div>
+		<md-input-container class="md-block" flex>
+			<textarea required
+			placeholder="Descrição"
+			ng-model="projectsCtrl.resource.description">
+			</textarea>
+		</md-input-container>
+		<box-footer-buttons>
+			<md-button class="md-primary md-raised" type="submit">{{::'views.actions.save' | translate}}</md-button>
+			<md-button class="md-raised" ng-click="projectsCtrl.cleanForm(projectForm)">{{::'views.actions.clear' | translate}}</md-button>
+		</box-footer-buttons>
+	</box>
+</form>
+

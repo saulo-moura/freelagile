@@ -24,13 +24,6 @@ class DatabaseSeeder extends Seeder
         factory(\App\User::class)->states('admin')->create();
         factory(\App\User::class)->states('normal')->create();
         factory(\App\User::class, 5)->create();
-        factory(\App\Task::class, 3)->create();
-
-        factory(\App\Project::class)->create()
-            ->tasks()->saveMany(factory(\App\Task::class, 2)->states('no-project')->make());
-
-        factory(\App\Project::class)->create()
-            ->tasks()->saveMany(factory(\App\Task::class, 5)->states('no-project')->make());
 
         $role = factory(\App\Role::class)->states('admin')->create();
 
