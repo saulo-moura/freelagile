@@ -1,5 +1,6 @@
 ### Composer ###
 composer.phar
+vendor/
 composer.lock
 
 ### Resources ###
@@ -21,7 +22,6 @@ npm-debug.log
 .env
 Homestead.yaml
 Homestead.json
-vendor/
 
 ### Production ###
 *.zip

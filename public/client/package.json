@@ -31,6 +31,7 @@
     "lodash": "~4.13.1",
     "moment": "~2.14.1",
     "ng-material-datetimepicker": "~1.6.2",
+    "ng-prodeb": "git+ssh://git@git.prodeb.ba.gov.br:starter-pack/ngprodeb.git#0.2.12",
     "uri-templates": "~0.2.0",
     "xlsx": "~0.10.3"
   },
