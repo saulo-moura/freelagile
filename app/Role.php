@@ -45,4 +45,7 @@ class Role extends BaseModel
         return $this->belongsToMany(User::class);
     }
     
+    public function projects(){
+        return $this->hasMany(Project::class);
+    }
 }

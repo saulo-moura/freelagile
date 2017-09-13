@@ -147,8 +147,11 @@ class User extends BaseModel implements AuthenticatableContract, CanResetPasswor
      *
      * @return QueryBuilder Object
      */
-    public function roles()
-    {
+    public function roles() {
         return $this->belongsToMany(Role::class);
+    }
+    
+    public function projectRoles() {
+        return $this->belongsToMany('App\Role', 'user_role_project', 'user_id', 'role_id');
     }
 }

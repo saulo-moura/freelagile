@@ -23,7 +23,7 @@
 
       // Array contendo os itens que são mostrados no menu lateral
       vm.itensMenu = [
-        { state: 'app.dashboard', title: menuPrefix + 'dashboard', icon: 'dashboard', subItens: [] },
+        { state: 'app.projects', title: menuPrefix + 'dashboard', icon: 'dashboard', subItens: [] },
         // Coloque seus itens de menu a partir deste ponto
         {
           state: '#', title: menuPrefix + 'admin', icon: 'settings_applications', profiles: ['admin'],

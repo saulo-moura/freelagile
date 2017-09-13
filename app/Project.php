@@ -19,8 +19,11 @@ class Project extends BaseModel {
 
     protected $dateFormat = "Y-m-d H:m:i";
     
-    public function roles() {
-        return $this->belongsToMany('App\Role', 'user_role_project', 'role_id', 'project_id');
+    public function users() {
+        return $this->belongsToMany('App\User', 'user_role_project', 'project_id', 'user_id');
 	}
 
+    public function roles() {
+        return $this->belongsToMany('App\Role', 'user_role_project', 'project_id', 'role_id');
+	}
 }
