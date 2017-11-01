@@ -121,6 +121,8 @@ trait Actions
 
                 $this->callback('after'.$action, $request, $obj);
                 $this->callback('afterSave', $request, $obj);
+
+                $this->dashboard($request, $obj, $action);
             });
         } catch (Exception $e) {
             return Response::json(['error' => 'messages.duplicatedResourceError'], HttpResponse::HTTP_CONFLICT);
@@ -142,6 +144,18 @@ trait Actions
             $obj->delete();
 
             $this->callback('afterDestroy', $request, $obj);
+
+            $this->dashboard($request, $obj, 'Destroy');
         });
+    }
+
+    protected function dashboard(Request $request, $obj, $action) {
+        $user = \Auth::user();
+        $query = \App\Dashboard::create([
+            'user_id' => $user->id,
+            'project_id' => isset($request->project_id) ? $request->project_id : $obj->id, 
+            'action' => $action, 
+            'description' => strcmp($action, 'Store') == 0 ? 'messages.dashboard.store' : (strcmp($action, 'Update') == 0 ? 'messages.dashboard.update' : 'messages.dashboard.destroy')
+        ]);
     }
 }

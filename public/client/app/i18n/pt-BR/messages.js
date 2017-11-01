@@ -50,6 +50,11 @@
       },
       queryDinamic: {
         noFilter: 'Nenhum filtro adicionado'
+      },
+      dashboard: {
+        store: 'Criou um item',
+        update: 'Atualizou um item',
+        destroy: 'Apagou um item'
       }
     })
 

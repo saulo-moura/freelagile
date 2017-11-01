@@ -42,7 +42,8 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
 
         Route::resource('projects', 'ProjectsController');
         Route::resource('roles', 'RolesController', ['only' => ['index']]);
-
+        Route::resource('dashboards', 'DashboardsController');
+        
         Route::put('tasks/toggleDone', 'Samples\TasksController@toggleDone');
         Route::resource('tasks', 'Samples\TasksController');
 

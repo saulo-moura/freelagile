@@ -1,4 +1,5 @@
 <md-sidenav
+  ng-if="appCtrl.getActiveProject()"
   class="site-sidenav md-sidenav-left full-height"
   md-component-id="left"
   md-is-locked-open="$mdMedia('gt-sm')"
@@ -11,39 +12,27 @@
       <div class="principal"
         ng-style="{'background-image':'url(' + appCtrl.getImagePerfil() + ')'}">
       </div>
-      <span ng-style="menuCtrl.sidenavStyle.textColor">{{auth.currentUser.name}}</span>
-      <span class="email" id="logged-user-mail" ng-style="::menuCtrl.sidenavStyle.textColor">{{auth.currentUser.email}}</span>
-    </a>
+		</a>
   </header>
 
   <md-content layout-padding flex style="text-transform:uppercase;" ng-style="::menuCtrl.sidenavStyle.content">
     <ul class="menu-sidenav">
-      <li ng-repeat="item in menuCtrl.itensMenu" ng-style="::menuCtrl.sidenavStyle.lineBottom" ng-if="!item.profiles || (item.profiles && auth.currentUser.hasProfile(item.profiles, item.allProfiles))">
+      <li ng-repeat="item in menuCtrl.itensMenu" 
+          ng-style="::menuCtrl.sidenavStyle.lineBottom" 
+          ng-if="!item.profiles || (item.profiles && auth.currentUser.hasProfile(item.profiles, item.allProfiles))"
+          style="text-align:center;">
         <md-menu md-offset="0 55">
           <md-button
-            class="md-button md-buttom-menu"
-            ng-click="menuCtrl.openMenuOrRedirectToState($mdMenu, $event, item)">
+            class="md-button"
+            style="min-width:10px !important;"
+            ng-click="menuCtrl.openMenuOrRedirectToState($mdMenu, $event, item);">
             <md-icon md-font-set="material-icons"
-              class="pull-left menu-icon" ng-style="menuCtrl.sidenavStyle.textColor">
+              class="pull-left menu-icon">
               {{::item.icon}}
             </md-icon>
-            <span translate="{{::item.title}}" translate-cloak ng-style="::menuCtrl.sidenavStyle.textColor"></span>
           </md-button>
-          <md-menu-content width="4">
-            <md-menu-item ng-repeat="subItem in item.subItens">
-              <md-button
-                ng-click="menuCtrl.openMenuOrRedirectToState($mdMenu, $event, subItem)"
-                ng-if="!subItem.profiles || (subItem.profiles && auth.currentUser.hasProfile(subItem.profiles, subItem.allProfiles))">
-                <span md-menu-align-target>
-                  <md-icon md-font-set="material-icons" class="pull-left menu-icon">
-                    {{::subItem.icon}}
-                  </md-icon>
-                  <span translate="{{::subItem.title}}"></span>
-                </span>
-              </md-button>
-            </md-menu-item>
-          </md-menu-content>
-        </md-menu>
+          <span style="font-size:10px;text-align:center;">{{::item.title | translate}}</span>
+				</md-menu>
       </li>
     </ul>
   </md-content>

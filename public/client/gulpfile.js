@@ -44,7 +44,8 @@ paths.angularScripts = [
   paths.node + '/angular-model-factory/dist/angular-model-factory.js',
   paths.node + '/angular-file-upload/dist/angular-file-upload.js',
   paths.node + '/ng-material-datetimepicker/dist/angular-material-datetimepicker.min.js',
-  paths.node + '/ng-prodeb/dist/ng-prodeb.js'
+  paths.node + '/ng-prodeb/dist/ng-prodeb.js',
+  paths.node + '/DlhSoft.KanbanLibrary/DlhSoft.Kanban.Angular.Components.js'
 ];
 //Add minifieds files.
 paths.vendorsScripts = [
@@ -63,7 +64,8 @@ paths.styles = [
   paths.node   + '/ng-prodeb/dist/ng-prodeb.css',
   paths.node   + '/angular-material-data-table/dist/md-data-table.min.css',
   paths.node   + '/ng-material-datetimepicker/dist/material-datetimepicker.min.css',
-  paths.client  + '/styles/app.scss'
+  paths.client  + '/styles/app.scss',
+  paths.node   + '/DlhSoft.KanbanLibrary/DlhSoft.Kanban.Angular.Components.css'
 ];
 
 var filesNames = {

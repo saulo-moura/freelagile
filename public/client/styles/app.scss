@@ -157,11 +157,6 @@ table.condensed .md-cell {
   overflow-x: hidden;
 }
 
-.menu-sidenav li {
-  padding: 0;
-  margin-top: 3px;
-}
-
 .menu-sidenav> li {
   border-bottom: 1px solid #FFFFFF;
 }
@@ -195,7 +190,6 @@ table.condensed .md-cell {
 
 .logo {
   text-align: center;
-  display: flex;
   flex-direction: column;
   align-items: center;
   padding: 16px 0 16px;
@@ -223,7 +217,7 @@ a.logo {
   background-position: 50%;
   background-size: cover;
   border-radius: 50%;
-  width: 40%;
+  width: 100%;
   height: 100px;
 }
 
@@ -235,9 +229,9 @@ a.logo {
 .site-sidenav,
 .site-sidenav.md-locked-open-add-active,
 .site-sidenav.md-locked-open {
-  width: 272px;
-  min-width: 272px;
-  max-width: 272px;
+  width: auto !important;
+  min-width: 10px !important;
+  max-width: none !important;
 }
 
 .site-sidenav md-content {
@@ -245,7 +239,7 @@ a.logo {
 }
 
 .site-sidenav> * {
-  min-width: 218px;
+  width: 80px !important;
 }
 
 .site-content-toolbar {

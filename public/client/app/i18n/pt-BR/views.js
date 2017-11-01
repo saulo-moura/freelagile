@@ -16,7 +16,7 @@
         'not-authorized': 'Acesso Negado'
       },
       titles: {
-        dashboard: 'Página inicial',
+        dashboard: 'Dashboard',
         mailSend: 'Enviar e-mail',
         taskList: 'Lista de Tarefas',
         userList: 'Lista de Usuários',
@@ -44,7 +44,7 @@
         loadImage: 'Carregar Imagem',
         signup: 'Cadastrar',
         criarProjeto: 'Criar Projeto',
-        projectList: 'Lista de Projetos'
+        projectList: 'Lista de Projetos',
       },
       fields: {
         date: 'Data',
@@ -104,8 +104,11 @@
       },
       layout: {
         menu: {
+          projects: 'Projetos',
           dashboard: 'Dashboard',
-          project: 'Projetos',
+          tasks: 'Tarefas',
+          kanban: 'Kanban',
+          vcs: 'Controle de Versão',
           admin: 'Administração',
           examples: 'Exemplos',
           user: 'Usuários',

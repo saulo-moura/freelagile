@@ -23,7 +23,11 @@
 
       // Array contendo os itens que são mostrados no menu lateral
       vm.itensMenu = [
-        { state: 'app.projects', title: menuPrefix + 'dashboard', icon: 'dashboard', subItens: [] },
+        { state: 'app.projects', title: menuPrefix + 'projects', icon: 'view_module', subItens: [] },
+        { state: 'app.dashboard', title: menuPrefix + 'dashboard', icon: 'dashboard', subItens: [] },
+        { state: 'app.tasks', title: menuPrefix + 'tasks', icon: 'view_list', subItens: [] },
+        { state: 'app.kanban', title: menuPrefix + 'kanban', icon: 'view_column', subItens: [] },
+        { state: 'app.vcs', title: menuPrefix + 'vcs', icon: 'group_work', subItens: [] },
         // Coloque seus itens de menu a partir deste ponto
         {
           state: '#', title: menuPrefix + 'admin', icon: 'settings_applications', profiles: ['admin'],
@@ -41,11 +45,11 @@
        */
       vm.sidenavStyle = {
         top: {
-          'border-bottom': '1px solid ' + getColor('primary'),
-          'background-image': '-webkit-linear-gradient(top, '+getColor('primary-500')+', '+getColor('primary-800')+')'
+          'border-bottom': '1px solid rgb(210, 210, 210)',
+          'background-image': '-webkit-linear-gradient(top, rgb(144, 144, 144), rgb(210, 210, 210))'
         },
         content: {
-          'background-color': getColor('primary-800')
+          'background-color': 'rgb(210, 210, 210)'
         },
         textColor: {
           color: '#FFF'

@@ -16,9 +16,13 @@
 
     //ano atual para ser exibido no rodapé do sistema
     vm.anoAtual = null;
+    vm.activeProject = null;
 
     vm.logout     = logout;
     vm.getImagePerfil = getImagePerfil;
+    vm.setActiveProject = setActiveProject;
+    vm.getActiveProject = getActiveProject;
+    vm.removeActiveProject = removeActiveProject;
 
     activate();
 
@@ -37,8 +41,20 @@
     function getImagePerfil() {
       return (Auth.currentUser && Auth.currentUser.image)
         ? Auth.currentUser.image
-        : Global.imagePath + '/no_avatar.gif';
+        : Global.imagePath + '/logo-vertical.png';
     }
+    
+    function setActiveProject(project) {
+      localStorage.setItem('project', project);
+		}
+    
+    function getActiveProject() {
+      return localStorage.getItem('project');
+    }
+    
+    function removeActiveProject() {
+      localStorage.removeItem('project');
+		}
 
   }
 

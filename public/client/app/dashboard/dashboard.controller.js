@@ -4,17 +4,11 @@
 
   angular
     .module('app')
-    .controller('ProjectsController', ProjectsController);
+    .controller('DashboardController', DashboardController);
 
   /** @ngInject */
   // eslint-disable-next-line max-params
-  function ProjectsController(Global, 
-    $controller, 
-    ProjectsService, 
-    Auth, 
-    RolesService, 
-    UsersService,
-    $state) {
+  function DashboardController(Global, $controller, DashboardsService, ProjectsService, Auth, RolesService, UsersService) {
     var vm = this;
 
     //Attributes Block
@@ -26,13 +20,13 @@
     vm.searchUser = searchUser;
     vm.addUser = addUser;
     vm.removeUser = removeUser;
-    vm.viewProject = viewProject;
     
     vm.roles = {};
 
     function onActivate() { 
-      localStorage.removeItem('project');
-      vm.queryFilters = {user_id: Auth.currentUser.id};
+      var project = localStorage.getItem('project');
+      console.log(project);
+      vm.queryFilters = {project_id: project};
   		RolesService.query().then(function(response){
   			vm.roles = response;
   		});
@@ -66,12 +60,9 @@
       return angular.extend(defaultQueryFilters, vm.queryFilters);    
     }
     
-    function viewProject(project) {
-      $state.go('app.dashboard');
-		}
 
     // instantiate base controller
-    $controller('CRUDController', { vm: vm, modelService: ProjectsService, options: {} });
+    $controller('CRUDController', { vm: vm, modelService: DashboardsService, options: {} });
   }
 
 })();
