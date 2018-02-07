@@ -13,6 +13,7 @@ use App\Http\Requests;
 use App\Http\Controllers\CrudController;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Input;
+use App\Exceptions\BusinessException;
 
 
 class MilestonesController extends CrudController
@@ -72,6 +73,12 @@ class MilestonesController extends CrudController
     }
 
     public function finalize(Request $request) {
+        $milestone = \App\Milestone::find($request->milestone_id);
+        foreach ($milestone->tasks as $task) {
+            if($task->status['slug'] != 'feito') {
+                throw new BusinessException("Não foi possível finalizar a sprint, existem tarefas não finalizadas");
+            }
+        }
         $this->saveAction($request->project_id, 'Update', config('utils.dashboard.finalizedMilestone'));
         return \App\Milestone::where('id', $request->milestone_id)->update(['done' => true]);
     }

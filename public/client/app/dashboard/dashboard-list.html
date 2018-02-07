@@ -1,8 +1,12 @@
 <box box-title="{{ dashboardCtrl.actualProject.name }}">
   <box-toolbar-buttons>
-    <md-button ng-click="dashboardCtrl.goToProject()">
-      <md-icon md-font-set="material-icons" class="md-warn">edit</md-icon>
-      <md-tooltip md-direction="bottom" hide-sm hide-xs>Editar</md-tooltip>
+    <md-button ng-disabled="dashboardCtrl.actualProject.done" ng-click="dashboardCtrl.goToProject()">
+      <md-icon md-font-set="material-icons">edit</md-icon>
+      <md-tooltip md-direction="top" hide-sm hide-xs>Editar</md-tooltip>
+    </md-button>
+    <md-button ng-disabled="dashboardCtrl.actualProject.done" ng-click="dashboardCtrl.finalizeProject()">
+      <md-icon md-font-set="material-icons">done_all</md-icon>
+      <md-tooltip md-direction="top">{{::'views.actions.finalize' | translate}}</md-tooltip>
     </md-button>
   </box-toolbar-buttons>
   <md-list flex>
@@ -28,7 +32,7 @@
 			</md-list-item>
 		</md-list>
     <div ng-if="dashboardCtrl.resources.length === 0" style="text-align:center;">
-      <span>Ainda nÃ£o houveram aÃ§Ãµes neste projeto.</span>
+      <span>Ainda nÃ£o houveram ações neste projeto.</span>
     </div>
   </md-content>
 

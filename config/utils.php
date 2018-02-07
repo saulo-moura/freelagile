@@ -23,6 +23,7 @@ return [
         'destroyRelease' => 'Apagou uma Release',
         'updateReleaseMilestone' => 'Atualizou as sprints de uma Release',
         'finalizedRelease' => 'Finalizou uma Release',
-        'addComment' => 'Adicionou comentário em uma Tarefa'
+        'addComment' => 'Adicionou comentário em uma Tarefa',
+        'finalizedProject' => 'Finalizou o Projeto'
     ]
 ];

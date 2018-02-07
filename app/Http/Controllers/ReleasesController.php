@@ -26,7 +26,7 @@ class ReleasesController extends CrudController {
     }
 
     protected function applyFilters(Request $request, $query) {
-        $query->with(['milestones.tasks']);
+        $query->with(['milestones.tasks', 'project']);
         if ($request->has('project_id')) {
             $query = $query->where('project_id', $request->project_id);
         }

@@ -1,6 +1,6 @@
 <box box-title="{{ ::'views.actions.milestonesList' | translate}}">
   <box-toolbar-buttons>
-    <md-button class="md-icon-button" ng-click="milestonesCtrl.goTo('form')">
+    <md-button ng-disabled="milestonesCtrl.resources[0] && milestonesCtrl.resources[0].project.done" class="md-icon-button" ng-click="milestonesCtrl.goTo('form')">
       <md-icon md-font-set="material-icons" class="md-warn">add</md-icon>
       <md-tooltip md-direction="bottom" hide-sm hide-xs>{{ ::'views.actions.add' | translate}}</md-tooltip>
     </md-button>

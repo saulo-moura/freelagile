@@ -41,7 +41,14 @@
 
   /** @ngInject */
   // eslint-disable-next-line max-params
-  function DashboardController($controller, $state, DashboardsService, ProjectsService, moment) {
+  function DashboardController($controller,
+    $state,
+    $mdDialog,
+    $translate,
+    DashboardsService,
+    ProjectsService,
+    moment,
+    PrToast) {
     var vm = this;
 
     //Attributes Block
@@ -79,6 +86,24 @@
         estimated_cost += (parseFloat(vm.actualProject.hour_value_final) * task.estimated_time);
       });
       return estimated_cost.toLocaleString('Pt-br', { minimumFractionDigits: 2 });
+    }
+
+    vm.finalizeProject = function() {
+      var confirm = $mdDialog.confirm()
+          .title('Finalizar Projeto')
+          .textContent('Tem certeza que deseja finalizar o projeto ' + vm.actualProject.name + '?')
+          .ok('Sim')
+          .cancel('Não');
+
+      $mdDialog.show(confirm).then(function() {
+        ProjectsService.finalize({ project_id: vm.actualProject.id }).then(function() {
+          PrToast.success($translate.instant('messages.projectEndedSuccess'));
+          onActivate();
+          vm.search();
+        }, function() {
+          PrToast.Error($translate.instant('messages.projectEndedError'));
+        });
+      });
     }
 
     // instantiate base controller

@@ -8,7 +8,7 @@
 
   /** @ngInject */
   // eslint-disable-next-line max-params
-  function KanbanController($controller, TasksService, StatusService, $mdDialog, $document) {
+  function KanbanController($controller, TasksService, StatusService, PrToast, $mdDialog, $document) {
     //Attributes Block
     var vm = this;
     var fields = [
@@ -21,6 +21,7 @@
     vm.onActivate = function() {
       vm.project = localStorage.getItem('project');
       vm.queryFilters = { project_id: vm.project };
+      vm.isMoved = false;
     }
 
     vm.applyFilters = function(defaultQueryFilters) {
@@ -33,7 +34,7 @@
 
       StatusService.query().then(function(response) {
         response.forEach(function(status) {
-          columns.push({ text: status.name, dataField: status.slug });
+          columns.push({ text: status.name, dataField: status.slug, collapsible: false });
         });
 
         if (vm.resources.length > 0) {
@@ -70,32 +71,45 @@
     }
 
     vm.onItemMoved = function(event) {
-      TasksService.updateTaskByKanban({
-        project_id: vm.project,
-        id: event.args.itemId,
-        oldColumn: event.args.oldColumn,
-        newColumn: event.args.newColumn }).then(function() {
-
-        });
+      vm.isMoved = true;
+      TasksService.query({ task_id: event.args.itemId }).then(function(response) {
+        if ((response[0].milestone && response[0].milestone.done) || response[0].project.done) {
+          PrToast.error('Não é possível modificar o status de uma tarefa finalizada.');
+          vm.afterSearch();
+          vm.isMoved = false;
+        } else {
+          TasksService.updateTaskByKanban({
+            project_id: vm.project,
+            id: event.args.itemId,
+            oldColumn: event.args.oldColumn,
+            newColumn: event.args.newColumn }).then(function() {
+              vm.isMoved = false;
+            });
+        }
+      });
     }
 
     vm.onItemClicked = function(event) {
-      TasksService.query({ task_id: event.args.itemId }).then(function(response) {
-        vm.taskInfo = response[0];
-        $mdDialog.show({
-          parent: angular.element($document.body),
-          templateUrl: 'client/app/kanban/task-info-dialog/taskInfo.html',
-          controllerAs: 'taskInfoCtrl',
-          controller: 'TaskInfoController',
-          bindToController: true,
-          locals: {
-            task: vm.taskInfo,
-            close: close
-          },
-          escapeToClose: true,
-          clickOutsideToClose: true
+      if (!vm.isMoved) {
+        TasksService.query({ task_id: event.args.itemId }).then(function(response) {
+          vm.taskInfo = response[0];
+          $mdDialog.show({
+            parent: angular.element($document.body),
+            templateUrl: 'client/app/kanban/task-info-dialog/taskInfo.html',
+            controllerAs: 'taskInfoCtrl',
+            controller: 'TaskInfoController',
+            bindToController: true,
+            locals: {
+              task: vm.taskInfo,
+              close: close
+            },
+            escapeToClose: true,
+            clickOutsideToClose: true
+          });
         });
-      });
+      } else {
+        vm.isMoved = false;
+      }
     }
 
     function close() {

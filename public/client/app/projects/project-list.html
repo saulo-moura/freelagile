@@ -6,7 +6,7 @@
 		</md-button>
 	</box-toolbar-buttons>
 	<md-content layout="row" flex layout-wrap class="md-padding" ng-if="projectsCtrl.resources.length > 0">
-		<md-card ng-repeat="project in projectsCtrl.resources" flex="45">
+		<md-card flex-xs flex-gt-xs="45" layout="column" ng-repeat="project in projectsCtrl.resources">
 			<md-card-title>
 				<md-card-title-text>
 					<span class="md-headline">{{ ::project.name }}</span>
@@ -20,7 +20,7 @@
 					<md-icon md-font-set="material-icons" class="md-warn">remove_red_eye</md-icon>
 					<md-tooltip md-direction="bottom" hide-sm hide-xs>Visualizar</md-tooltip>
 				</md-button>
-				<md-button ng-click="projectsCtrl.remove(project)">
+				<md-button ng-disabled="project.done" ng-click="projectsCtrl.remove(project)">
 					<md-icon md-font-set="material-icons" class="md-warn">delete</md-icon>
 					<md-tooltip md-direction="bottom" hide-sm hide-xs>Apagar</md-tooltip>
 				</md-button>

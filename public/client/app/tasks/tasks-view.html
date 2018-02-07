@@ -52,7 +52,7 @@
   </fieldset>
 </box>
 <box box-title="Comentários">
-  <div layout="row">
+  <div layout="row" ng-if="!tasksCtrl.resource.milestone.done && !tasksCtrl.resource.project.done">
     <md-input-container class="md-block" flex>
       <textarea
         placeholder="Comentário"
@@ -62,7 +62,7 @@
     </md-input-container>
     <md-button flex=5 class="md-primary md-raised" ng-click="tasksCtrl.saveComment()">{{::'views.actions.save' | translate}}</md-button>
   </div>
-  <div layout="column">
+  <div layout="column" ng-if="tasksCtrl.resource.comments.length > 0">
     <md-list ng-repeat="comment in tasksCtrl.resource.comments" ng-if="!comment.comment_id" flex>
       <md-list-item class="md-2-line md-long-text" >
         <img src="{{ comment.user.image }}" class="md-avatar" alt="{{comment.user.name}}" />
@@ -70,12 +70,12 @@
           <h3>{{ comment.user.name }}</h3>
           <p>{{ comment.description }}</p>
           <h5 class="md-secondary">{{ tasksCtrl.fixDate(comment.created_at) | elapsed }}</h5>
-          <md-button class="md-icon-button md-secondary" ng-click="comment.showAnswer = comment.showAnswer ? false : true">
+          <md-button ng-disabled="tasksCtrl.resource.milestone.done || tasksCtrl.resource.project.done" class="md-icon-button md-secondary" ng-click="comment.showAnswer = comment.showAnswer ? false : true">
             <md-icon md-font-set="material-icons"
-              class="md-dark">reply</md-icon>
+              class="md-warn">reply</md-icon>
             <md-tooltip md-direction="top">{{::'views.actions.reply' | translate}}</md-tooltip>
           </md-button>
-          <md-button class="md-icon-button md-secondary" ng-if="comment.user.id === tasksCtrl.currentUser.id" ng-click="tasksCtrl.removeComment(comment)">
+          <md-button ng-disabled="tasksCtrl.resource.milestone.done || tasksCtrl.resource.project.done" class="md-icon-button md-secondary" ng-if="comment.user.id === tasksCtrl.currentUser.id" ng-click="tasksCtrl.removeComment(comment)">
             <md-icon md-font-set="material-icons"
               class="md-warn">delete</md-icon>
             <md-tooltip md-direction="top">{{::'views.actions.remove' | translate}}</md-tooltip>
@@ -108,5 +108,8 @@
         <md-button flex=5 class="md-primary md-raised" ng-click="tasksCtrl.saveComment(comment)">{{::'views.actions.save' | translate}}</md-button>
       </div>
     </md-list>
+  </div>
+  <div layout="row" layout-align="center center" ng-if="tasksCtrl.resource.comments.length === 0" flex>
+    Não há comentários
   </div>
 </box>

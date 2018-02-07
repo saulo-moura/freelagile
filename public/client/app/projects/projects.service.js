@@ -8,7 +8,11 @@
   /** @ngInject */
   function ProjectsService(serviceFactory) {
     return serviceFactory('projects', {
-      actions: { },
+      actions: {
+        finalize: {
+          method: 'POST',
+          url: 'finalize'
+        } },
       instance: { }
     });
   }

@@ -42,10 +42,10 @@
 
       $mdDialog.show(confirm).then(function() {
         ReleasesService.finalize({ project_id: vm.project, release_id: release.id }).then(function() {
-          PrToast.success($translate.instant('messages.sprintEndedSuccess'));
+          PrToast.success($translate.instant('messages.releaseEndedSuccess'));
           vm.search();
         }, function() {
-          PrToast.Error($translate.instant('messages.sprintEndedError'));
+          PrToast.Error($translate.instant('messages.releaseEndedError'));
         });
       });
     }

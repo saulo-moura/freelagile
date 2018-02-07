@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 // preflight to CORS
 Route::options('{all}', function () {
-    //Trata as requisições OPTIONS preflight
+    //Trata as requisiÃ§Ãµes OPTIONS preflight
     return \Response::json('{"method":"OPTIONS"}', 200, \Prodeb::getCORSHeaders());
 })->where('all', '.*');
 
@@ -43,6 +43,8 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
         Route::resource('users', 'UsersController', ['except' => ['updateProfile', 'store']]);
 
         Route::resource('projects', 'ProjectsController');
+        Route::post('projects/finalize', 'ProjectsController@finalize');
+
         Route::resource('roles', 'RolesController', ['only' => ['index']]);
         Route::resource('dashboards', 'DashboardsController');
         Route::resource('status', 'StatusController');

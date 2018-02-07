@@ -27,7 +27,8 @@ class Project extends BaseModel {
         'repo_github',
         'hour_value_developer',
         'hour_value_client',
-        'hour_value_final'
+        'hour_value_final',
+        'done'
     ];
 
     public function developer() {
@@ -44,5 +45,9 @@ class Project extends BaseModel {
 
     public function tasks() {
         return $this->hasMany(Task::class);
+    }
+
+    public function releases() {
+        return $this->hasMany(Release::class);
 	}
 }

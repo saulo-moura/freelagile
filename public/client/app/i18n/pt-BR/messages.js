@@ -22,6 +22,10 @@
       sprintEndedError: 'Erro ao finalizar a sprint',
       successSignUp: 'Cadastro realizado com sucesso. Um e-mail foi enviado com seus dados de login',
       errorsSignUp: 'Houve um erro ao realizar o seu cadastro. Tente novamente mais tarde!',
+      releasetEndedSuccess: 'Release finalizada com sucesso',
+      releaseEndedError: 'Erro ao finalizar a release',
+      projectEndedSuccess: 'Projeto finalizado com sucesso',
+      projectEndedError: 'Erro ao finalizar o projeto',
       validate: {
         fieldRequired: 'O campo {{field}} é obrigratório.'
       },

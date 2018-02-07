@@ -17,15 +17,13 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 
 class ProjectsController extends CrudController {
-    public function __construct() {
-    }
 
     protected function getModel() {
         return Project::class;
     }
 
     protected function applyFilters(Request $request, $query) {
-		$query->with(['developer.projectRoles', 'client.projectRoles', 'stakeholder.projectRoles']);
+		$query->with(['developer.projectRoles', 'client.projectRoles', 'stakeholder.projectRoles', 'releases']);
 
         if ($request->has('user_id')) {
             $query->where('dev_id', $request->user_id)
@@ -158,5 +156,16 @@ class ProjectsController extends CrudController {
         ];
 
         return $rules;
+    }
+
+    public function finalize(Request $request) {
+        $project = \App\Project::find($request->project_id);
+        foreach ($project->releases as $release) {
+            if(!$release->done) {
+                throw new BusinessException("Não foi possível finalizar o projeto, existem releases não finalizadas");
+            }
+        }
+        $this->saveAction($request->project_id, 'Update', config('utils.dashboard.finalizedProject'));
+        return \App\Project::where('id', $request->project_id)->update(['done' => true]);
     }
 }
