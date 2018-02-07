@@ -10,15 +10,15 @@
   <header class="nav-header" ng-style="::menuCtrl.sidenavStyle.top">
     <a class="logo" href="/">
       <div class="principal"
-        ng-style="{'background-image':'url(' + appCtrl.getImagePerfil() + ')'}">
+        ng-style="{'background-image':'url(' + appCtrl.getLogoMenu() + ')'}">
       </div>
 		</a>
   </header>
 
-  <md-content layout-padding flex style="text-transform:uppercase;" ng-style="::menuCtrl.sidenavStyle.content">
+  <md-content flex style="text-transform:uppercase;margin-top:-20px;" ng-style="::menuCtrl.sidenavStyle.content">
     <ul class="menu-sidenav">
-      <li ng-repeat="item in menuCtrl.itensMenu" 
-          ng-style="::menuCtrl.sidenavStyle.lineBottom" 
+      <li ng-repeat="item in menuCtrl.itensMenu"
+          ng-style="::menuCtrl.sidenavStyle.lineBottom"
           ng-if="!item.profiles || (item.profiles && auth.currentUser.hasProfile(item.profiles, item.allProfiles))"
           style="text-align:center;">
         <md-menu md-offset="0 55">
@@ -31,6 +31,9 @@
               {{::item.icon}}
             </md-icon>
           </md-button>
+          <md-menu-content>
+            <md-menu-item></md-menu-item>
+          </md-menu-content>
           <span style="font-size:10px;text-align:center;">{{::item.title | translate}}</span>
 				</md-menu>
       </li>

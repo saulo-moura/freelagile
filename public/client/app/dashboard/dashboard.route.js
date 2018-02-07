@@ -18,7 +18,8 @@
         url: '/dashboards',
         templateUrl: Global.clientPath + '/dashboard/dashboard.html',
         controller: 'DashboardController as dashboardCtrl',
-        data: { needAuthentication: true}
+        data: { needAuthentication: true },
+        obj: { resource: null }
       });
   }
 }());

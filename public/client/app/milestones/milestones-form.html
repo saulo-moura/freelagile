@@ -1,0 +1,54 @@
+<form name="milestonesCtrl.formMilestone" ng-submit="milestonesCtrl.save()">
+  <box box-title="{{::'views.titles.register' | translate}}">
+    <box-toolbar-buttons>
+      <md-button class="md-icon-button" ng-click="milestonesCtrl.goTo('list')">
+        <md-icon md-font-set="material-icons" class="md-warn">view_list</md-icon>
+        <md-tooltip md-direction="bottom">{{ ::'views.actions.list' | translate}}</md-tooltip>
+      </md-button>
+    </box-toolbar-buttons>
+    <div layout="row">
+      <md-input-container class="md-block" flex>
+        <input type="text" placeholder="Título" ng-model="milestonesCtrl.resource.title" required>
+      </md-input-container>
+    </div>
+		<div layout="row">
+      <md-input-container class="md-block" flex>
+        <textarea required
+          placeholder="Descrição"
+          ng-model="milestonesCtrl.resource.description"
+          ng-attr-rows="{{row || '3'}}" >
+        </textarea>
+      </md-input-container>
+    </div>
+		<div layout="row">
+      <md-input-container class="md-block" flex>
+        <label>Data Estimada para Início</label>
+        <md-datepicker required
+          onkeydown="return false"
+          md-open-on-focus
+          name="date_begin"
+          ng-model="milestonesCtrl.resource.date_begin"></md-datepicker>
+        <div ng-messages="milestonesCtrl.formMilestone.date_begin.$error">
+          <div ng-message="valid">Data inválida.</div>
+          <div ng-message="required">A data deve ser informada.</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block" flex>
+        <label>Data Estimada para Fim</label>
+        <md-datepicker required
+          onkeydown="return false"
+          md-open-on-focus
+          name="date_end"
+          ng-model="milestonesCtrl.resource.date_end"></md-datepicker>
+        <div ng-messages="milestonesCtrl.formMilestone.date_end.$error">
+          <div ng-message="valid">Data inválida.</div>
+          <div ng-message="required">A data deve ser informada.</div>
+        </div>
+      </md-input-container>
+		</div>
+    <box-footer-buttons>
+      <md-button class="md-primary md-raised" type="submit">{{::'views.actions.save' | translate}}</md-button>
+      <md-button class="md-raised" ng-click="milestonesCtrl.cleanForm()">{{::'views.actions.clear' | translate}}</md-button>
+    </box-footer-buttons>
+  </box>
+</form>

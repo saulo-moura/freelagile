@@ -1,0 +1,79 @@
+<box box-title="{{ ::releasesCtrl.resource.title }}">
+  <box-toolbar-buttons>
+    <md-button class="md-icon-button" ng-click="releasesCtrl.goTo('list')">
+      <md-icon md-font-set="material-icons" class="md-warn">view_list</md-icon>
+      <md-tooltip md-direction="bottom">{{ ::'views.actions.list' | translate}}</md-tooltip>
+    </md-button>
+  </box-toolbar-buttons>
+  <fieldset disabled style="border:0px;">
+    <div layout="row">
+      <md-input-container class="md-block" flex>
+        <textarea
+          placeholder="Descrição"
+          ng-model="releasesCtrl.resource.description"
+          ng-attr-rows="{{row || '3'}}" >
+        </textarea>
+      </md-input-container>
+      <md-input-container ng-if="releasesCtrl.resource.release_date" class="md-block" flex=30>
+        <label>Data de Entrega</label>
+        <md-datepicker
+          onkeydown="return false"
+          md-open-on-focus
+          ng-model="releasesCtrl.resource.release_date"></md-datepicker>
+      </md-input-container>
+      <md-input-container ng-if="!releasesCtrl.resource.release_date" class="md-block" flex=30>
+        <input type="text" placeholder="Data de Entrega" value="Não Entregue">
+      </md-input-container>
+    </div>
+  </fieldset>
+</box>
+<box box-title="Sprints da Release">
+  <md-input-container ng-if="!releasesCtrl.resource.done" class="md-block" flex>
+    <md-autocomplete class="md-input-has-placeholder"
+      md-min-length="3" md-no-cache="true" md-selected-item="releasesCtrl.milestone" md-search-text="releasesCtrl.milestoneTerm"
+      md-items="milestone in releasesCtrl.searchMilestone(releasesCtrl.milestoneTerm)" md-item-text="milestone.title"
+      md-clear-button="true" md-floating-label="Adicionar Sprint" md-selected-item-change="releasesCtrl.onMilestoneChange()">
+      <md-item-template>
+          <span md-highlight-text="releasesCtrl.milestoneTerm" md-highlight-flags="^i">{{ milestone.title }}</span>
+      </md-item-template>
+      <md-not-found>
+          Nenhuma sprint encontrada.
+      </md-not-found>
+    </md-autocomplete>
+  </md-input-container>
+  <md-table-container>
+    <table md-table class="condensed">
+      <thead md-head>
+        <tr md-row>
+          <th md-column>{{ ::'attributes.milestone.title' | translate}}</th>
+          <th md-column>{{ ::'attributes.milestone.description' | translate}}</th>
+          <th md-column>{{ ::'attributes.milestone.estimated_time' | translate}}</th>
+          <th md-column>{{ ::'attributes.release.tasks' | translate}}</th>
+          <th md-column class="md-text-center">{{ ::'views.fields.action' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody md-body ng-repeat="milestone in releasesCtrl.resource.milestones" ng-if="releasesCtrl.resource.milestones.length > 0">
+        <tr md-row ng-repeat="task in milestone.tasks">
+          <td ng-if="$first" rowspan="{{ milestone.tasks.length }}" md-cell>{{ milestone.title}}</td>
+          <td ng-if="$first" rowspan="{{ milestone.tasks.length }}" md-cell>{{ milestone.description}}</td>
+          <td ng-if="$first" rowspan="{{ milestone.tasks.length }}" md-cell>{{ releasesCtrl.estimatedTime(milestone) + ' dias' }}</td>
+          <td md-cell>{{ task.title }}</td>
+          <td ng-if="$first" rowspan="{{ milestone.tasks.length }}" md-cell class="md-text-center">
+            <md-button ng-disabled="releasesCtrl.resource.done" class="md-icon-button" ng-click="releasesCtrl.removeMilestone(milestone)">
+              <md-icon md-font-set="material-icons" class="md-warn">delete</md-icon>
+              <md-tooltip md-direction="top">{{::'views.actions.remove' | translate}}</md-tooltip>
+            </md-button>
+          </td>
+        </tr>
+        <tr md-row ng-if="releasesCtrl.resource.milestones.length == 0">
+          <td md-cell colspan="7">
+            <div layout="row" layout-align="center center">{{::'messages.notFound' | translate}}</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </md-table-container>
+  <box-footer-buttons>
+    <md-button ng-if="!releasesCtrl.resource.done" class="md-primary md-raised" ng-click="releasesCtrl.saveMilestones()">{{::'views.actions.save' | translate}}</md-button>
+  </box-footer-buttons>
+</box>

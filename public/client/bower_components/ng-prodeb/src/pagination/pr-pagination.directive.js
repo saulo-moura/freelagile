@@ -44,7 +44,7 @@
           <section layout="row" layout-align="center center"
             ng-show="paginator.total > 0">
             <md-button class="md-raised" style="cursor: default;"
-              ng-disabled="true" md-colors="::{background:'accent'}">Total: {{paginator.total}} registro(s)</md-button>
+              ng-disabled="true" md-colors="::{background:'default-accent'}">Total: {{paginator.total}} registro(s)</md-button>
           </section>
         </section>`
     };

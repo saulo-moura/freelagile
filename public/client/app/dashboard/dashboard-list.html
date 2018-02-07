@@ -1,22 +1,38 @@
+<box box-title="{{ dashboardCtrl.actualProject.name }}">
+  <box-toolbar-buttons>
+    <md-button ng-click="dashboardCtrl.goToProject()">
+      <md-icon md-font-set="material-icons" class="md-warn">edit</md-icon>
+      <md-tooltip md-direction="bottom" hide-sm hide-xs>Editar</md-tooltip>
+    </md-button>
+  </box-toolbar-buttons>
+  <md-list flex>
+    <md-list-item class="md-2-line">
+      <div class="md-list-item-text" layout="column">
+        <h4>{{ dashboardCtrl.actualProject.description }}</h4>
+        <h4 class="md-secondary">Valor Total R$ {{ dashboardCtrl.totalCost() }}</h4>
+      </div>
+    </md-list-item>
+  </md-list>
+</box>
+
 <box box-title="{{ ::'views.titles.dashboard' | translate}}">
-	<box-toolbar-buttons>
-		<md-button class="md-icon-button" ng-click="dashboardCtrl.goTo('form')">
-			<md-icon md-font-set="material-icons" class="md-warn">add</md-icon>
-			<md-tooltip md-direction="bottom" hide-sm hide-xs>{{ ::'views.actions.criarProjeto' | translate}}</md-tooltip>
-		</md-button>
-	</box-toolbar-buttons>
 	<md-content>
 		<md-list flex>
 			<md-list-item class="md-2-line" ng-repeat="resource in dashboardCtrl.resources" ng-if="dashboardCtrl.resources.length > 0">
-				<img src="{{resource.user.image ? resource.user.image : 'client/images/no_avatar.gif'}}" class="md-avatar" alt="{{resource.user.name}}" />
+				<img src="{{ resource.user.image }}" class="md-avatar" alt="{{resource.user.name}}" />
 				<div class="md-list-item-text" layout="column">
 				<h3>{{ resource.user.name }}</h3>
-				<h4>{{ (resource.action == 'Store' ? 'Criou' : (resource.action == 'Update' ? 'Alterou' : 'Deletou')) + ' ' + resource.description }}</h4>
+        <h4>{{ resource.description }}</h4>
+        <h4 class="md-secondary">{{ dashboardCtrl.fixDate(resource.created_at) | elapsed }}</h4>
 				</div>
 			</md-list-item>
 		</md-list>
-	</md-content>
-	<div ng-if="dashboardCtrl.resources.length === 0" style="text-align:center;">
-		<span>Ainda não houveram ações neste projeto.</span>
-	</div>
+    <div ng-if="dashboardCtrl.resources.length === 0" style="text-align:center;">
+      <span>Ainda nÃ£o houveram aÃ§Ãµes neste projeto.</span>
+    </div>
+  </md-content>
+
+  <md-card-actions layout="row" layout-align="end center">
+    <pr-pagination paginator="dashboardCtrl.paginator"></pr-pagination>
+  </md-card-actions>
 </box>

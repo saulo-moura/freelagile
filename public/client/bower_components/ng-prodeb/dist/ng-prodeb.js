@@ -7,7 +7,7 @@
 
   //inicia o modulo da biblioteca e define as dependências
 
-  angular.module('ngProdeb', ['ngMaterial', 'md.data.table', 'ngMaterialDatePicker', 'angularFileUpload']);
+  angular.module('ngProdeb', ['ngMaterial', 'md.data.table', 'ngMaterialDatePicker', 'text-mask', 'angularFileUpload']);
 })();
 'use strict';
 
@@ -47,7 +47,7 @@
   //encapsula as bibliotecas externas para serem carregadas como uma dependência
   //do angular.
 
-  angular.module('ngProdeb').constant('lodash', _).constant('alasql', alasql).constant('moment', moment);
+  angular.module('ngProdeb').constant('lodash', _).constant('_', _).constant('alasql', alasql).constant('moment', moment);
 })();
 'use strict';
 
@@ -77,39 +77,92 @@
    */
   /** @ngInject */
 
-  angular.module('ngProdeb').directive('prDateTimePicker', ["moment", function (moment) {
+  angular.module('ngProdeb').component('prDateTimePicker', {
+    template: '\n          <md-input-container class="md-block" flex="$ctrl.flex">\n            <label for="$ctrl.id">{{$ctrl.label}}</label>\n            <md-icon md-font-set="material-icons" class="md-warn"\n              ng-style="$ctrl.style.label"\n              ng-click="$ctrl.show(true)"\n              md-colors="$ctrl.colors.icon">date_range</md-icon>\n            <input\n              id="$ctrl.id"\n              ng-model="$ctrl.ngModel"\n              ng-click="$ctrl.show(false)"\n              ng-readonly="$ctrl.clickToShowInField"\n              text-mask="$ctrl.maskConfig"\n              type="text">\n            </input>\n          </md-input-container>\n        ',
+    controller: ['mdcDateTimeDialog', 'moment', function (mdcDateTimeDialog, moment) {
+      var ctrl = this;
 
-    function buildDatePicker(attr) {
-      var autoOk = angular.isUndefined(attr.autoOk) || attr.autoOk === 'true';
-      var withTime = angular.isDefined(attr.withTime) && attr.withTime === 'true';
-      var withMinutesPicker = angular.isUndefined(attr.withMinutesPicker) || attr.withMinutesPicker === 'true';
-      var format = attr.format || (withTime ? 'DD/MM/YYYY HH:mm' : 'DD/MM/YYYY');
+      ctrl.$onInit = function () {
+        ctrl.style = {
+          label: {
+            cursor: 'pointer'
+          }
+        };
 
-      /**
-       * Constroi o template do componente de escolha de data
-       */
-      return '\n            <input\n              id="' + attr.id + '"\n              mdc-datetime-picker\n              ng-model="ngModel"\n              show-todays-date\n              date="true"\n              time="' + withTime + '"\n              minutes="' + withMinutesPicker + '"\n              cancel-text="Cancelar"\n              today-text="Hoje"\n              auto-ok="' + autoOk + '"\n              format="' + format + '"\n              min-date="' + (angular.isDefined(attr.minDate) ? moment(attr.minDate).format(format) : '') + '"\n              max-date="\'' + (angular.isDefined(attr.maxDate) ? moment(attr.maxDate).format(format) : '') + '\'">\n            </input>\n        ';
-    }
+        ctrl.autoOk = setDefaultToTrue(ctrl.autoOk);
+        ctrl.withMinutesPicker = setDefaultToTrue(ctrl.withMinutesPicker);
+        ctrl.clickToShowInField = setDefaultToTrue(ctrl.clickToShowInField);
+        ctrl.format = ctrl.format || ctrl.withTime ? 'DD/MM/YYYY HH:mm' : 'DD/MM/YYYY';
 
-    return {
-      template: function template(element, attr) {
-        var template = buildDatePicker(attr);
+        ctrl.defineMask();
+        ctrl.defineColors();
+      };
 
-        return template;
-      },
-      scope: {
-        ngModel: '=',
-        layout: '=',
-        id: '=',
-        withTime: '=?',
-        withMinutesPicker: '=?',
-        autoOk: '=?',
-        format: '=?',
-        minDate: '=?',
-        maxDate: '=?'
+      ctrl.defineColors = function () {
+        ctrl.colors = {
+          icon: {
+            color: ctrl.iconColor ? ctrl.iconColor : 'default-grey-900'
+          }
+        };
+      };
+
+      ctrl.defineMask = function () {
+        if (angular.isUndefined(ctrl.mask)) {
+          ctrl.mask = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
+
+          if (ctrl.withTime) {
+            ctrl.mask = ctrl.mask.concat([' ', /\d/, /\d/, ':', /\d/, /\d/]);
+          }
+        }
+
+        ctrl.maskConfig = {
+          mask: ctrl.mask,
+          guide: false
+        };
+      };
+
+      function setDefaultToTrue(value) {
+        return angular.isUndefined(value) || value;
       }
-    };
-  }]);
+
+      ctrl.show = function (fromIcon) {
+        if (ctrl.clickToShowInField || fromIcon) {
+          mdcDateTimeDialog.show({
+            maxDate: angular.isUndefined(ctrl.maxDate) ? null : ctrl.maxDate,
+            format: ctrl.format,
+            minutes: ctrl.withMinutesPicker,
+            currentDate: ctrl.ngModel,
+            autoOk: ctrl.autoOk,
+            cancelText: 'Cancelar',
+            todayText: 'Hoje',
+            time: ctrl.withTime,
+            date: true
+          }).then(function (date) {
+            ctrl.ngModel = moment(date).format(ctrl.format);
+          });
+        }
+      };
+    }],
+    require: {
+      ngModelCtrl: 'ngModel'
+    },
+    bindings: {
+      label: '=',
+      minDate: '=',
+      maxDate: '=',
+      ngModel: '<',
+      id: '<',
+      iconColor: '<',
+      withTime: '<',
+      withMask: '<',
+      withMinutesPicker: '<',
+      clickToShowInField: '<',
+      autoOk: '<',
+      format: '<',
+      flex: '<',
+      mask: '<'
+    }
+  });
 })();
 'use strict';
 
@@ -127,7 +180,8 @@
     return {
       custom: custom,
       confirm: confirm,
-      close: close
+      close: close,
+      alert: alert
     };
 
     /**
@@ -162,6 +216,41 @@
       }
 
       return angular.merge(defaultOptions, config);
+    }
+
+    /**
+     * Método que exibe o dialog de confirmação na tela depois que o build e invocado
+     * de uma determinada ação
+     * @returns {promisse} - Retorna uma promisse que pode ou não ser resolvida
+     */
+    function alert(config) {
+
+      var options = build(config);
+
+      options.locals = {
+        title: angular.isDefined(options.title) ? options.title : 'Exception',
+        description: angular.isDefined(options.description) ? options.description : '',
+        okBgColor: angular.isDefined(options.okBgColor) ? options.okBgColor : 'red-A700',
+        toolbarBgColor: angular.isDefined(options.toolbarBgColor) ? options.toolbarBgColor : 'red-A700'
+      };
+
+      options.template = ' <md-dialog flex=50 aria-label="' + options.locals.title + '">\n              <md-toolbar md-scroll-shrink md-colors="::{background:\'default-{{ctrl.toolbarBgColor}}\'}">\n                <div class="md-toolbar-tools">\n                  <h3>\n                    <span>' + options.locals.title + '</span>\n                  </h3>\n                </div>\n              </md-toolbar>\n              <md-dialog-content layout-margin>\n                <p>' + options.locals.description + '</p>\n              </md-dialog-content>\n              <md-dialog-actions>\n                <md-button class="md-raised"\n                  md-colors="::{background:\'default-{{ctrl.okBgColor}}\'}"\n                  ng-click="ctrl.okAction()">Ok</md-button>\n              </md-dialog-actions>\n            </md-dialog>\n          ';
+
+      options.controller = ['$mdDialog', function ($mdDialog) {
+        var vm = this;
+
+        vm.okAction = okAction;
+
+        function okAction() {
+          $mdDialog.hide();
+        }
+      }];
+
+      options.controllerAs = 'ctrl';
+      options.clickOutsideToClose = false;
+      options.hasBackdrop = true;
+
+      return $mdDialog.show(options);
     }
 
     /**
@@ -499,7 +588,7 @@
       scope: {
         paginator: '='
       },
-      template: '\n        <section class="pr-pagination" layout="row">\n          <section layout="row" layout-align="center center" layout-wrap\n            style="margin-right: 10px"\n            ng-show="paginator.numberOfPages > 1">\n              <md-button class="md-raised"\n                ng-disabled="paginator.currentPage === 1"\n                ng-click="paginator.goToPage(1)">{{paginator.options.labels.first}}</md-button>\n              <md-button class="md-raised"\n                ng-disabled="paginator.currentPage === 1"\n                ng-click="paginator.previousPage()">{{paginator.options.labels.previous}}</md-button>\n              <md-button class="md-raised"\n                ng-repeat="n in paginator.pages(s)"\n                ng-class="{\'md-primary\': n == paginator.currentPage}"\n                ng-click="paginator.goToPage(n)"\n                ng-bind="n">1</md-button>\n            <md-button class="md-raised"\n              ng-disabled="paginator.currentPage == paginator.numberOfPages"\n              ng-click="paginator.nextPage()">{{paginator.options.labels.next}}</md-button>\n            <md-button class="md-raised"\n              ng-disabled="paginator.currentPage == paginator.numberOfPages"\n              ng-click="paginator.goToPage(paginator.numberOfPages)">{{paginator.options.labels.last}}</md-button>\n          </section>\n          <section layout="row" layout-align="center center"\n            ng-show="paginator.total > 0">\n            <md-button class="md-raised" style="cursor: default;"\n              ng-disabled="true" md-colors="::{background:\'accent\'}">Total: {{paginator.total}} registro(s)</md-button>\n          </section>\n        </section>'
+      template: '\n        <section class="pr-pagination" layout="row">\n          <section layout="row" layout-align="center center" layout-wrap\n            style="margin-right: 10px"\n            ng-show="paginator.numberOfPages > 1">\n              <md-button class="md-raised"\n                ng-disabled="paginator.currentPage === 1"\n                ng-click="paginator.goToPage(1)">{{paginator.options.labels.first}}</md-button>\n              <md-button class="md-raised"\n                ng-disabled="paginator.currentPage === 1"\n                ng-click="paginator.previousPage()">{{paginator.options.labels.previous}}</md-button>\n              <md-button class="md-raised"\n                ng-repeat="n in paginator.pages(s)"\n                ng-class="{\'md-primary\': n == paginator.currentPage}"\n                ng-click="paginator.goToPage(n)"\n                ng-bind="n">1</md-button>\n            <md-button class="md-raised"\n              ng-disabled="paginator.currentPage == paginator.numberOfPages"\n              ng-click="paginator.nextPage()">{{paginator.options.labels.next}}</md-button>\n            <md-button class="md-raised"\n              ng-disabled="paginator.currentPage == paginator.numberOfPages"\n              ng-click="paginator.goToPage(paginator.numberOfPages)">{{paginator.options.labels.last}}</md-button>\n          </section>\n          <section layout="row" layout-align="center center"\n            ng-show="paginator.total > 0">\n            <md-button class="md-raised" style="cursor: default;"\n              ng-disabled="true" md-colors="::{background:\'default-accent\'}">Total: {{paginator.total}} registro(s)</md-button>\n          </section>\n        </section>'
     };
   }
 })();
@@ -722,14 +811,14 @@
 (function () {
   'use strict';
 
-  Toast.$inject = ["$mdToast", "lodash", "$log"];
+  Toast.$inject = ["$mdToast", "lodash", "$log", "PrDialog"];
   angular.module('ngProdeb').factory('PrToast', Toast);
 
   /**
    * Serviço que encapsula e amplia os serviços do angular toastr
    */
   /** @ngInject */
-  function Toast($mdToast, lodash, $log) {
+  function Toast($mdToast, lodash, $log, PrDialog) {
     var obj = {
       success: success,
       error: error,
@@ -777,23 +866,74 @@
       return toast(msg, 'green', options);
     }
 
-    function error(errors, options) {
+    /**
+     * Exibe um toast com as mensagens de erro referente a validação.
+     *
+     * @param {string | object | array} errors - String, Objeto ou Array contendo as mensagens de erro.
+     * Suporta diferente formatos:
+     *
+     * Para validações de atributos
+     *   {
+     *    "nome-do-atributo1": ["mensagem de erro 1", "mensagem de erro 2"],
+     *    "nome-do-atributo2": ["mensagem de erro 1"]
+     *   }
+     *
+     * ou - Para várias mensagens simples
+     *   [
+     *    'Mensagem 1',
+     *    'Mensagem 2'
+     *   ]
+     *
+     *  ou - Para 1 única mensagem
+     *   "Mensagem 1"
+     *
+     *  ou - Para exceptions - Neste caso usa um PrDialog
+     *   {
+     *     message: 'Exception Desconhecida',
+     *     source: 'StarterPack.Controllers.SupportController.langs()',
+     *     line: 21,
+     *     stacktrace: 'at StarterPack.Controllers.SupportController.langs() in /home/workspa...'
+     *   }
+     * @param {string} msg - Opcional. Mensagem de erro.
+     */
+    function error(errors) {
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
       //se for um objeto contendo os erros, itera sobre os atributos do mesmo
       //para exibir a(s) mensagem(ns) de erro atribuidas
       if (angular.isObject(errors)) {
         var errorStr = '';
 
-        // exibe as mensagem de erro contidas no objeto
-        //  {
-        //    "name": ["o campo nome é obrigatório"],
-        //    "password": [
-        //      "A confirmação de senha não confere.",
-        //      "senha deve ter no mínimo 6 caracteres."
-        //    ]
-        //  }
-        lodash.forIn(errors, function (keyErrors) {
-          errorStr += buildArrayMessage(keyErrors);
-        });
+        if (checkErrorIsUnknownException(errors)) {
+          errorStr += 'Message: ' + errors.message + '<br/>Source: ' + errors.source + '<br/>Line: ' + errors.line + '<br/><br/>StackTrace: ';
+
+          var steps = errors.stacktrace.split(' at ');
+
+          if (steps.length > 0) {
+            steps.forEach(function (step, index) {
+              errorStr += '<br/>Step ' + (index + 1) + ': ' + step;
+            });
+          } else {
+            errorStr += errors.stacktrace;
+          }
+
+          return PrDialog.alert({
+            title: 'Exception',
+            description: errorStr
+          });
+        } else {
+          // exibe as mensagem de erro contidas no objeto
+          //  {
+          //    "name": ["o campo nome é obrigatório"],
+          //    "password": [
+          //      "A confirmação de senha não confere.",
+          //      "senha deve ter no mínimo 6 caracteres."
+          //    ]
+          //  }
+          lodash.forIn(errors, function (keyErrors) {
+            errorStr += buildArrayMessage(keyErrors);
+          });
+        }
 
         errors = errorStr;
       } else {
@@ -835,6 +975,7 @@
      *    'Mensagem 2'
      *   ]
      * @param {string} msg - Opcional. Mensagem de erro.
+     * @param {object} options - Options da documentação do $mdToast
      */
     function errorValidation(errors, msg, options) {
       obj.error(angular.isArray(errors) || angular.isObject(errors) ? errors : msg, options);
@@ -846,6 +987,10 @@
 
     function warn(msg, options) {
       return toast(msg, 'warn', options);
+    }
+
+    function checkErrorIsUnknownException(errors) {
+      return angular.isObject(errors) && angular.isDefined(errors.line) && angular.isDefined(errors.source) && angular.isDefined(errors.stacktrace);
     }
 
     return obj;

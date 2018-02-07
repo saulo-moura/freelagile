@@ -20,6 +20,7 @@
 
     vm.logout     = logout;
     vm.getImagePerfil = getImagePerfil;
+    vm.getLogoMenu = getLogoMenu;
     vm.setActiveProject = setActiveProject;
     vm.getActiveProject = getActiveProject;
     vm.removeActiveProject = removeActiveProject;
@@ -41,20 +42,24 @@
     function getImagePerfil() {
       return (Auth.currentUser && Auth.currentUser.image)
         ? Auth.currentUser.image
-        : Global.imagePath + '/logo-vertical.png';
+        : Global.imagePath + '/no_avatar.gif';
     }
-    
+
+    function getLogoMenu() {
+      return Global.imagePath + '/logo-vertical.png';
+    }
+
     function setActiveProject(project) {
       localStorage.setItem('project', project);
-		}
-    
+    }
+
     function getActiveProject() {
       return localStorage.getItem('project');
     }
-    
+
     function removeActiveProject() {
       localStorage.removeItem('project');
-		}
+    }
 
   }
 

@@ -56,7 +56,7 @@ class User extends BaseModel implements AuthenticatableContract, CanResetPasswor
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'image'];
+    protected $fillable = ['name', 'email', 'image', 'hour_value', 'birthday'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -65,8 +65,6 @@ class User extends BaseModel implements AuthenticatableContract, CanResetPasswor
      */
     protected $hidden = ['password', 'remember_token'];
     protected $dontKeepLogOf = ['password', 'remember_token'];
-
-    protected $dateFormat = "Y-m-d H:m:i";
 
     /**
      * Atributo usado para amazenar temporáriamente a senha para envio no email
@@ -150,7 +148,7 @@ class User extends BaseModel implements AuthenticatableContract, CanResetPasswor
     public function roles() {
         return $this->belongsToMany(Role::class);
     }
-    
+
     public function projectRoles() {
         return $this->belongsToMany('App\Role', 'user_role_project', 'user_id', 'role_id');
     }

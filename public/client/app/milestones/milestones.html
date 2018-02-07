@@ -1,0 +1,5 @@
+<content-body>
+  <div flex ng-include src="global.clientPath + '/milestones/milestones-form.html'" ng-show="milestonesCtrl.viewForm && !milestonesCtrl.onView"></div>
+  <div flex ng-include src="global.clientPath + '/milestones/milestones-list.html'" ng-hide="milestonesCtrl.viewForm || milestonesCtrl.onView"></div>
+  <div flex ng-include src="global.clientPath + '/milestones/milestones-view.html'" ng-show="milestonesCtrl.onView && !milestonesCtrl.viewForm"></div>
+</content-body>

@@ -8,7 +8,7 @@
 
   /** @ngInject */
   // eslint-disable-next-line max-params
-  function UsersController($controller, UsersService) {
+  function UsersController($controller, UsersService, PrToast, $mdDialog, $translate) {
 
     var vm = this;
 
@@ -18,6 +18,18 @@
 
     function onActivate() {
       vm.queryFilters = {};
+    }
+
+    vm.hideDialog = function() {
+      $mdDialog.hide();
+    }
+
+    vm.saveNewUser = function() {
+      vm.resource.$save().then(function (resource) {
+        vm.resource = resource;
+        PrToast.success($translate.instant('messages.successSignUp'));
+        $mdDialog.hide();
+      });
     }
   }
 })();

@@ -12,7 +12,8 @@
     return {
       custom: custom,
       confirm: confirm,
-      close: close
+      close: close,
+      alert: alert
     };
 
     /**
@@ -47,6 +48,59 @@
       }
 
       return angular.merge(defaultOptions, config);
+    }
+
+    /**
+     * Método que exibe o dialog de confirmação na tela depois que o build e invocado
+     * de uma determinada ação
+     * @returns {promisse} - Retorna uma promisse que pode ou não ser resolvida
+     */
+    function alert(config) {
+
+      var options = build(config);
+
+      options.locals = {
+        title: (angular.isDefined(options.title) ? options.title : 'Exception'),
+        description: (angular.isDefined(options.description) ? options.description : ''),
+        okBgColor: (angular.isDefined(options.okBgColor) ? options.okBgColor : 'red-A700'),
+        toolbarBgColor: (angular.isDefined(options.toolbarBgColor) ? options.toolbarBgColor : 'red-A700')
+      };
+
+      options.template =
+          ` <md-dialog flex=50 aria-label="${options.locals.title}">
+              <md-toolbar md-scroll-shrink md-colors="::{background:'default-{{ctrl.toolbarBgColor}}'}">
+                <div class="md-toolbar-tools">
+                  <h3>
+                    <span>${options.locals.title}</span>
+                  </h3>
+                </div>
+              </md-toolbar>
+              <md-dialog-content layout-margin>
+                <p>${options.locals.description}</p>
+              </md-dialog-content>
+              <md-dialog-actions>
+                <md-button class="md-raised"
+                  md-colors="::{background:'default-{{ctrl.okBgColor}}'}"
+                  ng-click="ctrl.okAction()">Ok</md-button>
+              </md-dialog-actions>
+            </md-dialog>
+          `;
+
+      options.controller = ['$mdDialog', function($mdDialog) {
+        var vm = this;
+
+        vm.okAction = okAction;
+
+        function okAction() {
+          $mdDialog.hide();
+        }
+      }];
+
+      options.controllerAs = 'ctrl';
+      options.clickOutsideToClose = false;
+      options.hasBackdrop = true;
+
+      return $mdDialog.show(options);
     }
 
     /**

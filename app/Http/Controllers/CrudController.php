@@ -29,9 +29,24 @@ abstract class CrudController extends Controller
     abstract protected function getModel();
 
     /**
-     * Get the model class.
+     * Get the rules of validation.
      *
      * @return string
      */
     abstract protected function getValidationRules(Request $request, Model $obj);
+
+    /**
+     * Save the action.
+     *
+     * @return void
+     */
+    protected function saveAction($project_id, $action, $description) {
+        $user = \Auth::user();
+        $query = \App\Dashboard::create([
+            'user_id' => $user->id,
+            'project_id' => $project_id,
+            'action' => $action,
+            'description' => $description
+        ]);
+    }
 }

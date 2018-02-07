@@ -1,0 +1,112 @@
+<box box-title="Tarefa">
+  <box-toolbar-buttons>
+    <md-button class="md-icon-button" ng-click="tasksCtrl.goTo('list')">
+      <md-icon md-font-set="material-icons" class="md-warn">view_list</md-icon>
+      <md-tooltip md-direction="bottom" hide-sm hide-xs>{{ ::'views.actions.list' | translate}}</md-tooltip>
+    </md-button>
+  </box-toolbar-buttons>
+  <fieldset disabled style="border:0px;">
+    <div layout="row">
+      <md-input-container class="md-block" flex>
+        <input type="text" placeholder="Título" ng-model="tasksCtrl.resource.title">
+      </md-input-container>
+      <md-input-container class="md-block" flex>
+        <input type="text" placeholder="Tempo Estimado (em horas)" ng-model="tasksCtrl.resource.estimated_time" required>
+      </md-input-container>
+    </div>
+    <div layout="row">
+      <md-input-container class="md-block" flex>
+        <label>Status</label>
+        <md-select disabled ng-model="tasksCtrl.resource.status_id">
+          <md-option ng-value="{{ status.id }}" ng-repeat="status in tasksCtrl.status">
+            {{ ::status.name }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+      <md-input-container class="md-block" flex>
+        <label>Prioridade</label>
+        <md-select disabled ng-model="tasksCtrl.resource.priority_id">
+          <md-option ng-value="{{ priority.id }}" ng-repeat="priority in tasksCtrl.priorities">
+            {{ ::priority.name }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+      <md-input-container class="md-block" flex>
+          <label>Tipo</label>
+        <md-select disabled ng-model="tasksCtrl.resource.type_id">
+          <md-option ng-value="{{ type.id }}" ng-repeat="type in tasksCtrl.types">
+            {{ ::type.name }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+    </div>
+    <div layout="row">
+      <md-input-container class="md-block" flex>
+        <textarea
+          placeholder="Descrição"
+          ng-model="tasksCtrl.resource.description"
+          ng-attr-rows="{{row || '3'}}" >
+        </textarea>
+      </md-input-container>
+    </div>
+  </fieldset>
+</box>
+<box box-title="Comentários">
+  <div layout="row">
+    <md-input-container class="md-block" flex>
+      <textarea
+        placeholder="Comentário"
+        ng-model="tasksCtrl.comment"
+        ng-attr-rows="{{row || '3'}}">
+      </textarea>
+    </md-input-container>
+    <md-button flex=5 class="md-primary md-raised" ng-click="tasksCtrl.saveComment()">{{::'views.actions.save' | translate}}</md-button>
+  </div>
+  <div layout="column">
+    <md-list ng-repeat="comment in tasksCtrl.resource.comments" ng-if="!comment.comment_id" flex>
+      <md-list-item class="md-2-line md-long-text" >
+        <img src="{{ comment.user.image }}" class="md-avatar" alt="{{comment.user.name}}" />
+        <div class="md-list-item-text" layout="column">
+          <h3>{{ comment.user.name }}</h3>
+          <p>{{ comment.description }}</p>
+          <h5 class="md-secondary">{{ tasksCtrl.fixDate(comment.created_at) | elapsed }}</h5>
+          <md-button class="md-icon-button md-secondary" ng-click="comment.showAnswer = comment.showAnswer ? false : true">
+            <md-icon md-font-set="material-icons"
+              class="md-dark">reply</md-icon>
+            <md-tooltip md-direction="top">{{::'views.actions.reply' | translate}}</md-tooltip>
+          </md-button>
+          <md-button class="md-icon-button md-secondary" ng-if="comment.user.id === tasksCtrl.currentUser.id" ng-click="tasksCtrl.removeComment(comment)">
+            <md-icon md-font-set="material-icons"
+              class="md-warn">delete</md-icon>
+            <md-tooltip md-direction="top">{{::'views.actions.remove' | translate}}</md-tooltip>
+          </md-button>
+        </div>
+      </md-list-item>
+      <md-divider></md-divider>
+      <md-list-item class="md-2-line md-long-text" ng-repeat="answer in comment.comments" flex-offset=5>
+        <img src="{{ answer.user.image }}" class="md-avatar" alt="{{answer.user.name}}" />
+        <div class="md-list-item-text">
+          <h3>{{ answer.user.name }}</h3>
+          <p>{{ answer.description }}</p>
+          <h5 class="md-secondary">{{ tasksCtrl.fixDate(answer.created_at) | elapsed }}</h5>
+          <md-button class="md-icon-button md-secondary" ng-if="answer.user.id === tasksCtrl.currentUser.id" ng-click="tasksCtrl.removeComment(answer)">
+            <md-icon md-font-set="material-icons"
+              class="md-warn">delete</md-icon>
+            <md-tooltip md-direction="top">{{::'views.actions.remove' | translate}}</md-tooltip>
+          </md-button>
+        </div>
+        <md-divider ></md-divider>
+      </md-list-item>
+      <div layout="row" ng-if="comment.showAnswer" flex>
+        <md-input-container flex>
+          <textarea
+            placeholder="Responder"
+            ng-model="tasksCtrl.answer"
+            ng-attr-rows="{{row || '3'}}">
+          </textarea>
+        </md-input-container>
+        <md-button flex=5 class="md-primary md-raised" ng-click="tasksCtrl.saveComment(comment)">{{::'views.actions.save' | translate}}</md-button>
+      </div>
+    </md-list>
+  </div>
+</box>

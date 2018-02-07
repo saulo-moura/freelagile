@@ -16,13 +16,9 @@
 				<span class="md-subhead">{{ ::project.description }}</span>
 			</md-card-content>
 			<md-card-actions layout-align="end center">
-				<md-button ng-click="appCtrl.setActiveProject(project.id); projectsCtrl.viewProject(project);">
+				<md-button aria-label="Visualizar" ng-click="appCtrl.setActiveProject(project.id); projectsCtrl.viewProject();">
 					<md-icon md-font-set="material-icons" class="md-warn">remove_red_eye</md-icon>
 					<md-tooltip md-direction="bottom" hide-sm hide-xs>Visualizar</md-tooltip>
-				</md-button>
-				<md-button ng-click="projectsCtrl.edit(project)">
-					<md-icon md-font-set="material-icons" class="md-warn">edit</md-icon>
-					<md-tooltip md-direction="bottom" hide-sm hide-xs>Editar</md-tooltip>
 				</md-button>
 				<md-button ng-click="projectsCtrl.remove(project)">
 					<md-icon md-font-set="material-icons" class="md-warn">delete</md-icon>

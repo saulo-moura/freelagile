@@ -23,13 +23,15 @@
 
       // Array contendo os itens que são mostrados no menu lateral
       vm.itensMenu = [
-        { state: 'app.projects', title: menuPrefix + 'projects', icon: 'view_module', subItens: [] },
+        { state: 'app.projects', title: menuPrefix + 'projects', icon: 'work', subItens: [] },
         { state: 'app.dashboard', title: menuPrefix + 'dashboard', icon: 'dashboard', subItens: [] },
         { state: 'app.tasks', title: menuPrefix + 'tasks', icon: 'view_list', subItens: [] },
+        { state: 'app.milestones', title: menuPrefix + 'milestones', icon: 'view_module', subItens: [] },
+        { state: 'app.releases', title: menuPrefix + 'releases', icon: 'subscriptions', subItens: [] },
         { state: 'app.kanban', title: menuPrefix + 'kanban', icon: 'view_column', subItens: [] },
-        { state: 'app.vcs', title: menuPrefix + 'vcs', icon: 'group_work', subItens: [] },
+        { state: 'app.vcs', title: menuPrefix + 'vcs', icon: 'group_work', subItens: [] }
         // Coloque seus itens de menu a partir deste ponto
-        {
+        /* {
           state: '#', title: menuPrefix + 'admin', icon: 'settings_applications', profiles: ['admin'],
           subItens: [
             { state: 'app.user', title: menuPrefix + 'user', icon: 'people' },
@@ -37,7 +39,7 @@
             { state: 'app.audit', title: menuPrefix + 'audit', icon: 'storage' },
             { state: 'app.dinamic-query', title: menuPrefix + 'dinamicQuery', icon: 'location_searching' }
           ]
-        }
+        } */
       ];
 
       /**
@@ -66,13 +68,13 @@
 
     /**
      * Método que exibe o sub menu dos itens do menu lateral caso tenha sub itens
-     * caso contrário redireciona para o state passado como parâmetro
+     * caso contrário redireciona para o state passado como parÃ¢metro
      */
     function openMenuOrRedirectToState($mdMenu, ev, item) {
       if (angular.isDefined(item.subItens) && item.subItens.length > 0) {
         $mdMenu.open(ev);
       } else {
-        $state.go(item.state);
+        $state.go(item.state, { obj: null });
         $mdSidenav('left').close();
       }
     }

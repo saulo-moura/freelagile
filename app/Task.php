@@ -31,21 +31,61 @@ use Carbon\Carbon;
 class Task extends BaseModel
 {
     protected $table = 'tasks';
+
     protected $fillable = [
+        'title',
         'description',
         'done',
-        'priority',
-        'scheduled_to',
+        'milestone_id',
+        'status_id',
+        'priority_id',
+        'estimated_time',
+        'type_id',
         'project_id'
     ];
 
-    protected $dateFormat = "Y-m-d H:m:i";
+    protected $with = ['milestone', 'status', 'priority', 'type', 'project', 'comments'];
 
     /**
-    * Retorna o projeto de um projeto
+    * Retorna o milestone de um de uma tarefa
     */
-    public function project()
-    {
+    public function milestone() {
+        return $this->belongsTo(Milestone::class);
+    }
+
+    /**
+    * Retorna o milestone de um de uma tarefa
+    */
+    public function status() {
+        return $this->belongsTo(Status::class);
+    }
+
+    /**
+    * Retorna o milestone de um de uma tarefa
+    */
+    public function priority() {
+        return $this->belongsTo(Priority::class);
+    }
+
+    /**
+    * Retorna o tipo de um de uma tarefa
+    */
+    public function type() {
+        return $this->belongsTo(Type::class);
+    }
+
+    /**
+    * Retorna o projeto a qual a tarefa pertence
+    */
+    public function project() {
         return $this->belongsTo(Project::class);
     }
+
+    /**
+    * Retorna os comentários de uma tarefa
+    */
+    public function comments() {
+        return $this->hasMany(Comment::class)->orderBy('created_at', 'desc');
+    }
+
 }

@@ -41,6 +41,13 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+$app->singleton('Github\Client', function(){
+    $client = new Github\Client();
+    $token = env('GITHUB_TOKEN');
+    $client->authenticate($token, null, Github\Client::AUTH_HTTP_TOKEN);
+    return $client;
+});
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application

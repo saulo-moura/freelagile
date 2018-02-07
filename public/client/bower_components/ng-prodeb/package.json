@@ -1,14 +1,40 @@
 {
   "private": true,
   "name": "ng-prodeb",
+  "version": "0.2.12",
   "description": "Biblioteca de componetes Angular da Prodeb",
   "scripts": {
     "server": "http-server -p 5005",
-    "postinstall": "bower install",
     "build": "gulp",
     "check": "gulp check"
   },
+  "authors": [
+    {
+      "name": "Thiago Antonius",
+      "email": "thiagoantonius.souza@prodeb.ba.gov.br"
+    },
+    {
+      "name": "Francis Gomes",
+      "email": "francisgomes.santos@prodeb.ba.gov.br"
+    }
+  ],
+  "main": "dist/ng-prodeb.js",
   "node": "~6.9.0",
+  "dependencies": {
+    "alasql": "~0.3.5",
+    "angular": "~1.6.4",
+    "angular-animate": "~1.6.4",
+    "angular-aria": "~1.6.4",
+    "angular-file-upload": "latest",
+    "angular-material": "~1.1.4",
+    "angular-material-data-table": "~0.10.10",
+    "angular-moment": "~0.10.3",
+    "angular1-text-mask": "~6.0.1",
+    "lodash": "~4.13.1",
+    "moment": "~2.14.1",
+    "ng-material-datetimepicker": "~1.6.2",
+    "xlsx": "~0.10.3"
+  },
   "devDependencies": {
     "bower": "~1.7.9",
     "eslint": "~3.1.1",
@@ -33,7 +59,5 @@
     "path": "~0.12.7",
     "yargs": "~4.8.1",
     "gulp-sass": "~2.3.2"
-  },
-  "dependencies": {
   }
 }

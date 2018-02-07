@@ -1,4 +1,4 @@
-<form ng-submit="usersCtrl.save()">
+<form ng-submit="usersCtrl.saveNewUser()">
   <box box-title="{{::'views.titles.register' | translate}}">
     <md-input-container class="md-block" flex>
       <label>{{::'attributes.name' | translate}}</label>
@@ -10,8 +10,7 @@
     </md-input-container>
     <box-footer-buttons layout-align="end center">
       <md-button type="submit" id="btn-usersCtrl-save" class="md-primary md-raised">{{::'views.actions.signup' | translate}}</md-button>
-      <md-button class="md-raised" ng-click="$mdDialog.hide()">{{::'views.actions.cancel' | translate}}</md-button>
+      <md-button class="md-raised" ng-click="usersCtrl.hideDialog()">{{::'views.actions.cancel' | translate}}</md-button>
     </box-footer-buttons>
   </box>
 </form>
-

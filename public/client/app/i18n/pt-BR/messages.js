@@ -18,6 +18,10 @@
       resourceNotFoundError: 'Recurso não encontrado',
       notNullError: 'Todos os campos obrigatórios devem ser preenchidos.',
       duplicatedResourceError: 'Já existe um recurso com essas informações.',
+      sprintEndedSuccess: 'Sprint finalizada com sucesso',
+      sprintEndedError: 'Erro ao finalizar a sprint',
+      successSignUp: 'Cadastro realizado com sucesso. Um e-mail foi enviado com seus dados de login',
+      errorsSignUp: 'Houve um erro ao realizar o seu cadastro. Tente novamente mais tarde!',
       validate: {
         fieldRequired: 'O campo {{field}} é obrigratório.'
       },
@@ -50,11 +54,6 @@
       },
       queryDinamic: {
         noFilter: 'Nenhum filtro adicionado'
-      },
-      dashboard: {
-        store: 'Criou um item',
-        update: 'Atualizou um item',
-        destroy: 'Apagou um item'
       }
     })
 

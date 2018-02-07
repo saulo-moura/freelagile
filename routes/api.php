@@ -40,12 +40,33 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
     Route::group(['middleware' => ['jwt.auth', 'jwt.refresh']], function () {
         Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
 
+        Route::resource('users', 'UsersController', ['except' => ['updateProfile', 'store']]);
+
         Route::resource('projects', 'ProjectsController');
         Route::resource('roles', 'RolesController', ['only' => ['index']]);
         Route::resource('dashboards', 'DashboardsController');
-        
-        Route::put('tasks/toggleDone', 'Samples\TasksController@toggleDone');
-        Route::resource('tasks', 'Samples\TasksController');
+        Route::resource('status', 'StatusController');
+        Route::resource('types', 'TypesController');
+        Route::resource('priorities', 'PrioritiesController');
+
+        Route::resource('milestones', 'MilestonesController');
+        Route::post('milestones/finalize', 'MilestonesController@finalize');
+        Route::post('milestones/updateRelease', 'MilestonesController@updateRelease');
+
+        Route::resource('tasks', 'TasksController', ['except' => ['updateMilestone', 'toggleDone', 'updateTaskByKanban']]);
+        Route::put('tasks/toggleDone', 'TasksController@toggleDone');
+        Route::post('tasks/updateMilestone', 'TasksController@updateMilestone');
+        Route::post('tasks/updateTaskByKanban', 'TasksController@updateTaskByKanban');
+        Route::resource('kanban', 'TasksController');
+
+        Route::resource('releases', 'ReleasesController');
+        Route::post('releases/finalize', 'ReleasesController@finalize');
+
+        Route::post('task-comments/saveTaskComment', 'CommentsController@saveTaskComment');
+        Route::post('task-comments/removeTaskComment', 'CommentsController@removeTaskComment');
+
+        // Rotas da API Github
+        Route::get('vcs', 'VcsController@index');
 
         Route::resource(
             'mails',
@@ -59,8 +80,6 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
         Route::group(['middleware' => ['acl.role:admin']], function () {
             Route::get('audit', 'AuditController@index');
             Route::get('audit/models', 'AuditController@models');
-
-            Route::resource('users', 'UsersController', ['except' => ['updateProfile', 'store']]);
 
             Route::group(['prefix' => 'dinamicQuery'], function () {
                 Route::get('/', 'DinamicQueryController@index');

@@ -8,6 +8,7 @@
   angular
     .module('ngProdeb')
     .constant('lodash', _)
+    .constant('_', _)
     .constant('alasql', alasql)
     .constant('moment', moment);
 })();

@@ -31,6 +31,50 @@
 
           <md-card>
             <md-toolbar class="md-accent">
+              <div class="md-toolbar-tools md-accent">
+                <h2 class="md-title">Dialog</h2>
+              </div>
+            </md-toolbar>
+            <md-card-content class="md-padding" layout-xs="column">
+              <md-button class="md-raised" md-colors="::{background:'green'}" ng-click="globalCtrl.customDialog()">Custom dialog</md-button>
+              <md-button class="md-raised md-primary" ng-click="globalCtrl.confirmDialog()">Confirm dialog</md-button>
+            </md-card-content>
+          </md-card>
+
+          <md-card>
+            <md-toolbar class="md-accent">
+              <div class="md-toolbar-tools md-accent">
+                <h2 class="md-title">DateTime Picker</h2>
+              </div>
+            </md-toolbar>
+            <md-card-content class="md-padding" layout-xs="column">
+              <pr-date-time-picker
+                id="date1"
+                label="'Data Inicial'"
+                ng-model="globalCtrl.dataWithTime"
+                max-date="globalCtrl.maxDate"
+                with-time="true"
+                click-to-show-in-field="false">
+              </pr-date-time-picker>
+
+              <pr-date-time-picker
+                id="date2"
+                label="'Data Final'"
+                ng-model="globalCtrl.dataWithTime"
+                with-time="false"
+                click-to-show-in-field="true">
+              </pr-date-time-picker>
+
+              <div ng-if="globalCtrl.dataWithTime">
+                objeto: {{globalCtrl.dataWithTime}}
+                <br/> prDate filter: {{globalCtrl.dataWithTime | prDate}}
+                <br/> prDatetime filter: {{globalCtrl.dataWithTime | prDatetime}}
+              </div>
+            </md-card-content>
+          </md-card>
+
+          <md-card>
+            <md-toolbar class="md-accent">
               <div class="md-toolbar-tools">
                 <h2 class="md-title">Carros</h2>
                 <span flex></span>
@@ -78,43 +122,8 @@
               <md-button class="md-raised md-warn" ng-click="globalCtrl.notification('warn', 'Alert.')">Alert</md-button>
               <md-button class="md-raised" md-colors="::{background:'red-A700'}" ng-click="globalCtrl.notificationArrayValidationErrors()">Erros em Array</md-button>
               <md-button class="md-raised" md-colors="::{background:'red-A700'}" ng-click="globalCtrl.notificationObjectValidationErrors()">Erros em um objeto</md-button>
+              <md-button class="md-raised" md-colors="::{background:'red-A700'}" ng-click="globalCtrl.notificationExceptionErrors()">Erros de Exception</md-button>
               <md-button class="md-raised" md-colors="::{background:'teal'}" ng-click="globalCtrl.hideNotification()">Esconder</md-button>
-            </md-card-content>
-          </md-card>
-
-          <md-card>
-            <md-toolbar class="md-accent">
-              <div class="md-toolbar-tools md-accent">
-                <h2 class="md-title">Dialog</h2>
-              </div>
-            </md-toolbar>
-            <md-card-content class="md-padding" layout-xs="column">
-              <md-button class="md-raised" md-colors="::{background:'green'}" ng-click="globalCtrl.customDialog()">Custom dialog</md-button>
-              <md-button class="md-raised md-primary" ng-click="globalCtrl.confirmDialog()">Confirm dialog</md-button>
-            </md-card-content>
-          </md-card>
-
-          <md-card>
-            <md-toolbar class="md-accent">
-              <div class="md-toolbar-tools md-accent">
-                <h2 class="md-title">DateTime Picker</h2>
-              </div>
-            </md-toolbar>
-            <md-card-content class="md-padding" layout-xs="column">
-              <md-input-container class="md-block" flex-gt-md="30">
-                <label for="date">Data</label>
-                <pr-date-time-picker
-                  id="date"
-                  ng-model="globalCtrl.dataWithTime"
-                  max-date="2017-11-11"
-                  with-time="true">
-                </pr-date-time-picker>
-              </md-input-container>
-              <div ng-if="globalCtrl.dataWithTime">
-                objeto: {{globalCtrl.dataWithTime}}
-                <br/> prDate filter: {{globalCtrl.dataWithTime | prDate}}
-                <br/> prDatetime filter: {{globalCtrl.dataWithTime | prDatetime}}
-              </div>
             </md-card-content>
           </md-card>
 

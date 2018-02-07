@@ -14,5 +14,9 @@
     'md.data.table',
     'ngMaterialDatePicker',
     'pascalprecht.translate',
-    'angularFileUpload']);
+    'angularFileUpload',
+    'ngMessages',
+    'jqwidgets',
+    'ui.mask',
+    'ngRoute']);
 })();

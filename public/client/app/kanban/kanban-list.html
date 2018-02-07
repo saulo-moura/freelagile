@@ -1,0 +1,7 @@
+<box>
+  <md-content>
+    <div ng-if="kanbanCtrl.kanbanReady" layout="row" flex>
+      <jqx-kanban jqx-settings="kanbanCtrl.settings" jqx-on-item-moved="kanbanCtrl.onItemMoved($event)" jqx-on-item-attr-clicked="kanbanCtrl.onItemClicked($event)"></jqx-kanban>
+    </div>
+  </md-content>
+</box>

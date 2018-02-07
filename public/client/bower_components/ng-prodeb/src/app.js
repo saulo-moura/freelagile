@@ -4,6 +4,6 @@
   'use strict';
 
   //inicia o modulo da biblioteca e define as dependências
-  angular.module('ngProdeb', ['ngMaterial', 'md.data.table', 'ngMaterialDatePicker', 'angularFileUpload']);
+  angular.module('ngProdeb', ['ngMaterial', 'md.data.table', 'ngMaterialDatePicker', 'text-mask', 'angularFileUpload']);
 
 })();

@@ -20,39 +20,42 @@ var names = {
 }
 
 var paths = {
+  node: 'node_modules',
+  allScripts: 'src/**/*.js',
+  destination: 'dist',
   scripts: [
     'src/app.js',
     'src/app.config.js',
     'src/app.external.js',
     'src/**/*.js'
   ],
-  stylesVendors: [
-    'bower_components/angular-material/angular-material.css',
-    'bower_components/angular-material-data-table/dist/md-data-table.css',
-    'bower_components/ng-material-datetimepicker/dist/material-datetimepicker.min.css'
-  ],
-  scriptsVendors: [
-    'bower_components/alasql/dist/alasql.js',
-    'bower_components/js-xlsx/dist/xlsx.core.min.js',
-    'bower_components/lodash/dist/lodash.min.js',
-    'bower_components/angular/angular.js',
-    'bower_components/angular-aria/angular-aria.js',
-    'bower_components/angular-animate/angular-animate.js',
-    'bower_components/angular-material/angular-material.js',
-    'bower_components/angular-material-data-table/dist/md-data-table.js',
-    'bower_components/moment/min/moment.min.js',
-    'bower_components/moment/locale/pt-br.js',
-    'bower_components/angular-moment/angular-moment.min.js',
-    'bower_components/ng-material-datetimepicker/dist/angular-material-datetimepicker.min.js',
-    'bower_components/angular-file-upload/dist/angular-file-upload.js'
-  ],
   styles: [
     'src/styles/*.scss',
     'src/styles/*.css'
-  ],
-  allScripts: 'src/**/*.js',
-  destination: 'dist'
+  ]
 };
+
+paths.stylesVendors = [
+  paths.node + '/angular-material/angular-material.css',
+  paths.node + '/angular-material-data-table/dist/md-data-table.css',
+  paths.node + '/ng-material-datetimepicker/dist/material-datetimepicker.min.css'
+];
+paths.scriptsVendors = [
+  paths.node + '/alasql/dist/alasql.min.js',
+  paths.node + '/xlsx/dist/xlsx.core.min.js',
+  paths.node + '/lodash/lodash.min.js',
+  paths.node + '/angular/angular.min.js',
+  paths.node + '/angular-aria/angular-aria.js',
+  paths.node + '/angular-animate/angular-animate.js',
+  paths.node + '/angular-material/angular-material.js',
+  paths.node + '/angular-material-data-table/dist/md-data-table.js',
+  paths.node + '/angular1-text-mask/dist/angular1TextMask.js',
+  paths.node + '/moment/min/moment.min.js',
+  paths.node + '/moment/locale/pt-br.js',
+  paths.node + '/angular-moment/angular-moment.min.js',
+  paths.node + '/ng-material-datetimepicker/js/angular-material-datetimepicker.js',
+  paths.node + '/angular-file-upload/dist/angular-file-upload.js'
+];
 
 gulp.task('scripts', function() {
   return gulp.src(paths.scripts)

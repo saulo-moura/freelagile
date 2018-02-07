@@ -106,6 +106,8 @@
         vm.resources = response.items;
 
         if (angular.isFunction(vm.afterSearch)) vm.afterSearch(response);
+      }, function (responseData) {
+        if (angular.isFunction(vm.onSearchError)) vm.onSearchError(responseData);
       });
     }
 
@@ -123,6 +125,8 @@
         vm.resources = response;
 
         if (angular.isFunction(vm.afterSearch)) vm.afterSearch(response);
+      }, function (responseData) {
+        if (angular.isFunction(vm.onSearchError)) vm.onSearchError(responseData);
       });
     }
 
@@ -213,7 +217,7 @@
      */
     function goTo(viewName) {
       vm.viewForm = false;
-
+      vm.onView = false;
       if (viewName === 'form') {
         vm.cleanForm();
         vm.viewForm = true;

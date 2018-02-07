@@ -153,9 +153,11 @@ class UsersController extends CrudController
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users,email,'.$user->id,
             'password' => 'confirmed|min:6',
+            'hour_value' => 'nullable|numeric',
+            'birthday' => 'nullable|date'
         ]);
 
-        $user->fill(Input::only('name', 'email'));
+        $user->fill(Input::only('name', 'email', 'image', 'hour_value', 'birthday'));
 
         if ($request->has('password')) {
             $user->password = Hash::make($request->password);

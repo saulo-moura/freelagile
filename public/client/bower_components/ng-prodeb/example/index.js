@@ -16,6 +16,7 @@ function GlobalController(PrPagination, PrSpinner, PrToast, PrDialog, $timeout, 
   vm.confirmDialog = confirmDialog;
   vm.notificationArrayValidationErrors = notificationArrayValidationErrors;
   vm.notificationObjectValidationErrors = notificationObjectValidationErrors;
+  vm.notificationExceptionErrors = notificationExceptionErrors;
 
   activate();
 
@@ -76,6 +77,8 @@ function GlobalController(PrPagination, PrSpinner, PrToast, PrDialog, $timeout, 
       return 0;
     });
 
+    vm.maxDate = moment().add(1,'y');
+
     //crie uma instancia e informe a
     //função responsável pela busca e quantidade por página a ser exibido
     vm.paginator = PrPagination.getInstance(search, 3);
@@ -128,6 +131,15 @@ function GlobalController(PrPagination, PrSpinner, PrToast, PrDialog, $timeout, 
     PrToast.errorValidation({
      'Atributo 1': ['é obrigatório', 'deve ter o formato 999.999.999-99'],
      'Atributo 2': ['deve ter no máximo 10 caracteres']
+    });
+  }
+
+  function notificationExceptionErrors() {
+    PrToast.errorValidation({
+      message: 'Exception Desconhecida',
+      source: 'StarterPack.Controllers.SupportController.langs()',
+      line: 21,
+      stacktrace: 'at StarterPack.Controllers.SupportController.langs() in /home/user/workspace/projects/dotnet/starterpack/Controllers/SupportController.cs:line 21 at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeActionMethodAsync>d__27.MoveNext() --- End of stack trace from previous location where exception was thrown --- at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw() at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task) at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeNextActionFilterAsync>d__25.MoveNext() --- End of stack trace from previous location where exception was thrown --- at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw() at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context) at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted) at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeNextExceptionFilterAsync>d__24.MoveNext()"'
     });
   }
 

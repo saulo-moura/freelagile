@@ -21,7 +21,7 @@ class BaseModel extends Model
 
     protected $casts = [];
 
-    protected $dateFormat = 'Y-m-d H:i:sO';
+    protected $dateFormat = "Y-m-d H:i:s";
 
     protected $dontFilterAttributesInDinamicQuery = ['password'];
 

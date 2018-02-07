@@ -26,7 +26,7 @@
               //verifica se ocorreu algum erro referente ao token
               if (rejection.data.error.startsWith('token_')) {
                 PrToast.warn($translate.instant('messages.login.logoutInactive'));
-              } else {
+              } else if (rejection.data.error !== 'Not Found') {
                 PrToast.error($translate.instant(rejection.data.error));
               }
             } else {

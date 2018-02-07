@@ -1,32 +1,51 @@
-<content-body layout-align="center center">
-  <div flex=100 flex-sm=80 flex-gt-sm=60>
-    <form flex ng-submit="profileCtrl.update()">
-      <box box-title="{{::'views.titles.update' | translate}}">
-        <md-input-container class="md-block" flex>
-          <label>{{::'attributes.name' | translate}}</label>
-          <input type="text" ng-model="profileCtrl.user.name">
-        </md-input-container>
-        <md-input-container class="md-block" flex>
-          <label>{{::'attributes.email' | translate}}</label>
-          <input type="email" ng-model="profileCtrl.user.email">
-        </md-input-container>
-        <md-input-container class="md-block" flex>
-          <label>{{::'attributes.password' | translate}}</label>
-          <input type="password" ng-model="profileCtrl.user.password">
-        </md-input-container>
-        <md-input-container class="md-block" flex>
-          <label>{{::'views.fields.login.confirmPassword' | translate}}</label>
-          <input type="password" ng-model="profileCtrl.user.password_confirmation">
-        </md-input-container>
-        <div md-input-container class="md-block" >
-          <div ng-repeat="role in profileCtrl.roles">
-            <md-checkbox ng-model="role.selected">{{role.title}}</md-checkbox>
-          </div>
-        </div>
-        <box-footer-buttons >
-          <md-button type="submit" class="md-primary md-raised">{{::'views.actions.update' | translate}}</md-button>
-        </box-footer-buttons>
-      </box>
-    </form>
-  </div>
-</content-body>
+<form flex ng-submit="profileCtrl.update()">
+  <box layout-align="center" box-title="{{::'views.titles.update' | translate}}">
+    <box-toolbar-buttons>
+        <md-button class="md-icon-button" ng-click="profileCtrl.historyBack()">
+          <md-icon md-font-set="material-icons" class="md-warn">reply</md-icon>
+          <md-tooltip md-direction="bottom" hide-sm hide-xs>Voltar</md-tooltip>
+        </md-button>
+      </box-toolbar-buttons>
+    <md-input-container class="md-block md-input-has-placeholder" flex>
+      <label>{{::'attributes.image' | translate}}</label>
+      <img ng-src="{{ profileCtrl.user.image ? profileCtrl.user.image : global.imagePath + '/no_avatar.gif' }}"/>
+      <input type="file" pr-uploader-base64 ng-model="profileCtrl.user.image">
+    </md-input-container>
+    <div layout="row">
+      <md-input-container class="md-block" flex>
+        <label>{{::'attributes.name' | translate}}</label>
+        <input type="text" ng-model="profileCtrl.user.name">
+      </md-input-container>
+      <md-input-container class="md-block" flex>
+        <label>{{::'attributes.email' | translate}}</label>
+        <input type="email" ng-model="profileCtrl.user.email">
+      </md-input-container>
+    </div>
+    <div layout="row">
+      <md-input-container class="md-block" flex>
+        <label>{{::'attributes.birthday' | translate}}</label>
+        <input type="text"
+          ui-mask="99/99/9999"
+          model-view-value="{{true}}"
+          ui-options="{addDefaultPlaceholder: false}"
+          ng-pattern="/([0-3][0-1])/(0[1-9]|10|11|12)/[0-9]{4}$/"
+          ui-mask-placeholder
+          ng-model="profileCtrl.user.birthday">
+      </md-input-container>
+    </div>
+    <div layout="row">
+      <md-input-container class="md-block" flex>
+        <label>{{::'attributes.password' | translate}}</label>
+        <input type="password" ng-model="profileCtrl.user.password">
+      </md-input-container>
+      <md-input-container class="md-block" flex>
+        <label>{{::'views.fields.login.confirmPassword' | translate}}</label>
+        <input type="password" ng-model="profileCtrl.user.password_confirmation">
+      </md-input-container>
+    </div>
+    <box-footer-buttons >
+      <md-button class="md-primary md-raised md-warn" ng-click="profileCtrl.historyBack()">{{::'views.actions.cancel' | translate}}</md-button>
+      <md-button type="submit" class="md-primary md-raised">{{::'views.actions.update' | translate}}</md-button>
+    </box-footer-buttons>
+  </box>
+</form>

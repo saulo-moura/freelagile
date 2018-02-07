@@ -1,37 +1,50 @@
-<box box-title="{{ ::'views.actions.projectList' | translate}}">
+<box box-title="{{ ::'views.actions.tasksList' | translate}}">
 	<box-toolbar-buttons>
 		<md-button class="md-icon-button" ng-click="tasksCtrl.goTo('form')">
 			<md-icon md-font-set="material-icons" class="md-warn">add</md-icon>
 			<md-tooltip md-direction="bottom" hide-sm hide-xs>{{ ::'views.actions.criarProjeto' | translate}}</md-tooltip>
 		</md-button>
 	</box-toolbar-buttons>
-	<md-content layout="row" flex layout-wrap class="md-padding" ng-if="tasksCtrl.resources.length > 0">
-		<md-card ng-repeat="project in tasksCtrl.resources" flex="45">
-			<md-card-title>
-				<md-card-title-text>
-					<span class="md-headline">{{ ::project.name }}</span>
-				</md-card-title-text>
-			</md-card-title>
-			<md-card-content>
-				<span class="md-subhead">{{ ::project.description }}</span>
-			</md-card-content>
-			<md-card-actions layout-align="end center">
-				<md-button ng-click="appCtrl.setActiveProject(project); tasksCtrl.viewProject(project);">
-					<md-icon md-font-set="material-icons" class="md-warn">remove_red_eye</md-icon>
-					<md-tooltip md-direction="bottom" hide-sm hide-xs>Visualizar</md-tooltip>
-				</md-button>
-				<md-button ng-click="tasksCtrl.edit(project)">
-					<md-icon md-font-set="material-icons" class="md-warn">edit</md-icon>
-					<md-tooltip md-direction="bottom" hide-sm hide-xs>Editar</md-tooltip>
-				</md-button>
-				<md-button ng-click="tasksCtrl.remove(project)">
-					<md-icon md-font-set="material-icons" class="md-warn">delete</md-icon>
-					<md-tooltip md-direction="bottom" hide-sm hide-xs>Apagar</md-tooltip>
-				</md-button>
-			</md-card-actions>
-		</md-card>
-	</md-content>
-	<div ng-if="tasksCtrl.resources.length === 0" style="text-align:center;">
-		<span>Não há projetos cadastrados</span>
-	</div>
+
+  <md-table-container>
+    <table md-table class="condensed">
+      <thead md-head>
+        <tr md-row>
+          <th md-column>{{ ::'attributes.task.title' | translate}}</th>
+          <th md-column>{{ ::'attributes.task.status' | translate}}</th>
+          <th md-column>{{ ::'attributes.task.priority' | translate}}</th>
+          <th md-column>{{ ::'attributes.task.type' | translate}}</th>
+          <th md-column class="md-text-center">{{ ::'views.fields.action' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody md-body>
+        <tr md-row ng-repeat="resource in tasksCtrl.resources" ng-if="tasksCtrl.resources.length > 0">
+          <td md-cell>{{ ::resource.title}}</td>
+          <td md-cell>{{ ::resource.status.name}}</td>
+          <td md-cell>{{ ::resource.priority.name}}</td>
+          <td md-cell>{{ ::resource.type.name}}</td>
+          <td md-cell class="md-text-center">
+            <md-button class="md-icon-button" ng-click="tasksCtrl.view(resource)">
+              <md-icon md-font-set="material-icons" class="md-dark">remove_red_eye</md-icon>
+              <md-tooltip md-direction="top" hide-sm hide-xs>Visualizar</md-tooltip>
+            </md-button>
+            <md-button ng-disabled="resource.milestone.done" class="md-icon-button" ng-click="tasksCtrl.edit(resource)">
+              <md-icon md-font-set="material-icons" ng-class="resource.milestone.done ? '' : 'md-dark'">create</md-icon>
+              <md-tooltip md-direction="top">{{::'views.actions.edit' | translate}}</md-tooltip>
+            </md-button>
+            <md-button ng-disabled="resource.milestone.done" class="md-icon-button" ng-click="tasksCtrl.remove(resource)">
+              <md-icon md-font-set="material-icons"
+                class="md-warn">delete</md-icon>
+              <md-tooltip md-direction="top">{{::'views.actions.remove' | translate}}</md-tooltip>
+            </md-button>
+          </td>
+        </tr>
+        <tr md-row ng-if="tasksCtrl.resources.length == 0">
+          <td md-cell colspan="7">
+            <div layout="row" layout-align="center center">{{::'messages.notFound' | translate}}</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </md-table-container>
 </box>

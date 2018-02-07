@@ -8,13 +8,15 @@
 
   /** @ngInject */
   // eslint-disable-next-line max-params
-  function ProjectsController(Global, 
-    $controller, 
-    ProjectsService, 
-    Auth, 
-    RolesService, 
+  function ProjectsController($controller,
+    ProjectsService,
+    Auth,
+    RolesService,
     UsersService,
-    $state) {
+    $state,
+    $filter,
+    $stateParams,
+    $window) {
     var vm = this;
 
     //Attributes Block
@@ -27,34 +29,42 @@
     vm.addUser = addUser;
     vm.removeUser = removeUser;
     vm.viewProject = viewProject;
-    
-    vm.roles = {};
 
-    function onActivate() { 
-      localStorage.removeItem('project');
-      vm.queryFilters = {user_id: Auth.currentUser.id};
-  		RolesService.query().then(function(response){
-  			vm.roles = response;
-  		});
+    vm.roles = {};
+    vm.users = [];
+
+    function onActivate() {
+      RolesService.query().then(function(response) {
+        vm.roles = response;
+        if ($stateParams.obj === 'edit') {
+          vm.cleanForm();
+          vm.viewForm = true;
+          vm.resource = $stateParams.resource;
+          usersArray(vm.resource);
+        } else {
+          localStorage.removeItem('project');
+          vm.queryFilters = { user_id: Auth.currentUser.id };
+        }
+      });
     }
 
     function applyFilters(defaultQueryFilters) {
       return angular.extend(defaultQueryFilters, vm.querylters);
     }
-    
-    function beforeSave() {
-  		vm.resource.owner = Auth.currentUser.id;
-  		vm.resource.user_id = Auth.currentUser.id;
-  	}
 
-    function searchUser(text) {
-      return UsersService.query({name: vm.userName});
+    function beforeSave() {
+      vm.resource.owner = Auth.currentUser.id;
+      vm.resource.user_id = Auth.currentUser.id;
+    }
+
+    function searchUser() {
+      return UsersService.query({ name: vm.userName });
     }
 
     function addUser(user) {
-      if(user) {
+      if (user) {
         vm.resource.users.push(user);
-        vm.userName = ''; 
+        vm.userName = '';
       }
     }
 
@@ -63,15 +73,48 @@
     }
 
     function applyFilters(defaultQueryFilters) {
-      return angular.extend(defaultQueryFilters, vm.queryFilters);    
+      return angular.extend(defaultQueryFilters, vm.queryFilters);
     }
-    
-    function viewProject(project) {
+
+    function viewProject() {
       $state.go('app.dashboard');
-		}
+    }
+
+    vm.afterSearch = function() {
+      if (vm.resources.length > 0) {
+        vm.resources.forEach(function(project) {
+          usersArray(project);
+        });
+      }
+    }
+
+    function usersArray(project) {
+      project.users = [];
+      if (project.client_id) {
+        project.client.role = $filter('filter')(vm.roles, { slug: 'client' })[0];
+        project.users.push(project.client);
+      }
+      if (project.dev_id) {
+        project.developer.role = $filter('filter')(vm.roles, { slug: 'dev' })[0];
+        project.users.push(project.developer);
+      }
+      if (project.stakeholder_id) {
+        project.stakeholder.role = $filter('filter')(vm.roles, { slug: 'stakeholder' })[0];
+        project.users.push(project.stakeholder);
+      }
+    }
+
+    vm.historyBack = function() {
+      $window.history.back();
+    }
+
+    vm.afterSave = function(resource) {
+      localStorage.setItem('project', resource.id);
+      $state.go('app.dashboard');
+    }
 
     // instantiate base controller
-    $controller('CRUDController', { vm: vm, modelService: ProjectsService, options: {} });
+    $controller('CRUDController', { vm: vm, modelService: ProjectsService, options: { redirectAfterSave: false } });
   }
 
 })();

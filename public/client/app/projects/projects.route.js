@@ -18,7 +18,8 @@
         url: '/projects',
         templateUrl: Global.clientPath + '/projects/projects.html',
         controller: 'ProjectsController as projectsCtrl',
-        data: { needAuthentication: true}
+        data: { needAuthentication: true },
+        params: { obj: null, resource: null }
       });
   }
 }());

@@ -1,0 +1,97 @@
+<box box-title="{{ ::milestonesCtrl.resource.title }}">
+  <box-toolbar-buttons>
+    <md-button class="md-icon-button" ng-click="milestonesCtrl.goTo('list')">
+      <md-icon md-font-set="material-icons" class="md-warn">view_list</md-icon>
+      <md-tooltip md-direction="bottom">{{ ::'views.actions.list' | translate}}</md-tooltip>
+    </md-button>
+  </box-toolbar-buttons>
+  <fieldset disabled style="border:0px;">
+    <div layout="row">
+      <md-input-container class="md-block" flex>
+        <textarea required
+          placeholder="Descrição"
+          ng-model="milestonesCtrl.resource.description"
+          ng-attr-rows="{{row || '3'}}" >
+        </textarea>
+      </md-input-container>
+    </div>
+    <div layout="row">
+      <md-input-container class="md-block" flex>
+        <label>Data Estimada para Iní­cio</label>
+        <md-datepicker required
+          onkeydown="return false"
+          md-open-on-focus
+          name="date_begin"
+          ng-model="milestonesCtrl.resource.date_begin"></md-datepicker>
+        <div ng-messages="milestonesCtrl.formMilestone.date_begin.$error">
+          <div ng-message="valid">Data inválida.</div>
+          <div ng-message="required">A data deve ser informada.</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block" flex>
+        <label>Data Estimada para Fim</label>
+        <md-datepicker required
+          onkeydown="return false"
+          md-open-on-focus
+          name="date_end"
+          ng-model="milestonesCtrl.resource.date_end"></md-datepicker>
+        <div ng-messages="milestonesCtrl.formMilestone.date_end.$error">
+          <div ng-message="valid">Data inválida.</div>
+          <div ng-message="required">A data deve ser informada.</div>
+        </div>
+      </md-input-container>
+    </div>
+  </fieldset>
+</box>
+<box box-title="Tarefas">
+  <md-input-container ng-if="!milestonesCtrl.resource.done" class="md-block" flex>
+    <md-autocomplete class="md-input-has-placeholder"
+      md-min-length="3" md-no-cache="true" md-selected-item="milestonesCtrl.task" md-search-text="milestonesCtrl.taskTerm"
+      md-items="task in milestonesCtrl.searchTask(milestonesCtrl.taskTerm)" md-item-text="task.title"
+      md-clear-button="true" md-floating-label="Adicionar Tarefa" md-selected-item-change="milestonesCtrl.onTaskChange()">
+      <md-item-template>
+          <span md-highlight-text="milestonesCtrl.taskTerm" md-highlight-flags="^i">{{ task.title }}</span>
+      </md-item-template>
+      <md-not-found>
+          Nenhuma tarefa encontrada.
+      </md-not-found>
+    </md-autocomplete>
+  </md-input-container>
+  <md-table-container>
+    <table md-table class="condensed">
+      <thead md-head>
+        <tr md-row>
+          <th md-column>{{ ::'attributes.task.title' | translate}}</th>
+          <th md-column>{{ ::'attributes.task.status' | translate}}</th>
+          <th md-column>{{ ::'attributes.task.priority' | translate}}</th>
+          <th md-column>{{ ::'attributes.task.type' | translate}}</th>
+          <th md-column>{{ ::'attributes.task.estimated_time' | translate}}</th>
+          <th md-column class="md-text-center">{{ ::'views.fields.action' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody md-body>
+        <tr md-row ng-repeat="task in milestonesCtrl.resource.tasks" ng-if="milestonesCtrl.resource.tasks.length > 0">
+          <td md-cell>{{ task.title}}</td>
+          <td md-cell>{{ task.status.name}}</td>
+          <td md-cell>{{ task.priority.name}}</td>
+          <td md-cell>{{ task.type.name}}</td>
+          <td md-cell>{{ task.estimated_time}} horas</td>
+          <td md-cell class="md-text-center">
+            <md-button ng-disabled="milestonesCtrl.resource.done" class="md-icon-button" ng-click="milestonesCtrl.removeTask(task)">
+              <md-icon md-font-set="material-icons" class="md-warn">delete</md-icon>
+              <md-tooltip md-direction="top">{{::'views.actions.remove' | translate}}</md-tooltip>
+            </md-button>
+          </td>
+        </tr>
+        <tr md-row ng-if="milestonesCtrl.resource.tasks.length == 0">
+          <td md-cell colspan="6">
+            <div layout="row" layout-align="center center">{{::'messages.notFound' | translate}}</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </md-table-container>
+  <box-footer-buttons>
+    <md-button ng-if="!milestonesCtrl.resource.done" class="md-primary md-raised" ng-click="milestonesCtrl.saveTasks()">{{::'views.actions.save' | translate}}</md-button>
+  </box-footer-buttons>
+</box>

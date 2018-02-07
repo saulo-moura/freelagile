@@ -8,6 +8,24 @@
   </md-toolbar>
   <md-dialog-content layout-margin>
     <p>{{::ctrl.description}}</p>
+
+    <pr-date-time-picker
+      id="date3"
+      label="'Data Inicial'"
+      ng-model="globalCtrl.dataWithTime3"
+      max-date="globalCtrl.maxDate"
+      with-time="true"
+      click-to-show-in-field="false">
+    </pr-date-time-picker>
+
+    <pr-date-time-picker
+      id="date4"
+      label="'Data Inicial'"
+      ng-model="globalCtrl.dataWithTime4"
+      max-date="globalCtrl.maxDate"
+      with-time="true"
+      click-to-show-in-field="false">
+    </pr-date-time-picker>
   </md-dialog-content>
   <md-dialog-actions>
     <md-button class="md-raised md-primary" ng-click="ctrl.close()">Sair</md-button>

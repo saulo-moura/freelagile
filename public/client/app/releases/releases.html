@@ -1,0 +1,5 @@
+<content-body>
+  <div flex ng-include src="global.clientPath + '/releases/releases-form.html'" ng-show="releasesCtrl.viewForm && !releasesCtrl.onView"></div>
+  <div flex ng-include src="global.clientPath + '/releases/releases-list.html'" ng-hide="releasesCtrl.viewForm || releasesCtrl.onView"></div>
+  <div flex ng-include src="global.clientPath + '/releases/releases-view.html'" ng-show="releasesCtrl.onView && !releasesCtrl.viewForm"></div>
+</content-body>

@@ -13,7 +13,12 @@
         mail: 'Administração - Envio de e-mail',
         projects: 'Projetos',
         'dinamic-query': 'Administração - Consultas Dinâmicas',
-        'not-authorized': 'Acesso Negado'
+        'not-authorized': 'Acesso Negado',
+        tasks: 'Tarefas',
+        milestones: 'Sprints',
+        kanban: 'Kanban Board',
+        vcs: 'Controle de Versão',
+        releases: 'Releases'
       },
       titles: {
         dashboard: 'Dashboard',
@@ -23,7 +28,12 @@
         auditList: 'Lista de Logs',
         register: 'Formulário de Cadastro',
         resetPassword: 'Redefinir Senha',
-        update: 'Formulário de Atualização'
+        update: 'Formulário de Atualização',
+        tasks: 'Tarefas',
+        milestones: 'Sprints',
+        kanban: 'Kanban Board',
+        vcs: 'Controle de Versão',
+        releases: 'Releases'
       },
       actions: {
         send: 'Enviar',
@@ -45,6 +55,10 @@
         signup: 'Cadastrar',
         criarProjeto: 'Criar Projeto',
         projectList: 'Lista de Projetos',
+        tasksList: 'Lista de Tarefas',
+        milestonesList: 'Lista de Sprints',
+        finalize: 'Finalizar',
+        reply: 'Responder'
       },
       fields: {
         date: 'Data',
@@ -106,15 +120,11 @@
         menu: {
           projects: 'Projetos',
           dashboard: 'Dashboard',
+          milestones: 'Sprints',
           tasks: 'Tarefas',
           kanban: 'Kanban',
           vcs: 'Controle de Versão',
-          admin: 'Administração',
-          examples: 'Exemplos',
-          user: 'Usuários',
-          mail: 'Enviar e-mail',
-          audit: 'Auditoria',
-          dinamicQuery: 'Consultas Dinamicas'
+          releases: 'Releases'
         }
       },
       tooltips: {

@@ -8,7 +8,7 @@
   /** @ngInject */
   // eslint-disable-next-line max-params
   function config(Global, $mdThemingProvider, $modelFactoryProvider,  // NOSONAR
-    $translateProvider, moment, $mdAriaProvider) {
+    $translateProvider, moment, $mdAriaProvider, $mdDateLocaleProvider) {
 
     $translateProvider
       .useLoader('languageLoader')
@@ -23,8 +23,8 @@
 
     // Configuration theme
     $mdThemingProvider.theme('default')
-      .primaryPalette('brown', {
-        default: '700'
+      .primaryPalette('grey', {
+        default: '800'
       })
       .accentPalette('amber')
       .warnPalette('deep-orange');
@@ -34,5 +34,8 @@
 
     $mdAriaProvider.disableWarnings();
 
+    $mdDateLocaleProvider.formatDate = function(date) {
+      return date ? moment(date).format('DD/MM/YYYY') : '';
+    };
   }
 }());

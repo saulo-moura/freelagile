@@ -17,14 +17,16 @@ class CreateTableTasks extends Migration
             $table->string('title');
             $table->text('description');
             $table->boolean('done');
-            $table->integer('status_id')->unsigned();
-            $table->integer('priority_id')->unsigned();
-            $table->integer('milestone_id')->unsigned();
+            $table->unsignedInteger('milestone_id')->nullable();
+            $table->unsignedInteger('status_id');
+            $table->unsignedInteger('priority_id');
             $table->timestampsTz();
-            
+        });
+
+        Schema::table('tasks', function (Blueprint $table) {
             $table->foreign('milestone_id')->references('id')->on('milestones');
-            $table->foreign('milestone_id')->references('id')->on('milestones');
-            $table->foreign('milestone_id')->references('id')->on('milestones');
+            $table->foreign('priority_id')->references('id')->on('priorities');
+            $table->foreign('status_id')->references('id')->on('status');
         });
     }
 

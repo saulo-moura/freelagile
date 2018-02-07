@@ -1,0 +1,61 @@
+<box box-title="{{ ::'views.actions.list' | translate}}">
+  <box-toolbar-buttons>
+      <a ng-href="https://github.com/{{vcsCtrl.username}}/{{vcsCtrl.repo}}/archive/master.zip">
+        <md-button ng-if="vcsCtrl.resources" class="md-icon-button">
+          <md-icon md-font-set="material-icons" class="md-warn">file_download</md-icon>
+          <md-tooltip md-direction="bottom" hide-sm hide-xs>Fazer Download do Repositório</md-tooltip>
+        </md-button>
+      </a>
+      <md-button ng-if="vcsCtrl.index !== 0" class="md-icon-button" ng-click="vcsCtrl.openFileOrDirectory()">
+        <md-icon md-font-set="material-icons" class="md-warn">reply</md-icon>
+        <md-tooltip md-direction="bottom" hide-sm hide-xs>{{ ::'views.actions.add' | translate}}</md-tooltip>
+      </md-button>
+  </box-toolbar-buttons>
+  <md-table-container ng-if="vcsCtrl.resources.length > 0 && !vcsCtrl.resources[0].content">
+    <md-list flex>
+      <md-list-item>
+        <div class="md-list-item-text" layout="row" flex layout-align="start center">
+          <span flex=70>Nome</span>
+          <span flex=20>Tamanho</span>
+          <span flex=10>Ações</span>
+        </div>
+      </md-list-item>
+      <md-list-item ng-repeat="resource in vcsCtrl.resources" ng-click="vcsCtrl.openFileOrDirectory(resource)">
+        <div class="md-list-item-text" layout="row" flex layout-align="start center">
+          <span flex=70>
+            <md-button class="md-icon-button">
+              <md-icon ng-if="resource.type && resource.type === 'file'" md-font-set="material-icons">insert_drive_file</md-icon>
+              <md-icon ng-if="resource.type && resource.type !== 'file'" md-font-set="material-icons">folder</md-icon>
+            </md-button>
+            {{ resource.name }}
+          </span>
+          <span flex=20>{{ resource.size ? (resource.size | bytes:0) : '' }}</span>
+          <span flex=10 ng-if="resource.download_url !== null">
+            <a ng-href="{{ resource.download_url }}">
+              <md-button class="md-icon-button">
+                <md-icon md-font-set="material-icons" class="md-dark">file_download</md-icon>
+                <md-tooltip md-direction="bottom" hide-sm hide-xs>Download</md-tooltip>
+              </md-button>
+            </a>
+          </span>
+          <span flex=10 ng-if="resource.download_url === null"></span>
+        </div>
+        <md-divider ng-if="!$last"></md-divider>
+      </md-list-item>
+    </md-list>
+  </md-table-container>
+  <md-content ng-if="vcsCtrl.resources.length > 0 && vcsCtrl.resources[0].content">
+    <div layout="row">
+      <pre>
+        <code class="html">
+          {{ vcsCtrl.resources[0].content }}
+        </code>
+      </pre>
+    </div>
+  </md-content>
+  <md-content ng-if="!vcsCtrl.resources">
+    <div layout="row" layout-align="center">
+      <span>Repositório não encontrado ou não configurado</span>
+    </div>
+  </md-content>
+</box>

@@ -45,7 +45,15 @@ paths.angularScripts = [
   paths.node + '/angular-file-upload/dist/angular-file-upload.js',
   paths.node + '/ng-material-datetimepicker/dist/angular-material-datetimepicker.min.js',
   paths.node + '/ng-prodeb/dist/ng-prodeb.js',
-  paths.node + '/DlhSoft.KanbanLibrary/DlhSoft.Kanban.Angular.Components.js'
+  paths.node + '/angular-messages/angular-messages.min.js',
+  paths.node + '/jqwidgets-framework/jqwidgets/jqxcore.js',
+  paths.node + '/jqwidgets-framework/jqwidgets/jqxdata.js',
+  paths.node + '/jqwidgets-framework/jqwidgets/jqxsortable.js',
+  paths.node + '/jqwidgets-framework/jqwidgets/jqxkanban.js',
+  paths.node + '/jqwidgets-framework/jqwidgets/jqxangular.js',
+  'bower_components/angular-route/angular-route.js',
+  paths.node + '/angular-ui-mask/dist/mask.js',
+  paths.node + '/please-wait/build/please-wait.min.js'
 ];
 //Add minifieds files.
 paths.vendorsScripts = [
@@ -64,8 +72,17 @@ paths.styles = [
   paths.node   + '/ng-prodeb/dist/ng-prodeb.css',
   paths.node   + '/angular-material-data-table/dist/md-data-table.min.css',
   paths.node   + '/ng-material-datetimepicker/dist/material-datetimepicker.min.css',
-  paths.client  + '/styles/app.scss',
-  paths.node   + '/DlhSoft.KanbanLibrary/DlhSoft.Kanban.Angular.Components.css'
+  paths.node   + '/jqwidgets-framework/jqwidgets/styles/jqx.base.css',
+  paths.node   + '/jqwidgets-framework/jqwidgets/styles/jqx.classic.css',
+  paths.node   + '/jqwidgets-framework/jqwidgets/styles/jqx.fresh.css',
+  paths.node   + '/jqwidgets-framework/jqwidgets/styles/jqx.glacier.css',
+  paths.node   + '/jqwidgets-framework/jqwidgets/styles/jqx.light.css', //
+  paths.node   + '/jqwidgets-framework/jqwidgets/styles/jqx.metro.css',
+  paths.node   + '/jqwidgets-framework/jqwidgets/styles/jqx.mobile.css', //
+  paths.node   + '/jqwidgets-framework/jqwidgets/styles/jqx.office.css',
+  paths.node   + '/jqwidgets-framework/jqwidgets/styles/jqx.summer.css',
+  paths.node   + '/please-wait/build/please-wait.css',
+  paths.client  + '/styles/app.scss'
 ];
 
 var filesNames = {

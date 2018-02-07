@@ -14,7 +14,6 @@ class Dashboard extends BaseModel
      * @var string
      */
     protected $table = 'dashboard';
-    protected $dateFormat = "Y-m-d H:m:i";
 
     /**
      * Attributes that should be mass-assignable.
@@ -31,5 +30,5 @@ class Dashboard extends BaseModel
     public function user() {
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
-    
+
 }

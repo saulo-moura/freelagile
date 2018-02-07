@@ -1,65 +1,51 @@
-<form name="projectForm" ng-submit="tasksCtrl.save()" novalidate>
-	<box box-title="Novo Projeto">
+<form name="taskForm" ng-submit="tasksCtrl.save()" novalidate>
+	<box box-title="Nova Tarefa">
 		<box-toolbar-buttons>
 			<md-button class="md-icon-button" ng-click="tasksCtrl.goTo('list')">
 				<md-icon md-font-set="material-icons" class="md-warn">view_list</md-icon>
 				<md-tooltip md-direction="bottom" hide-sm hide-xs>{{ ::'views.actions.list' | translate}}</md-tooltip>
 			</md-button>
 		</box-toolbar-buttons>
-		<div layout="row" flex>
-			<div flex>
-				<md-input-container class="md-block" flex>
-					<input type="text" placeholder="Nome" ng-model="tasksCtrl.resource.name" required>
-				</md-input-container>
-			</div>
-			<div flex ng-if="!tasksCtrl.resource.id">
-				<md-input-container style="width:100%;">
-					<md-select ng-model="tasksCtrl.resource.role" placeholder="Selecione o seu Papel no Projeto">
-						<md-option ng-value="{{role}}" ng-repeat="role in tasksCtrl.roles" ng-if="!$first">
-							{{ ::role.title }}
-						</md-option>
-					</md-select>
-				</md-input-container>
-			</div>
+    <div layout="row">
+      <md-input-container class="md-block" flex>
+        <input type="text" placeholder="Título" ng-model="tasksCtrl.resource.title" required>
+      </md-input-container>
+      <md-input-container class="md-block" flex>
+        <input type="text" placeholder="Tempo Estimado (em horas)" ng-model="tasksCtrl.resource.estimated_time" required>
+      </md-input-container>
 		</div>
-		<md-input-container class="md-block" flex>
-			<textarea required
-			placeholder="Descrição"
-			ng-model="tasksCtrl.resource.description">
-			</textarea>
-		</md-input-container>
-		<md-list flex>
-			<h4>Membros</h4>
-			<md-autocomplete flex
-				md-no-cache="true"
-	            md-selected-item="tasksCtrl.selectedItem"
-	            md-search-text="tasksCtrl.userName"
-	            md-selected-item-change="tasksCtrl.addUser(user)"
-	            md-items="user in tasksCtrl.searchUser(tasksCtrl.userName)"
-	            md-item-text="user.name"
-	            md-floating-label="Usuário">
-	          <md-item-template>
-	            <span md-highlight-text="tasksCtrl.userName">{{user.name}}</span>
-	          </md-item-template>
-	        </md-autocomplete>
-	        <md-list-item class="md-3-line" ng-repeat="user in tasksCtrl.resource.users track by $index">
-				<div class="md-list-item-text" layout="column">
-					<h3>{{ user.name }}</h3>
-				</div>
-				<md-input-container>
-					<md-select ng-model="tasksCtrl.resource.role" placeholder="Selecione o papel deste usuário projeto">
-						<md-option ng-value="{{role}}" ng-repeat="role in tasksCtrl.roles" ng-if="!$first">
-							{{ ::role.title }}
-						</md-option>
-					</md-select>
-				</md-input-container>
-				<md-button ng-click="tasksCtrl.removeUser($index)">
-					<md-icon md-font-set="material-icons" class="md-warn">delete</md-icon>
-					<md-tooltip md-direction="bottom" hide-sm hide-xs>Apagar</md-tooltip>
-				</md-button>
-        	<md-divider ></md-divider>
-	        </md-list-item>
-	    </md-list>
+		<div layout="row">
+      <md-input-container class="md-block" flex>
+        <md-select ng-model="tasksCtrl.resource.status_id" placeholder="Status" required>
+          <md-option ng-value="{{ status.id }}" ng-repeat="status in tasksCtrl.status">
+            {{ ::status.name }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+      <md-input-container class="md-block" flex>
+        <md-select ng-model="tasksCtrl.resource.priority_id" placeholder="Prioridade" required>
+          <md-option ng-value="{{ priority.id }}" ng-repeat="priority in tasksCtrl.priorities">
+            {{ ::priority.name }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+      <md-input-container class="md-block" flex>
+        <md-select ng-model="tasksCtrl.resource.type_id" placeholder="Tipo" required>
+          <md-option ng-value="{{ type.id }}" ng-repeat="type in tasksCtrl.types">
+            {{ ::type.name }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+		</div>
+		<div layout="row">
+      <md-input-container class="md-block" flex>
+        <textarea required
+          placeholder="Descrição"
+          ng-model="tasksCtrl.resource.description"
+          ng-attr-rows="{{row || '3'}}" >
+        </textarea>
+      </md-input-container>
+    </div>
 		<box-footer-buttons>
 			<md-button class="md-primary md-raised" type="submit">{{::'views.actions.save' | translate}}</md-button>
 			<md-button class="md-raised" ng-click="tasksCtrl.cleanForm(projectForm)">{{::'views.actions.clear' | translate}}</md-button>

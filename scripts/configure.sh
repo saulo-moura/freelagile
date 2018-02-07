@@ -36,7 +36,7 @@ then
 fi
 
 # adicionando a referência do projeto do starter pack
-git remote add starter-pack git@git.prodeb.ba.gov.br:starter-pack/laravel_angular_base.git
+#git remote add starter-pack git@git.prodeb.ba.gov.br:starter-pack/laravel_angular_base.git
 
 # Configurando o Projeto
 
@@ -50,7 +50,7 @@ npm install -g yo gulp gulp-babel babel-preset-es2015 eslint eslint-plugin-angul
 webdriver-manager update
 
 # Instalando o gerador
-npm install -g git+ssh://git@git.prodeb.ba.gov.br:starter-pack/generator-ngprodeb.git
+#npm install -g git+ssh://git@git.prodeb.ba.gov.br:starter-pack/generator-ngprodeb.git
 
 # Dando permissão nas pastas do laravel
 chmod 777 -R storage

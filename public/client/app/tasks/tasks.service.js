@@ -8,7 +8,16 @@
   /** @ngInject */
   function TasksService(serviceFactory) {
     return serviceFactory('tasks', {
-      actions: { },
+      actions: {
+        updateMilestone: {
+          method: 'POST',
+          url: 'updateMilestone'
+        },
+        updateTaskByKanban: {
+          method: 'POST',
+          url: 'updateTaskByKanban'
+        }
+      },
       instance: { }
     });
   }

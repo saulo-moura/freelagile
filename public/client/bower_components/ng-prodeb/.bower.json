@@ -1,54 +1,12 @@
 {
   "name": "ng-prodeb",
-  "version": "0.2.5",
-  "description": "Biblioteca de componetes Angular da Prodeb",
-  "authors": [
-    "Thiago Antonius Oliveira Souza <thiagoantonius.souza@prodeb.ba.gov.br>",
-    "Francis Gomes <francisgomes.santos@prodeb.ba.gov.br>"
-  ],
-  "main": [
-    "dist/ng-prodeb.js"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git@git.prodeb.ba.gov.br:ngprodeb.git"
-  },
-  "license": "MIT",
-  "homepage": "http://git.prodeb.ba.gov.br/ngprodeb",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests",
-    ".jshintrc",
-    ".editorconfig"
-  ],
-  "dependencies": {
-    "angular": "~1.6.4",
-    "angular-aria": "~1.6.4",
-    "angular-animate": "~1.6.4",
-    "angular-material-data-table": "~0.10.10",
-    "angular-material": "~1.1.4",
-    "angular-moment": "~0.10.3",
-    "angular-file-upload": "latest",
-    "lodash": "~4.13.1",
-    "moment": "~2.14.1",
-    "ng-material-datetimepicker": "~1.6.2",
-    "alasql": "~0.3.5"
-  },
-  "resolutions": {
-    "angular": "~1.6.4",
-    "angular-material": "~1.1.4",
-    "moment": "~2.14.1"
-  },
-  "_release": "0.2.5",
+  "_release": "08d75d11fa",
   "_resolution": {
-    "type": "version",
-    "tag": "0.2.5",
-    "commit": "6784d05f36ddf7f21631fc4d2c6d1f34ad1efd93"
+    "type": "branch",
+    "branch": "master",
+    "commit": "08d75d11fa5c2efdccc7b3501af71cda72eda029"
   },
-  "_source": "git@git.prodeb.ba.gov.br:starter-pack/ngprodeb.git",
-  "_target": "0.2.5",
-  "_originalSource": "git@git.prodeb.ba.gov.br:starter-pack/ngprodeb.git"
+  "_source": "git@gitlab.com:saulo-moura/ngprodeb.git",
+  "_target": "*",
+  "_originalSource": "git@gitlab.com:saulo-moura/ngprodeb.git"
 }

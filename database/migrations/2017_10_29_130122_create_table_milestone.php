@@ -18,10 +18,11 @@ class CreateTableMilestone extends Migration
             $table->text('description');
             $table->date('date_begin');
             $table->date('date_end');
-            $table->integer('project_id')->unsigned();
-            
+            $table->unsignedInteger('project_id');
+
             $table->timestampsTz();
-            
+        });
+        Schema::table('milestones', function (Blueprint $table) {
             $table->foreign('project_id')->references('id')->on('projects');
         });
     }

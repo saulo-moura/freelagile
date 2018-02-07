@@ -27,17 +27,14 @@ class DashboardsController extends CrudController
 
     protected function applyFilters(Request $request, $query) {
         $query = $query->with(['user']);
-        
+
         if ($request->has('project_id')) {
             $query = $query->where('project_id', $request->project_id);
         }
     }
 
     protected function beforeSearch(Request $request, $dataQuery, $countQuery) {
-        /*
-         * A linha abaixo aplica o critério de ordenação antes da pesquisa
-         * $dataQuery->orderBy('{{attribute}}', 'asc');
-         */
+        $dataQuery->orderBy('created_at', 'desc');
     }
 
     protected function getValidationRules(Request $request, Model $obj)
