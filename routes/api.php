@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 // preflight to CORS
 Route::options('{all}', function () {
-    //Trata as requisiÃ§Ãµes OPTIONS preflight
+    //Trata as requisições OPTIONS preflight
     return \Response::json('{"method":"OPTIONS"}', 200, \Prodeb::getCORSHeaders());
 })->where('all', '.*');
 

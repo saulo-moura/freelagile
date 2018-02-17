@@ -8,7 +8,14 @@
 
   /** @ngInject */
   // eslint-disable-next-line max-params
-  function KanbanController($controller, TasksService, StatusService, PrToast, $mdDialog, $document) {
+  function KanbanController($controller,
+    TasksService,
+    StatusService,
+    PrToast,
+    $mdDialog,
+    $document,
+    Auth,
+    ProjectsService) {
     //Attributes Block
     var vm = this;
     var fields = [
@@ -20,6 +27,9 @@
 
     vm.onActivate = function() {
       vm.project = localStorage.getItem('project');
+      ProjectsService.query({ project_id: vm.project }).then(function(response) {
+        vm.actualProject = response[0];
+      })
       vm.queryFilters = { project_id: vm.project };
       vm.isMoved = false;
     }
@@ -71,22 +81,26 @@
     }
 
     vm.onItemMoved = function(event) {
-      vm.isMoved = true;
-      TasksService.query({ task_id: event.args.itemId }).then(function(response) {
-        if ((response[0].milestone && response[0].milestone.done) || response[0].project.done) {
-          PrToast.error('Não é possível modificar o status de uma tarefa finalizada.');
-          vm.afterSearch();
-          vm.isMoved = false;
-        } else {
-          TasksService.updateTaskByKanban({
-            project_id: vm.project,
-            id: event.args.itemId,
-            oldColumn: event.args.oldColumn,
-            newColumn: event.args.newColumn }).then(function() {
-              vm.isMoved = false;
-            });
-        }
-      });
+      if (Auth.currentUser.id === vm.actualProject.owner) {
+        vm.isMoved = true;
+        TasksService.query({ task_id: event.args.itemId }).then(function(response) {
+          if ((response[0].milestone && response[0].milestone.done) || response[0].project.done) {
+            PrToast.error('Não é possível modificar o status de uma tarefa finalizada.');
+            vm.afterSearch();
+            vm.isMoved = false;
+          } else {
+            TasksService.updateTaskByKanban({
+              project_id: vm.project,
+              id: event.args.itemId,
+              oldColumn: event.args.oldColumn,
+              newColumn: event.args.newColumn }).then(function() {
+                vm.isMoved = false;
+              });
+          }
+        });
+      } else {
+        vm.afterSearch();
+      }
     }
 
     vm.onItemClicked = function(event) {

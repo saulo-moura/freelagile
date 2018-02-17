@@ -8,13 +8,21 @@
 
   /** @ngInject */
   // eslint-disable-next-line max-params
-  function ReleasesController($controller, ReleasesService, MilestonesService, PrToast, moment, $mdDialog, $translate) {
+  function ReleasesController($controller,
+    ReleasesService,
+    MilestonesService,
+    Auth,
+    PrToast,
+    moment,
+    $mdDialog,
+    $translate) {
     var vm = this;
 
     //Attributes Block
 
     //Functions Block
     vm.onActivate = function() {
+      vm.currentUser = Auth.cuurrentUser;
       vm.project = localStorage.getItem('project');
       vm.queryFilters = { project_id: vm.project };
     }

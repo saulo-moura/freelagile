@@ -18,7 +18,7 @@ class VcsController extends Controller {
         $path = isset($request->path) ? $request->path : '.';
 
         try {
-            $result = $this->client->api('repo')->contents()->show($user, $repo, $path);
+            $result = $this->client->api('repos')->contents()->show($user, $repo, $path);
             if (isset($result['type']) && $result['type'] == 'file') {
                 $data = [];
                 $result['content'] = base64_decode($result['content']);

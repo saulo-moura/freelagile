@@ -20,7 +20,7 @@
 					<md-icon md-font-set="material-icons" class="md-warn">remove_red_eye</md-icon>
 					<md-tooltip md-direction="bottom" hide-sm hide-xs>Visualizar</md-tooltip>
 				</md-button>
-				<md-button ng-disabled="project.done" ng-click="projectsCtrl.remove(project)">
+				<md-button ng-disabled="project.done || project.owner !== projectsCtrl.currentUser.id" ng-click="projectsCtrl.remove(project)">
 					<md-icon md-font-set="material-icons" class="md-warn">delete</md-icon>
 					<md-tooltip md-direction="bottom" hide-sm hide-xs>Apagar</md-tooltip>
 				</md-button>

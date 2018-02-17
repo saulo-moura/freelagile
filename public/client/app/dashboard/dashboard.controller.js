@@ -48,7 +48,9 @@
     DashboardsService,
     ProjectsService,
     moment,
-    PrToast) {
+    PrToast,
+    Auth,
+    Global) {
     var vm = this;
 
     //Attributes Block
@@ -61,6 +63,8 @@
     function onActivate() {
       var project = localStorage.getItem('project');
 
+      vm.imagePath = Global.imagePath + '/no_avatar.gif';
+      vm.currentUser = Auth.currentUser;
       ProjectsService.query({ project_id: project }).then(function(response) {
         vm.actualProject = response[0];
       })

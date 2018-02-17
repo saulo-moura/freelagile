@@ -1,6 +1,6 @@
 <box box-title="{{ ::'views.actions.tasksList' | translate}}">
 	<box-toolbar-buttons>
-		<md-button ng-disabled="tasksCtrl.resources[0].project.done" class="md-icon-button" ng-click="tasksCtrl.goTo('form')">
+		<md-button ng-disabled="tasksCtrl.resources[0].project.done || tasksCtrl.currentUser.id !== tasksCtrl.resources[0].project.owner" class="md-icon-button" ng-click="tasksCtrl.goTo('form')">
 			<md-icon md-font-set="material-icons" class="md-warn">add</md-icon>
 			<md-tooltip md-direction="bottom" hide-sm hide-xs>{{ ::'views.actions.criarProjeto' | translate}}</md-tooltip>
 		</md-button>
@@ -27,11 +27,11 @@
               <md-icon md-font-set="material-icons" class="md-dark">remove_red_eye</md-icon>
               <md-tooltip md-direction="top" hide-sm hide-xs>Visualizar</md-tooltip>
             </md-button>
-            <md-button ng-disabled="resource.project.done || resource.milestone.done" class="md-icon-button" ng-click="tasksCtrl.edit(resource)">
-              <md-icon md-font-set="material-icons" ng-class="resource.project.done || resource.milestone.done ? '' : 'md-dark'">create</md-icon>
+            <md-button ng-disabled="resource.project.done || resource.milestone.done || tasksCtrl.currentUser.id !== resource.project.owner" class="md-icon-button" ng-click="tasksCtrl.edit(resource)">
+              <md-icon md-font-set="material-icons" ng-class="resource.project.done || resource.milestone.done || tasksCtrl.currentUser.id !== resource.project.owner ? '' : 'md-dark'">create</md-icon>
               <md-tooltip md-direction="top">{{::'views.actions.edit' | translate}}</md-tooltip>
             </md-button>
-            <md-button ng-disabled="resource.project.done || resource.milestone.done" class="md-icon-button" ng-click="tasksCtrl.remove(resource)">
+            <md-button ng-disabled="resource.project.done || resource.milestone.done || tasksCtrl.currentUser.id !== resource.project.owner" class="md-icon-button" ng-click="tasksCtrl.remove(resource)">
               <md-icon md-font-set="material-icons"
                 class="md-warn">delete</md-icon>
               <md-tooltip md-direction="top">{{::'views.actions.remove' | translate}}</md-tooltip>

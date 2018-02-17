@@ -1,6 +1,6 @@
 <box box-title="{{ ::'views.actions.milestonesList' | translate}}">
   <box-toolbar-buttons>
-    <md-button ng-disabled="milestonesCtrl.resources[0] && milestonesCtrl.resources[0].project.done" class="md-icon-button" ng-click="milestonesCtrl.goTo('form')">
+    <md-button ng-disabled="milestonesCtrl.resources[0] && milestonesCtrl.resources[0].project.done || milestonesCtrl.currentUser.id !== milestonesCtrl.resources[0].project.owner" class="md-icon-button" ng-click="milestonesCtrl.goTo('form')">
       <md-icon md-font-set="material-icons" class="md-warn">add</md-icon>
       <md-tooltip md-direction="bottom" hide-sm hide-xs>{{ ::'views.actions.add' | translate}}</md-tooltip>
     </md-button>
@@ -37,15 +37,15 @@
               <md-icon md-font-set="material-icons" class="md-dark">remove_red_eye</md-icon>
               <md-tooltip md-direction="top" hide-sm hide-xs>Visualizar</md-tooltip>
             </md-button>
-            <md-button ng-disabled="resource.done" class="md-icon-button" ng-click="milestonesCtrl.edit(resource)">
-              <md-icon md-font-set="material-icons" ng-class="resource.done ? '' : 'md-dark'">create</md-icon>
+            <md-button ng-disabled="resource.done || milestonesCtrl.currentUser.id !== resource.project.owner" class="md-icon-button" ng-click="milestonesCtrl.edit(resource)">
+              <md-icon md-font-set="material-icons" ng-class="resource.done || milestonesCtrl.currentUser.id !== resource.project.owner ? '' : 'md-dark'">create</md-icon>
               <md-tooltip md-direction="top">{{::'views.actions.edit' | translate}}</md-tooltip>
             </md-button>
-            <md-button ng-disabled="resource.done" class="md-icon-button" ng-click="milestonesCtrl.finalize(resource)">
-              <md-icon md-font-set="material-icons" ng-style="{color: resource.done ? '' : 'green' }">done_all</md-icon>
+            <md-button ng-disabled="resource.done || milestonesCtrl.currentUser.id !== resource.project.owner" class="md-icon-button" ng-click="milestonesCtrl.finalize(resource)">
+              <md-icon md-font-set="material-icons" ng-style="{color: resource.done || milestonesCtrl.currentUser.id !== resource.project.owner ? '' : 'green' }">done_all</md-icon>
               <md-tooltip md-direction="top">{{::'views.actions.finalize' | translate}}</md-tooltip>
             </md-button>
-            <md-button ng-disabled="resource.done" class="md-icon-button" ng-click="milestonesCtrl.remove(resource)">
+            <md-button ng-disabled="resource.done || milestonesCtrl.currentUser.id !== resource.project.owner" class="md-icon-button" ng-click="milestonesCtrl.remove(resource)">
               <md-icon md-font-set="material-icons" class="md-warn">delete</md-icon>
               <md-tooltip md-direction="top">{{::'views.actions.remove' | translate}}</md-tooltip>
             </md-button>

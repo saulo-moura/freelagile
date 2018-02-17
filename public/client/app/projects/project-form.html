@@ -9,21 +9,13 @@
 		<div layout="row" flex>
 			<div flex>
 				<md-input-container class="md-block" flex>
-					<input type="text" placeholder="Nome" ng-model="projectsCtrl.resource.name" required>
-				</md-input-container>
-			</div>
-			<div flex ng-if="!projectsCtrl.resource.id">
-				<md-input-container style="width:100%;">
-					<md-select ng-model="projectsCtrl.resource.role" placeholder="Selecione o seu Papel no Projeto">
-						<md-option ng-value="{{role}}" ng-repeat="role in projectsCtrl.roles" ng-if="!$first">
-							{{ ::role.title }}
-						</md-option>
-					</md-select>
+					<input type="text" ng-disabled="projectsCtrl.currentUser.id !== projectsCtrl.resource.owner" placeholder="Nome" ng-model="projectsCtrl.resource.name" required>
 				</md-input-container>
 			</div>
 		</div>
 		<md-input-container class="md-block" flex>
-			<textarea required
+      <textarea required
+      ng-disabled="projectsCtrl.currentUser.id !== projectsCtrl.resource.owner"
 			placeholder="Descrição"
 			ng-model="projectsCtrl.resource.description">
 			</textarea>
@@ -33,6 +25,7 @@
         <md-input-container class="md-block" flex>
           <label>{{::'attributes.project.hourValueDeveloper' | translate}}</label>
           <input type="text"
+            ng-disabled="projectsCtrl.currentUser.id !== projectsCtrl.resource.owner"
             ui-mask="99.99"
             model-view-value="{{true}}"
             ui-options="{addDefaultPlaceholder: false, escChar: null}"
@@ -51,6 +44,7 @@
         <md-input-container class="md-block" flex>
           <label>{{::'attributes.project.hourValueFinal' | translate}}</label>
           <input type="text"
+            ng-disabled="projectsCtrl.currentUser.id !== projectsCtrl.resource.owner"
             ui-mask="99.99"
             model-view-value="{{true}}"
             ui-options="{addDefaultPlaceholder: false, escChar: null}"
@@ -62,16 +56,17 @@
     <div layout="row">
       <md-input-container class="md-block" flex>
         <label>Usuário</label>
-        <input type="text" ng-model="projectsCtrl.resource.username_github">
+        <input type="text" ng-disabled="projectsCtrl.currentUser.id !== projectsCtrl.resource.owner" ng-model="projectsCtrl.resource.username_github">
       </md-input-container>
       <md-input-container class="md-block" flex>
         <label>Repositório</label>
-        <input type="text" ng-model="projectsCtrl.resource.repo_github">
+        <input type="text" ng-disabled="projectsCtrl.currentUser.id !== projectsCtrl.resource.owner" ng-model="projectsCtrl.resource.repo_github">
       </md-input-container>
     </div>
 		<md-list flex>
 			<h4>Membros do Projeto</h4>
-			<md-autocomplete flex
+      <md-autocomplete flex
+        ng-disabled="projectsCtrl.resource.users.length === 2 || projectsCtrl.currentUser.id !== projectsCtrl.resource.owner"
 				md-no-cache="true"
         md-selected-item="projectsCtrl.selectedItem"
         md-search-text="projectsCtrl.userName"
@@ -83,18 +78,18 @@
           <span md-highlight-text="projectsCtrl.userName">{{user.name + ' (' + user.email + ')' }}</span>
         </md-item-template>
       </md-autocomplete>
-      <md-list-item class="md-3-line" ng-repeat="user in projectsCtrl.resource.users track by $index">
+      <md-list-item class="md-3-line" ng-if="user.id !== projectsCtrl.resource.owner" ng-repeat="user in projectsCtrl.resource.users track by $index">
         <div class="md-list-item-text" layout="column">
           <h3>{{ user.name }}</h3>
         </div>
         <md-input-container>
-          <md-select required ng-disabled="user.id === projectsCtrl.resource.owner" ng-model="user.role.slug" placeholder="Selecione o papel deste usuário projeto">
-            <md-option ng-value="'{{role.slug}}'" ng-repeat="role in projectsCtrl.roles" ng-if="!$first">
+          <md-select required ng-disabled="true" ng-model="user.role.slug" placeholder="Selecione o papel deste usuário no projeto">
+            <md-option ng-selected="{{ role.slug === 'client' }}" ng-value="'{{ role.slug }}'" ng-repeat="role in projectsCtrl.roles">
               {{ ::role.title }}
             </md-option>
           </md-select>
         </md-input-container>
-        <md-button ng-disabled="user.id === projectsCtrl.resource.owner" ng-click="projectsCtrl.removeUser($index)">
+        <md-button ng-click="projectsCtrl.removeUser($index)" ng-disabled="projectsCtrl.currentUser.id !== projectsCtrl.resource.owner">
           <md-icon md-font-set="material-icons" class="md-warn">delete</md-icon>
           <md-tooltip md-direction="bottom" hide-sm hide-xs>Apagar</md-tooltip>
         </md-button>

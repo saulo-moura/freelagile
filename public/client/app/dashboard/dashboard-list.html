@@ -4,7 +4,7 @@
       <md-icon md-font-set="material-icons">edit</md-icon>
       <md-tooltip md-direction="top" hide-sm hide-xs>Editar</md-tooltip>
     </md-button>
-    <md-button ng-disabled="dashboardCtrl.actualProject.done" ng-click="dashboardCtrl.finalizeProject()">
+    <md-button ng-disabled="dashboardCtrl.actualProject.done || dashboardCtrl.actualProject.owner !== dashboardCtrl.currentUser.id" ng-click="dashboardCtrl.finalizeProject()">
       <md-icon md-font-set="material-icons">done_all</md-icon>
       <md-tooltip md-direction="top">{{::'views.actions.finalize' | translate}}</md-tooltip>
     </md-button>
@@ -23,7 +23,7 @@
 	<md-content>
 		<md-list flex>
 			<md-list-item class="md-2-line" ng-repeat="resource in dashboardCtrl.resources" ng-if="dashboardCtrl.resources.length > 0">
-				<img src="{{ resource.user.image }}" class="md-avatar" alt="{{resource.user.name}}" />
+				<img src="{{ resource.user.image ? resource.user.image : dashboardCtrl.imagePath }}" class="md-avatar" alt="{{resource.user.name}}" />
 				<div class="md-list-item-text" layout="column">
 				<h3>{{ resource.user.name }}</h3>
         <h4>{{ resource.description }}</h4>

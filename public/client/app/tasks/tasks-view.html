@@ -65,7 +65,7 @@
   <div layout="column" ng-if="tasksCtrl.resource.comments.length > 0">
     <md-list ng-repeat="comment in tasksCtrl.resource.comments" ng-if="!comment.comment_id" flex>
       <md-list-item class="md-2-line md-long-text" >
-        <img src="{{ comment.user.image }}" class="md-avatar" alt="{{comment.user.name}}" />
+        <img src="{{ comment.user.image ? comment.user.image : tasksCtrl.imagePath }}" class="md-avatar" alt="{{comment.user.name}}" />
         <div class="md-list-item-text" layout="column">
           <h3>{{ comment.user.name }}</h3>
           <p>{{ comment.description }}</p>
@@ -84,7 +84,7 @@
       </md-list-item>
       <md-divider></md-divider>
       <md-list-item class="md-2-line md-long-text" ng-repeat="answer in comment.comments" flex-offset=5>
-        <img src="{{ answer.user.image }}" class="md-avatar" alt="{{answer.user.name}}" />
+        <img src="{{ answer.user.image ? answer.user.image : tasksCtrl.imagePath }}" class="md-avatar" alt="{{answer.user.name}}" />
         <div class="md-list-item-text">
           <h3>{{ answer.user.name }}</h3>
           <p>{{ answer.description }}</p>

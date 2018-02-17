@@ -30,6 +30,7 @@
 <box box-title="Sprints da Release">
   <md-input-container ng-if="!releasesCtrl.resource.done" class="md-block" flex>
     <md-autocomplete class="md-input-has-placeholder"
+      ng-disabled="releasesCtrl.currentUser.id !== releasesCtrl.resource.project.owner"
       md-min-length="3" md-no-cache="true" md-selected-item="releasesCtrl.milestone" md-search-text="releasesCtrl.milestoneTerm"
       md-items="milestone in releasesCtrl.searchMilestone(releasesCtrl.milestoneTerm)" md-item-text="milestone.title"
       md-clear-button="true" md-floating-label="Adicionar Sprint" md-selected-item-change="releasesCtrl.onMilestoneChange()">
@@ -59,7 +60,7 @@
           <td ng-if="$first" rowspan="{{ milestone.tasks.length }}" md-cell>{{ releasesCtrl.estimatedTime(milestone) + ' dias' }}</td>
           <td md-cell>{{ task.title }}</td>
           <td ng-if="$first" rowspan="{{ milestone.tasks.length }}" md-cell class="md-text-center">
-            <md-button ng-disabled="releasesCtrl.resource.done" class="md-icon-button" ng-click="releasesCtrl.removeMilestone(milestone)">
+            <md-button ng-disabled="releasesCtrl.resource.done || releasesCtrl.currentUser.id !== releasesCtrl.resource.project.owner" class="md-icon-button" ng-click="releasesCtrl.removeMilestone(milestone)">
               <md-icon md-font-set="material-icons" class="md-warn">delete</md-icon>
               <md-tooltip md-direction="top">{{::'views.actions.remove' | translate}}</md-tooltip>
             </md-button>
@@ -74,6 +75,6 @@
     </table>
   </md-table-container>
   <box-footer-buttons>
-    <md-button ng-if="!releasesCtrl.resource.done" class="md-primary md-raised" ng-click="releasesCtrl.saveMilestones()">{{::'views.actions.save' | translate}}</md-button>
+    <md-button ng-if="!releasesCtrl.resource.done && releasesCtrl.currentUser.id === releasesCtrl.resource.project.owner" class="md-primary md-raised" ng-click="releasesCtrl.saveMilestones()">{{::'views.actions.save' | translate}}</md-button>
   </box-footer-buttons>
 </box>

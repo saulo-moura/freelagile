@@ -51,7 +51,8 @@
     Auth,
     PrToast,
     $translate,
-    $filter) {
+    $filter,
+    Global) {
     var vm = this;
 
     //Attributes Block
@@ -64,6 +65,7 @@
 
     function onActivate() {
       vm.currentUser = Auth.currentUser;
+      vm.imagePath = Global.imagePath + '/no_avatar.gif';
       vm.project = localStorage.getItem('project');
       vm.queryFilters = { project_id: vm.project };
 

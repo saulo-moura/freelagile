@@ -14,13 +14,15 @@
     TasksService,
     PrToast,
     $translate,
-    $mdDialog) {
+    $mdDialog,
+    Auth) {
 
     var vm = this;
 
     vm.estimatedPrice = estimatedPrice;
 
     vm.onActivate = function() {
+      vm.currentUser = Auth.currentUser;
       vm.project = localStorage.getItem('project');
       vm.queryFilters = { project_id: vm.project };
     }

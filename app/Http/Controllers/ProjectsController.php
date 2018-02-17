@@ -54,20 +54,17 @@ class ProjectsController extends CrudController {
                 case 'client':
                     $project->client_id = $request->user_id;
                     break;
-                case 'dev':
-                    $project->dev_id = $request->user_id;
-                    break;
                 case 'stakeholder':
                     $project->stakeholder_id = $request->user_id;
                     break;
             }
+            $project->dev_id = $request->owner;
             $project->save();
         }
         if(isset($request->users)) {
             $project_id = $model->id;
             $project = \App\Project::find($project_id);
             $project->client_id = null;
-            $project->dev_id = null;
             $project->stakeholder_id = null;
 
             $this->projectValidate($request);
@@ -75,9 +72,6 @@ class ProjectsController extends CrudController {
                 switch($user['role']['slug']) {
                     case 'client':
                         $project->client_id = $user['id'];
-                        break;
-                    case 'dev':
-                        $project->dev_id = $user['id'];
                         break;
                     case 'stakeholder':
                         $project->stakeholder_id = $user['id'];
