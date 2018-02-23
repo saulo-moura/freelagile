@@ -58,7 +58,6 @@ class ProjectsController extends CrudController {
                     $project->stakeholder_id = $request->user_id;
                     break;
             }
-            $project->dev_id = $request->owner;
             $project->save();
         }
         if(isset($request->users)) {
@@ -113,6 +112,9 @@ class ProjectsController extends CrudController {
         } else {
             $project_id = $model->id;
         }
+        $project = \App\Project::find($project_id);
+        $project->dev_id = $model->owner;
+        $project->save();
 
         $this->saveAction($project_id, 'Store', config('utils.dashboard.saveProject'));
     }

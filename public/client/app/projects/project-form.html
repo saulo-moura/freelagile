@@ -9,13 +9,13 @@
 		<div layout="row" flex>
 			<div flex>
 				<md-input-container class="md-block" flex>
-					<input type="text" ng-disabled="projectsCtrl.currentUser.id !== projectsCtrl.resource.owner" placeholder="Nome" ng-model="projectsCtrl.resource.name" required>
+					<input type="text" ng-disabled="projectsCtrl.resource.id && projectsCtrl.currentUser.id !== projectsCtrl.resource.owner" placeholder="Nome" ng-model="projectsCtrl.resource.name" required>
 				</md-input-container>
 			</div>
 		</div>
 		<md-input-container class="md-block" flex>
       <textarea required
-      ng-disabled="projectsCtrl.currentUser.id !== projectsCtrl.resource.owner"
+      ng-disabled="projectsCtrl.resource.id && projectsCtrl.currentUser.id !== projectsCtrl.resource.owner"
 			placeholder="Descrição"
 			ng-model="projectsCtrl.resource.description">
 			</textarea>
@@ -25,7 +25,7 @@
         <md-input-container class="md-block" flex>
           <label>{{::'attributes.project.hourValueDeveloper' | translate}}</label>
           <input type="text"
-            ng-disabled="projectsCtrl.currentUser.id !== projectsCtrl.resource.owner"
+            ng-disabled="projectsCtrl.resource.id && projectsCtrl.currentUser.id !== projectsCtrl.resource.owner"
             ui-mask="99.99"
             model-view-value="{{true}}"
             ui-options="{addDefaultPlaceholder: false, escChar: null}"
@@ -44,7 +44,7 @@
         <md-input-container class="md-block" flex>
           <label>{{::'attributes.project.hourValueFinal' | translate}}</label>
           <input type="text"
-            ng-disabled="projectsCtrl.currentUser.id !== projectsCtrl.resource.owner"
+            ng-disabled="projectsCtrl.resource.id && projectsCtrl.currentUser.id !== projectsCtrl.resource.owner"
             ui-mask="99.99"
             model-view-value="{{true}}"
             ui-options="{addDefaultPlaceholder: false, escChar: null}"
@@ -56,17 +56,17 @@
     <div layout="row">
       <md-input-container class="md-block" flex>
         <label>Usuário</label>
-        <input type="text" ng-disabled="projectsCtrl.currentUser.id !== projectsCtrl.resource.owner" ng-model="projectsCtrl.resource.username_github">
+        <input type="text" ng-disabled="projectsCtrl.resource.id && projectsCtrl.currentUser.id !== projectsCtrl.resource.owner" ng-model="projectsCtrl.resource.username_github">
       </md-input-container>
       <md-input-container class="md-block" flex>
         <label>Repositório</label>
-        <input type="text" ng-disabled="projectsCtrl.currentUser.id !== projectsCtrl.resource.owner" ng-model="projectsCtrl.resource.repo_github">
+        <input type="text" ng-disabled="projectsCtrl.resource.id && projectsCtrl.currentUser.id !== projectsCtrl.resource.owner" ng-model="projectsCtrl.resource.repo_github">
       </md-input-container>
     </div>
 		<md-list flex>
 			<h4>Membros do Projeto</h4>
       <md-autocomplete flex
-        ng-disabled="projectsCtrl.resource.users.length === 2 || projectsCtrl.currentUser.id !== projectsCtrl.resource.owner"
+        ng-disabled="projectsCtrl.resource.users.length === 2 || (projectsCtrl.resource.id && projectsCtrl.currentUser.id !== projectsCtrl.resource.owner)"
 				md-no-cache="true"
         md-selected-item="projectsCtrl.selectedItem"
         md-search-text="projectsCtrl.userName"

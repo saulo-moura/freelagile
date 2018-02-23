@@ -33,13 +33,17 @@
       ProjectsService.query({ project_id: localStorage.getItem('project') }).then(function(response) {
         vm.username = response[0].username_github;
         vm.repo = response[0].repo_github;
-        vm.queryFilters = {
-          username: vm.username,
-          repo: vm.repo,
-          path: '.'
+        if (vm.username && vm.repo) {
+          vm.queryFilters = {
+            username: vm.username,
+            repo: vm.repo,
+            path: '.'
+          }
+          vm.paths.push(vm.queryFilters.path);
+          vm.search();
+        } else {
+          $window.loading_screen.finish();
         }
-        vm.paths.push(vm.queryFilters.path);
-        vm.search();
       });
     }
 
@@ -53,9 +57,11 @@
     }
 
     function sortResources() {
-      vm.resources.sort(function(a, b) {
-        return a.type < b.type ? -1 : a.type > b.type ? 1 : 0;
-      });
+      if (vm.resources.length > 0) {
+        vm.resources.sort(function(a, b) {
+          return a.type < b.type ? -1 : a.type > b.type ? 1 : 0;
+        });
+      }
     }
 
     vm.openFileOrDirectory = function(resource) {

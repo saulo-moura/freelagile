@@ -35,9 +35,9 @@
 
     function onActivate() {
       vm.currentUser = Auth.currentUser;
+      vm.queryFilters = { user_id: vm.currentUser.id };
       RolesService.query().then(function(response) {
         vm.roles = response;
-        //vm.roles = $filter('filter')(vm.roles, { slug: 'client' });
         if ($stateParams.obj === 'edit') {
           vm.cleanForm();
           vm.viewForm = true;
@@ -45,7 +45,6 @@
           usersArray(vm.resource);
         } else {
           localStorage.removeItem('project');
-          vm.queryFilters = { user_id: vm.currentUser.id };
         }
       });
     }
@@ -55,9 +54,10 @@
     }
 
     function beforeSave() {
-      vm.resource.owner = Auth.currentUser.id;
+      if (!vm.resource.owner) {
+        vm.resource.owner = Auth.currentUser.id;
+      }
       vm.resource.user_id = Auth.currentUser.id;
-      vm.resource.dev_id = Auth.currentUser.id;
     }
 
     function searchUser() {
