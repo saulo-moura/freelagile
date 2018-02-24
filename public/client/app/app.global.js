@@ -7,6 +7,7 @@
       appName: 'Freelagile',
       homeState: 'app.projects',
       loginUrl: 'app/login',
+      resetPasswordUrl: 'app/password/reset',
       loginState: 'app.login',
       resetPasswordState: 'app.password-reset',
       notAuthorizedState: 'app.not-authorized',

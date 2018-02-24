@@ -33,7 +33,7 @@ class RecoveryPassword extends Mailable
     public function build()
     {
         return $this
-            ->subject('Confirmação de cadastro')
+            ->subject('Redefinição de Senha')
             ->view('emails.users.recoveryPassword')
             ->with([
                 'user' => $this->user,

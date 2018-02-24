@@ -30,6 +30,7 @@
         data: { needAuthentication: false }
       });
 
+    $urlRouterProvider.when('/password/reset', Global.resetPasswordUrl);
     $urlRouterProvider.when('/app', Global.loginUrl);
     $urlRouterProvider.otherwise(Global.loginUrl);
   }

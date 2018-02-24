@@ -15,7 +15,7 @@
                 <p>Caso não tenha sido você quem solcitou a redefinição de senha favor desconsiderar este email.</p>
                 <p>Este link tem validade de 1 hora.</p>
                 <p>Clique ou copie o link para redefinir sua senha.</p>
-                <p><a href="{{ url('/#/app/password/reset/'.$token) }}">{{ url('/#/password/reset/'.$token) }}</a></p>
+                <p><a href="{{ url('/#!/app/password/reset/'.$token) }}">{{ url('/#!/password/reset/'.$token) }}</a></p>
             </div>
         </div>
     </body>
