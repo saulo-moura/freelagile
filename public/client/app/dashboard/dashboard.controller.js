@@ -86,27 +86,62 @@
     vm.totalCost = function() {
       var estimated_cost = 0;
 
-      vm.actualProject.tasks.forEach(function(task) {
-        estimated_cost += (parseFloat(vm.actualProject.hour_value_final) * task.estimated_time);
-      });
+      if (vm.actualProject.hour_value_final) {
+        vm.actualProject.tasks.forEach(function(task) {
+          if (task.estimated_time > 0) {
+            estimated_cost += (parseFloat(vm.actualProject.hour_value_final) * task.estimated_time);
+          }
+        });
+      }
       return estimated_cost.toLocaleString('Pt-br', { minimumFractionDigits: 2 });
     }
 
     vm.finalizeProject = function() {
-      var confirm = $mdDialog.confirm()
+      ProjectsService.verifyReleases({ project_id: vm.actualProject.id }).then(function(response) {
+        if (response.success) {
+          var confirm = $mdDialog.confirm()
+          .title('Finalizar Projeto')
+          .htmlContent('Tem certeza que deseja finalizar o projeto ' + vm.actualProject.name + '?<br /> Ainda existem releases não finalizadas.')
+          .ok('Sim')
+          .cancel('Não');
+
+          $mdDialog.show(confirm).then(function() {
+            var reason = $mdDialog.prompt()
+            .title('Finalizar Projeto')
+            .textContent('Qual o motivo para a finalização do projeto?')
+            .placeholder('Motivo')
+            .initialValue('')
+            .required(true)
+            .ok('Confirmar')
+            .cancel('Cancelar');
+
+            $mdDialog.show(reason).then(function(reasonText) {
+              ProjectsService.finalize({ project_id: vm.actualProject.id, reason: reasonText }).then(function() {
+                PrToast.success($translate.instant('messages.projectEndedSuccess'));
+                onActivate();
+                vm.search();
+              }, function() {
+                PrToast.Error($translate.instant('messages.projectEndedError'));
+              });
+            });
+          });
+        } else {
+          var confirm = $mdDialog.confirm()
           .title('Finalizar Projeto')
           .textContent('Tem certeza que deseja finalizar o projeto ' + vm.actualProject.name + '?')
           .ok('Sim')
           .cancel('Não');
 
-      $mdDialog.show(confirm).then(function() {
-        ProjectsService.finalize({ project_id: vm.actualProject.id }).then(function() {
-          PrToast.success($translate.instant('messages.projectEndedSuccess'));
-          onActivate();
-          vm.search();
-        }, function() {
-          PrToast.Error($translate.instant('messages.projectEndedError'));
-        });
+          $mdDialog.show(confirm).then(function() {
+            ProjectsService.finalize({ project_id: vm.actualProject.id }).then(function() {
+              PrToast.success($translate.instant('messages.projectEndedSuccess'));
+              onActivate();
+              vm.search();
+            }, function() {
+              PrToast.Error($translate.instant('messages.projectEndedError'));
+            });
+          });
+        }
       });
     }
 

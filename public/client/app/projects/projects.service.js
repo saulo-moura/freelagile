@@ -12,7 +12,12 @@
         finalize: {
           method: 'POST',
           url: 'finalize'
-        } },
+        },
+        verifyReleases: {
+          method: 'POST',
+          url: 'verifyReleases'
+        }
+      },
       instance: { }
     });
   }

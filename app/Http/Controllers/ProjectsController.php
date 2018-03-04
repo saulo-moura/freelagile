@@ -154,14 +154,21 @@ class ProjectsController extends CrudController {
         return $rules;
     }
 
-    public function finalize(Request $request) {
+    public function verifyReleases(Request $request) {
         $project = \App\Project::find($request->project_id);
         foreach ($project->releases as $release) {
             if(!$release->done) {
-                throw new BusinessException("Não foi possível finalizar o projeto, existem releases não finalizadas");
+                return [ 'success' => true ];
             }
         }
+        return [ 'success' => false ];
+    }
+
+    public function finalize(Request $request) {
         $this->saveAction($request->project_id, 'Update', config('utils.dashboard.finalizedProject'));
+        if ($request->reason) {
+            return \App\Project::where('id', $request->project_id)->update(['done' => true, 'clousure_reason' => $request->reason]);
+        }
         return \App\Project::where('id', $request->project_id)->update(['done' => true]);
     }
 }

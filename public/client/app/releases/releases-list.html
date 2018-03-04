@@ -1,6 +1,6 @@
 <box box-title="{{ ::'views.actions.list' | translate}}">
   <box-toolbar-buttons>
-    <md-button ng-disabled="(releasesCtrl.resources[0] && releasesCtrl.resources[0].project.done) || releasesCtrl.currentUser.id !== releasesCtrl.resources[0].project.owner" class="md-icon-button" ng-click="releasesCtrl.goTo('form')">
+    <md-button ng-disabled="(releasesCtrl.resources[0] && releasesCtrl.resources[0].project.done) || releasesCtrl.currentUser.id !== releasesCtrl.resources[0].project.dev_id" class="md-icon-button" ng-click="releasesCtrl.goTo('form')">
       <md-icon md-font-set="material-icons" class="md-warn">add</md-icon>
       <md-tooltip md-direction="bottom" hide-sm hide-xs>{{ ::'views.actions.add' | translate}}</md-tooltip>
     </md-button>
@@ -25,15 +25,15 @@
               <md-icon md-font-set="material-icons" class="md-dark">remove_red_eye</md-icon>
               <md-tooltip md-direction="top" hide-sm hide-xs>Visualizar</md-tooltip>
             </md-button>
-            <md-button ng-disabled="resource.done || releasesCtrl.currentUser.id !== resource.project.owner" class="md-icon-button" ng-click="releasesCtrl.finalize(resource)">
-              <md-icon md-font-set="material-icons" ng-style="{color: resource.done || releasesCtrl.currentUser.id !== resource.project.owner ? '' : 'green' }">done_all</md-icon>
+            <md-button ng-disabled="resource.project.done || resource.done || releasesCtrl.currentUser.id !== resource.project.dev_id" class="md-icon-button" ng-click="releasesCtrl.finalize(resource)">
+              <md-icon md-font-set="material-icons" ng-style="{color: resource.project.done || resource.done || releasesCtrl.currentUser.id !== resource.project.dev_id ? '' : 'green' }">done_all</md-icon>
               <md-tooltip md-direction="top">{{::'views.actions.finalize' | translate}}</md-tooltip>
             </md-button>
-            <md-button ng-disabled="resource.done || releasesCtrl.currentUser.id !== resource.project.owner" class="md-icon-button" ng-click="releasesCtrl.edit(resource)">
-              <md-icon md-font-set="material-icons" ng-class="resource.done || releasesCtrl.currentUser.id !== resource.project.owner ? '' : 'md-dark'">create</md-icon>
+            <md-button ng-disabled="resource.project.done || resource.done || releasesCtrl.currentUser.id !== resource.project.dev_id" class="md-icon-button" ng-click="releasesCtrl.edit(resource)">
+              <md-icon md-font-set="material-icons" ng-class="resource.project.done || resource.done || releasesCtrl.currentUser.id !== resource.project.dev_id ? '' : 'md-dark'">create</md-icon>
               <md-tooltip md-direction="top">{{::'views.actions.edit' | translate}}</md-tooltip>
             </md-button>
-            <md-button ng-disabled="resource.done || releasesCtrl.currentUser.id !== resource.project.owner" class="md-icon-button" ng-click="releasesCtrl.remove(resource)">
+            <md-button ng-disabled="resource.project.done || resource.done || releasesCtrl.currentUser.id !== resource.project.dev_id" class="md-icon-button" ng-click="releasesCtrl.remove(resource)">
               <md-icon md-font-set="material-icons"
                 class="md-warn">delete</md-icon>
               <md-tooltip md-direction="top">{{::'views.actions.remove' | translate}}</md-tooltip>

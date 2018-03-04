@@ -22,7 +22,7 @@
 
     //Functions Block
     vm.onActivate = function() {
-      vm.currentUser = Auth.cuurrentUser;
+      vm.currentUser = Auth.currentUser;
       vm.project = localStorage.getItem('project');
       vm.queryFilters = { project_id: vm.project };
     }

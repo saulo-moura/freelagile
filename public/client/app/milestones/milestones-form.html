@@ -27,6 +27,7 @@
           onkeydown="return false"
           md-open-on-focus
           name="date_begin"
+          ng-change="milestonesCtrl.resource.date_end = null"
           ng-model="milestonesCtrl.resource.date_begin"></md-datepicker>
         <div ng-messages="milestonesCtrl.formMilestone.date_begin.$error">
           <div ng-message="valid">Data inválida.</div>
@@ -39,6 +40,7 @@
           onkeydown="return false"
           md-open-on-focus
           name="date_end"
+          md-min-date="milestonesCtrl.resource.date_begin"
           ng-model="milestonesCtrl.resource.date_end"></md-datepicker>
         <div ng-messages="milestonesCtrl.formMilestone.date_end.$error">
           <div ng-message="valid">Data inválida.</div>

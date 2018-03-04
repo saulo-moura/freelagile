@@ -18,5 +18,6 @@
     'ngMessages',
     'jqwidgets',
     'ui.mask',
-    'ngRoute']);
+    'ngRoute',
+    'ngSanitize']);
 })();

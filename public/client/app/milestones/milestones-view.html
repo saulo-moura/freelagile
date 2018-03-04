@@ -44,9 +44,9 @@
   </fieldset>
 </box>
 <box box-title="Tarefas">
-  <md-input-container ng-if="!milestonesCtrl.resource.done" class="md-block" flex>
+  <md-input-container ng-if="!milestonesCtrl.resource.project.done && !milestonesCtrl.resource.done" class="md-block" flex>
     <md-autocomplete class="md-input-has-placeholder"
-      ng-disabled="milestonesCtrl.currentUser.id !== resource.project.owner"
+      ng-disabled="milestonesCtrl.currentUser.id !== milestonesCtrl.resource.project.dev_id"
       md-min-length="3" md-no-cache="true" md-selected-item="milestonesCtrl.task" md-search-text="milestonesCtrl.taskTerm"
       md-items="task in milestonesCtrl.searchTask(milestonesCtrl.taskTerm)" md-item-text="task.title"
       md-clear-button="true" md-floating-label="Adicionar Tarefa" md-selected-item-change="milestonesCtrl.onTaskChange()">
@@ -78,7 +78,7 @@
           <td md-cell>{{ task.type.name}}</td>
           <td md-cell>{{ task.estimated_time}} horas</td>
           <td md-cell class="md-text-center">
-            <md-button ng-disabled="milestonesCtrl.resource.done || milestonesCtrl.currentUser.id !== milestonesCtrl.resource.project.owner" class="md-icon-button" ng-click="milestonesCtrl.removeTask(task)">
+            <md-button ng-disabled="milestonesCtrl.resource.project.done || milestonesCtrl.resource.done || milestonesCtrl.currentUser.id !== milestonesCtrl.resource.project.owner" class="md-icon-button" ng-click="milestonesCtrl.removeTask(task)">
               <md-icon md-font-set="material-icons" class="md-warn">delete</md-icon>
               <md-tooltip md-direction="top">{{::'views.actions.remove' | translate}}</md-tooltip>
             </md-button>
@@ -93,6 +93,6 @@
     </table>
   </md-table-container>
   <box-footer-buttons>
-    <md-button ng-if="!milestonesCtrl.resource.done && milestonesCtrl.currentUser.id === milestonesCtrl.resource.project.owner" class="md-primary md-raised" ng-click="milestonesCtrl.saveTasks()">{{::'views.actions.save' | translate}}</md-button>
+    <md-button ng-if="!milestonesCtrl.resource.project.done && !milestonesCtrl.resource.done && milestonesCtrl.currentUser.id === milestonesCtrl.resource.project.owner" class="md-primary md-raised" ng-click="milestonesCtrl.saveTasks()">{{::'views.actions.save' | translate}}</md-button>
   </box-footer-buttons>
 </box>

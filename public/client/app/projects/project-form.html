@@ -5,99 +5,101 @@
         <md-icon md-font-set="material-icons" class="md-warn">reply</md-icon>
         <md-tooltip md-direction="bottom" hide-sm hide-xs>{{ ::'views.actions.list' | translate}}</md-tooltip>
       </md-button>
-		</box-toolbar-buttons>
-		<div layout="row" flex>
-			<div flex>
-				<md-input-container class="md-block" flex>
-					<input type="text" ng-disabled="projectsCtrl.resource.id && projectsCtrl.currentUser.id !== projectsCtrl.resource.owner" placeholder="Nome" ng-model="projectsCtrl.resource.name" required>
-				</md-input-container>
-			</div>
-		</div>
-		<md-input-container class="md-block" flex>
-      <textarea required
-      ng-disabled="projectsCtrl.resource.id && projectsCtrl.currentUser.id !== projectsCtrl.resource.owner"
-			placeholder="Descrição"
-			ng-model="projectsCtrl.resource.description">
-			</textarea>
-    </md-input-container>
-    <h4>Informações de Valores</h4>
+    </box-toolbar-buttons>
+    <fieldset ng-disabled="projectsCtrl.resource.done" style="border:0px;">
+      <div layout="row" flex>
+        <div flex>
+          <md-input-container class="md-block" flex>
+            <input type="text" ng-disabled="projectsCtrl.resource.id && projectsCtrl.currentUser.id !== projectsCtrl.resource.owner" placeholder="Nome" ng-model="projectsCtrl.resource.name" required>
+          </md-input-container>
+        </div>
+      </div>
+      <md-input-container class="md-block" flex>
+        <textarea required
+        ng-disabled="projectsCtrl.resource.id && projectsCtrl.currentUser.id !== projectsCtrl.resource.owner"
+        placeholder="Descrição"
+        ng-model="projectsCtrl.resource.description">
+        </textarea>
+      </md-input-container>
+      <h4>Informações de Valores</h4>
+        <div layout="row">
+          <md-input-container class="md-block" flex>
+            <label>{{::'attributes.project.hourValueDeveloper' | translate}}</label>
+            <input type="text"
+              ng-disabled="projectsCtrl.resource.id && projectsCtrl.currentUser.id !== projectsCtrl.resource.owner"
+              ui-mask="99.99"
+              model-view-value="{{true}}"
+              ui-options="{addDefaultPlaceholder: false, escChar: null}"
+              ui-mask-placeholder
+              ng-model="projectsCtrl.resource.hour_value_developer">
+          </md-input-container>
+          <md-input-container class="md-block" flex>
+            <label>{{::'attributes.project.hourValueClient' | translate}}</label>
+            <input type="text"
+              ui-mask="99.99"
+              model-view-value="{{true}}"
+              ui-options="{addDefaultPlaceholder: false, escChar: null}"
+              ui-mask-placeholder
+              ng-model="projectsCtrl.resource.hour_value_client">
+          </md-input-container>
+          <md-input-container class="md-block" flex>
+            <label>{{::'attributes.project.hourValueFinal' | translate}}</label>
+            <input type="text"
+              ng-disabled="projectsCtrl.resource.id && projectsCtrl.currentUser.id !== projectsCtrl.resource.owner"
+              ui-mask="99.99"
+              model-view-value="{{true}}"
+              ui-options="{addDefaultPlaceholder: false, escChar: null}"
+              ui-mask-placeholder
+              ng-model="projectsCtrl.resource.hour_value_final">
+          </md-input-container>
+        </div>
+      <h4>Integração com Github</h4>
       <div layout="row">
         <md-input-container class="md-block" flex>
-          <label>{{::'attributes.project.hourValueDeveloper' | translate}}</label>
-          <input type="text"
-            ng-disabled="projectsCtrl.resource.id && projectsCtrl.currentUser.id !== projectsCtrl.resource.owner"
-            ui-mask="99.99"
-            model-view-value="{{true}}"
-            ui-options="{addDefaultPlaceholder: false, escChar: null}"
-            ui-mask-placeholder
-            ng-model="projectsCtrl.resource.hour_value_developer">
+          <label>Usuário</label>
+          <input type="text" ng-disabled="projectsCtrl.resource.id && projectsCtrl.currentUser.id !== projectsCtrl.resource.owner" ng-model="projectsCtrl.resource.username_github">
         </md-input-container>
         <md-input-container class="md-block" flex>
-          <label>{{::'attributes.project.hourValueClient' | translate}}</label>
-          <input type="text"
-            ui-mask="99.99"
-            model-view-value="{{true}}"
-            ui-options="{addDefaultPlaceholder: false, escChar: null}"
-            ui-mask-placeholder
-            ng-model="projectsCtrl.resource.hour_value_client">
-        </md-input-container>
-        <md-input-container class="md-block" flex>
-          <label>{{::'attributes.project.hourValueFinal' | translate}}</label>
-          <input type="text"
-            ng-disabled="projectsCtrl.resource.id && projectsCtrl.currentUser.id !== projectsCtrl.resource.owner"
-            ui-mask="99.99"
-            model-view-value="{{true}}"
-            ui-options="{addDefaultPlaceholder: false, escChar: null}"
-            ui-mask-placeholder
-            ng-model="projectsCtrl.resource.hour_value_final">
+          <label>Repositório</label>
+          <input type="text" ng-disabled="projectsCtrl.resource.id && projectsCtrl.currentUser.id !== projectsCtrl.resource.owner" ng-model="projectsCtrl.resource.repo_github">
         </md-input-container>
       </div>
-    <h4>Integração com Github</h4>
-    <div layout="row">
-      <md-input-container class="md-block" flex>
-        <label>Usuário</label>
-        <input type="text" ng-disabled="projectsCtrl.resource.id && projectsCtrl.currentUser.id !== projectsCtrl.resource.owner" ng-model="projectsCtrl.resource.username_github">
-      </md-input-container>
-      <md-input-container class="md-block" flex>
-        <label>Repositório</label>
-        <input type="text" ng-disabled="projectsCtrl.resource.id && projectsCtrl.currentUser.id !== projectsCtrl.resource.owner" ng-model="projectsCtrl.resource.repo_github">
-      </md-input-container>
-    </div>
-		<md-list flex>
-			<h4>Membros do Projeto</h4>
-      <md-autocomplete flex
-        ng-disabled="projectsCtrl.resource.users.length === 2 || (projectsCtrl.resource.id && projectsCtrl.currentUser.id !== projectsCtrl.resource.owner)"
-				md-no-cache="true"
-        md-selected-item="projectsCtrl.selectedItem"
-        md-search-text="projectsCtrl.userName"
-        md-selected-item-change="projectsCtrl.addUser(user)"
-        md-items="user in projectsCtrl.searchUser()"
-        md-item-text="user.name"
-        md-floating-label="Nome do Usuário">
-        <md-item-template>
-          <span md-highlight-text="projectsCtrl.userName">{{user.name + ' (' + user.email + ')' }}</span>
-        </md-item-template>
-      </md-autocomplete>
-      <md-list-item class="md-3-line" ng-if="user.id !== projectsCtrl.resource.owner" ng-repeat="user in projectsCtrl.resource.users track by $index">
-        <div class="md-list-item-text" layout="column">
-          <h3>{{ user.name }}</h3>
-        </div>
-        <md-input-container>
-          <md-select required ng-disabled="true" ng-model="user.role.slug" placeholder="Selecione o papel deste usuário no projeto">
-            <md-option ng-selected="{{ role.slug === 'client' }}" ng-value="'{{ role.slug }}'" ng-repeat="role in projectsCtrl.roles">
-              {{ ::role.title }}
-            </md-option>
-          </md-select>
-        </md-input-container>
-        <md-button ng-click="projectsCtrl.removeUser($index)" ng-disabled="projectsCtrl.currentUser.id !== projectsCtrl.resource.owner">
-          <md-icon md-font-set="material-icons" class="md-warn">delete</md-icon>
-          <md-tooltip md-direction="bottom" hide-sm hide-xs>Apagar</md-tooltip>
-        </md-button>
-        <md-divider ></md-divider>
-      </md-list-item>
-    </md-list>
+      <md-list flex>
+        <h4>Membros do Projeto</h4>
+        <md-autocomplete flex
+          ng-disabled="projectsCtrl.resource.users.length === 2 || (projectsCtrl.resource.id && projectsCtrl.currentUser.id !== projectsCtrl.resource.owner)"
+          md-no-cache="true"
+          md-selected-item="projectsCtrl.selectedItem"
+          md-search-text="projectsCtrl.userName"
+          md-selected-item-change="projectsCtrl.addUser(user)"
+          md-items="user in projectsCtrl.searchUser()"
+          md-item-text="user.name"
+          md-floating-label="Nome do Usuário">
+          <md-item-template>
+            <span md-highlight-text="projectsCtrl.userName">{{user.name + ' (' + user.email + ')' }}</span>
+          </md-item-template>
+        </md-autocomplete>
+        <md-list-item class="md-3-line" ng-if="user.id !== projectsCtrl.resource.owner" ng-repeat="user in projectsCtrl.resource.users track by $index">
+          <div class="md-list-item-text" layout="column">
+            <h3>{{ user.name }}</h3>
+          </div>
+          <md-input-container>
+            <md-select required ng-disabled="true" ng-model="user.role.slug" placeholder="Selecione o papel deste usuário no projeto">
+              <md-option ng-selected="{{ role.slug === 'client' }}" ng-value="'{{ role.slug }}'" ng-repeat="role in projectsCtrl.roles">
+                {{ ::role.title }}
+              </md-option>
+            </md-select>
+          </md-input-container>
+          <md-button ng-click="projectsCtrl.removeUser($index)" ng-disabled="projectsCtrl.resource.done || projectsCtrl.currentUser.id !== projectsCtrl.resource.owner">
+            <md-icon md-font-set="material-icons" class="md-warn">delete</md-icon>
+            <md-tooltip md-direction="bottom" hide-sm hide-xs>Apagar</md-tooltip>
+          </md-button>
+          <md-divider ></md-divider>
+        </md-list-item>
+      </md-list>
+    </fieldset>
 		<box-footer-buttons>
-			<md-button class="md-primary md-raised" ng-disabled="!projectsCtrl.projectForm.$valid" type="submit">{{::'views.actions.save' | translate}}</md-button>
+			<md-button class="md-primary md-raised" ng-if="!projectsCtrl.resource.done" ng-disabled="!projectsCtrl.projectForm.$valid" type="submit">{{::'views.actions.save' | translate}}</md-button>
 		</box-footer-buttons>
 	</box>
 </form>

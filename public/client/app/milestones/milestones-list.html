@@ -15,7 +15,7 @@
             <th md-column>{{ ::'attributes.milestone.date_end' | translate}}</th>
             <th md-column>{{ ::'attributes.milestone.estimated_time' | translate}}
               <md-icon md-font-set="material-icons" class="md-dark">info</md-icon>
-              <md-tooltip class="tooltip-estimated-value" md-direction="botton">Estimativa baseada no tempo<br /> das tarefas da sprint</md-tooltip>
+              <md-tooltip class="tooltip-estimated-value" md-direction="botton">Estimativa baseada no tempo<br /> das tarefas da sprint com base em<br /> 8h de trabalho diário</md-tooltip>
             </th>
             <th md-column>{{ ::'attributes.milestone.estimated_value' | translate}}
               <md-icon md-font-set="material-icons" class="md-dark">info</md-icon>
@@ -37,22 +37,22 @@
               <md-icon md-font-set="material-icons" class="md-dark">remove_red_eye</md-icon>
               <md-tooltip md-direction="top" hide-sm hide-xs>Visualizar</md-tooltip>
             </md-button>
-            <md-button ng-disabled="resource.done || milestonesCtrl.currentUser.id !== resource.project.owner" class="md-icon-button" ng-click="milestonesCtrl.edit(resource)">
-              <md-icon md-font-set="material-icons" ng-class="resource.done || milestonesCtrl.currentUser.id !== resource.project.owner ? '' : 'md-dark'">create</md-icon>
+            <md-button ng-disabled="resource.project.done || resource.done || milestonesCtrl.currentUser.id !== resource.project.owner" class="md-icon-button" ng-click="milestonesCtrl.edit(resource)">
+              <md-icon md-font-set="material-icons" ng-class="resource.project.done || resource.done || milestonesCtrl.currentUser.id !== resource.project.owner ? '' : 'md-dark'">create</md-icon>
               <md-tooltip md-direction="top">{{::'views.actions.edit' | translate}}</md-tooltip>
             </md-button>
-            <md-button ng-disabled="resource.done || milestonesCtrl.currentUser.id !== resource.project.owner" class="md-icon-button" ng-click="milestonesCtrl.finalize(resource)">
-              <md-icon md-font-set="material-icons" ng-style="{color: resource.done || milestonesCtrl.currentUser.id !== resource.project.owner ? '' : 'green' }">done_all</md-icon>
+            <md-button ng-disabled="resource.project.done || resource.done || milestonesCtrl.currentUser.id !== resource.project.owner" class="md-icon-button" ng-click="milestonesCtrl.finalize(resource)">
+              <md-icon md-font-set="material-icons" ng-style="{color: resource.project.done || resource.done || milestonesCtrl.currentUser.id !== resource.project.owner ? '' : 'green' }">done_all</md-icon>
               <md-tooltip md-direction="top">{{::'views.actions.finalize' | translate}}</md-tooltip>
             </md-button>
-            <md-button ng-disabled="resource.done || milestonesCtrl.currentUser.id !== resource.project.owner" class="md-icon-button" ng-click="milestonesCtrl.remove(resource)">
+            <md-button ng-disabled="resource.project.done || resource.done || milestonesCtrl.currentUser.id !== resource.project.owner" class="md-icon-button" ng-click="milestonesCtrl.remove(resource)">
               <md-icon md-font-set="material-icons" class="md-warn">delete</md-icon>
               <md-tooltip md-direction="top">{{::'views.actions.remove' | translate}}</md-tooltip>
             </md-button>
           </td>
         </tr>
         <tr md-row ng-if="milestonesCtrl.resources.length == 0">
-          <td md-cell colspan="6">
+          <td md-cell colspan="7">
             <div layout="row" layout-align="center center">{{::'messages.notFound' | translate}}</div>
           </td>
         </tr>

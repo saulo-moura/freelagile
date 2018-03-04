@@ -1,8 +1,12 @@
 <box box-title="{{ dashboardCtrl.actualProject.name }}">
   <box-toolbar-buttons>
-    <md-button ng-disabled="dashboardCtrl.actualProject.done" ng-click="dashboardCtrl.goToProject()">
+    <md-button ng-if="!dashboardCtrl.actualProject.done" ng-click="dashboardCtrl.goToProject()">
       <md-icon md-font-set="material-icons">edit</md-icon>
       <md-tooltip md-direction="top" hide-sm hide-xs>Editar</md-tooltip>
+    </md-button>
+    <md-button ng-if="dashboardCtrl.actualProject.done" ng-click="dashboardCtrl.goToProject()">
+      <md-icon md-font-set="material-icons">remove_red_eye</md-icon>
+      <md-tooltip md-direction="top" hide-sm hide-xs>Visualizar</md-tooltip>
     </md-button>
     <md-button ng-disabled="dashboardCtrl.actualProject.done || dashboardCtrl.actualProject.owner !== dashboardCtrl.currentUser.id" ng-click="dashboardCtrl.finalizeProject()">
       <md-icon md-font-set="material-icons">done_all</md-icon>
@@ -14,6 +18,12 @@
       <div class="md-list-item-text" layout="column">
         <h4>{{ dashboardCtrl.actualProject.description }}</h4>
         <h4 class="md-secondary">Valor Total R$ {{ dashboardCtrl.totalCost() }}</h4>
+      </div>
+    </md-list-item>
+    <md-list-item class="md-2-line" ng-if="dashboardCtrl.actualProject.clousure_reason">
+      <div class="md-list-item-text" layout="column">
+        <h3><strong>Motivo do Encerramento</strong></h3>
+        <p>{{ dashboardCtrl.actualProject.clousure_reason }}</p>
       </div>
     </md-list-item>
   </md-list>

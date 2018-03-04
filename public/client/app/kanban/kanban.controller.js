@@ -81,7 +81,7 @@
     }
 
     vm.onItemMoved = function(event) {
-      if (Auth.currentUser.id === vm.actualProject.owner) {
+      if (!vm.actualProject.done && Auth.currentUser.id === vm.actualProject.owner) {
         vm.isMoved = true;
         TasksService.query({ task_id: event.args.itemId }).then(function(response) {
           if ((response[0].milestone && response[0].milestone.done) || response[0].project.done) {

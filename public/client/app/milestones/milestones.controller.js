@@ -78,10 +78,11 @@
     }
 
     vm.view = function (resource) {
+      resource.date_begin = moment(resource.date_begin);
+      resource.date_end = moment(resource.date_end);
       vm.resource = resource;
       vm.onView = true;
       vm.viewForm = false;
-      console.log(resource.project);
     }
 
     vm.searchTask = function (taskTerm) {

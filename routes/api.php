@@ -43,6 +43,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
         Route::resource('users', 'UsersController', ['except' => ['updateProfile', 'store']]);
 
         Route::resource('projects', 'ProjectsController');
+        Route::post('projects/verifyReleases', 'ProjectsController@verifyReleases');
         Route::post('projects/finalize', 'ProjectsController@finalize');
 
         Route::resource('roles', 'RolesController', ['only' => ['index']]);
