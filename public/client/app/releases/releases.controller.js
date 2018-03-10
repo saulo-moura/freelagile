@@ -11,6 +11,7 @@
   function ReleasesController($controller,
     ReleasesService,
     MilestonesService,
+    ProjectsService,
     Auth,
     PrToast,
     moment,
@@ -19,12 +20,20 @@
     var vm = this;
 
     //Attributes Block
+    vm.applyFilters = applyFilters;
 
     //Functions Block
     vm.onActivate = function() {
       vm.currentUser = Auth.currentUser;
       vm.project = localStorage.getItem('project');
+      ProjectsService.query({ project_id: vm.project }).then(function(response) {
+        vm.actualProject = response[0];
+      });
       vm.queryFilters = { project_id: vm.project };
+    }
+
+    function applyFilters(defaultQueryFilters) {
+      return angular.extend(defaultQueryFilters, vm.queryFilters);
     }
 
     vm.beforeSave = function() {

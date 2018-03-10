@@ -47,6 +47,7 @@
     PrioritiesService,
     TypesService,
     TaskCommentsService,
+    ProjectsService,
     moment,
     Auth,
     PrToast,
@@ -67,6 +68,9 @@
       vm.currentUser = Auth.currentUser;
       vm.imagePath = Global.imagePath + '/no_avatar.gif';
       vm.project = localStorage.getItem('project');
+      ProjectsService.query({ project_id: vm.project }).then(function(response) {
+        vm.actualProject = response[0];
+      });
       vm.queryFilters = { project_id: vm.project };
 
       StatusService.query().then(function(response) {

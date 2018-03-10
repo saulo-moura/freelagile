@@ -12,6 +12,7 @@
     MilestonesService,
     moment,
     TasksService,
+    ProjectsService,
     PrToast,
     $translate,
     $mdDialog,
@@ -24,6 +25,9 @@
     vm.onActivate = function() {
       vm.currentUser = Auth.currentUser;
       vm.project = localStorage.getItem('project');
+      ProjectsService.query({ project_id: vm.project }).then(function(response) {
+        vm.actualProject = response[0];
+      });
       vm.queryFilters = { project_id: vm.project };
     }
 

@@ -1,6 +1,6 @@
 <box box-title="{{ ::'views.actions.list' | translate}}">
   <box-toolbar-buttons>
-    <md-button ng-disabled="(releasesCtrl.resources[0] && releasesCtrl.resources[0].project.done) || releasesCtrl.currentUser.id !== releasesCtrl.resources[0].project.dev_id" class="md-icon-button" ng-click="releasesCtrl.goTo('form')">
+    <md-button ng-disabled="releasesCtrl.actualProject.done || releasesCtrl.currentUser.id !== releasesCtrl.actualProject.dev_id" class="md-icon-button" ng-click="releasesCtrl.goTo('form')">
       <md-icon md-font-set="material-icons" class="md-warn">add</md-icon>
       <md-tooltip md-direction="bottom" hide-sm hide-xs>{{ ::'views.actions.add' | translate}}</md-tooltip>
     </md-button>
