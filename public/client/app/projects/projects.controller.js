@@ -65,6 +65,9 @@
     }
 
     function addUser(user) {
+      if (!vm.resource.users) {
+        vm.resource.users = [];
+      }
       if (user) {
         vm.resource.users.push(user);
         vm.userName = '';
@@ -108,7 +111,11 @@
     }
 
     vm.historyBack = function() {
-      $window.history.back();
+      if ($stateParams.obj) {
+        $window.history.back();
+      } else {
+        vm.viewForm = false;
+      }
     }
 
     vm.afterSave = function(resource) {

@@ -52,7 +52,7 @@
       var dateEnd = moment(milestone.date_end);
       var dateBegin = moment(milestone.date_begin);
 
-      if (dateEnd.diff(dateBegin, 'days') <= milestone.estimated_time) {
+      if (dateEnd.diff(dateBegin, 'days') < milestone.estimated_time) {
         milestone.color_estimated_time = { color: 'red' };
       } else {
         milestone.color_estimated_time = { color: 'green' };
@@ -77,14 +77,14 @@
     }
 
     vm.afterEdit = function() {
-      vm.resource.date_begin = moment(vm.resource.date_begin);
-      vm.resource.date_end = moment(vm.resource.date_end);
+      vm.resource.date_begin = moment(vm.resource.date_begin)._d;
+      vm.resource.date_end = moment(vm.resource.date_end)._d;
     }
 
     vm.view = function (resource) {
-      resource.date_begin = moment(resource.date_begin);
-      resource.date_end = moment(resource.date_end);
       vm.resource = resource;
+      vm.resource.date_begin = moment(vm.resource.date_begin);
+      vm.resource.date_end = moment(vm.resource.date_end);
       vm.onView = true;
       vm.viewForm = false;
     }
