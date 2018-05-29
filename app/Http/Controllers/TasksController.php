@@ -70,6 +70,12 @@ class TasksController extends CrudController {
         $this->saveAction($request->project_id, 'Update', config('utils.dashboard.updateTask'));
     }
 
+    protected function beforeDestroy(Request $request, Model $model) {
+        DB::table('task_comments')
+            ->where('task_id', $model->id)
+            ->delete();
+    }
+
     protected function afterDestroy(Request $request, Model $model) {
         $this->saveAction($model->project_id, 'Destroy', config('utils.dashboard.destroyTask'));
     }
